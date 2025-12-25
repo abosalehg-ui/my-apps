@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تطبيقاتي</title>
+    <link rel="icon" type="image/png" href="https://avatars.githubusercontent.com/u/239691345?v=4">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --primary-dark: #1557b0;
+            --primary-light: #4a90e8;
+            --secondary: #34a853;
+            --accent: #ea4335;
+            --warning: #fbbc04;
+            --bg-dark: #0a1628;
+            --bg-card: #111d32;
+            --bg-card-hover: #152238;
+            --text-primary: #ffffff;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --gradient-primary: linear-gradient(135deg, #1a73e8 0%, #34a853 100%);
+            --gradient-hero: linear-gradient(180deg, #0a1628 0%, #111d32 100%);
+            --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.3);
+            --shadow-button: 0 4px 16px rgba(26, 115, 232, 0.4);
+            --radius-lg: 20px;
+            --radius-md: 12px;
+            --radius-sm: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.03;
+            background-image: 
+                radial-gradient(circle at 20% 50%, var(--primary) 1px, transparent 1px),
+                radial-gradient(circle at 80% 50%, var(--secondary) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .shape-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--primary);
+            top: -100px;
+            right: -100px;
+            animation-delay: 0s;
+        }
+
+        .shape-2 {
+            width: 300px;
+            height: 300px;
+            background: var(--secondary);
+            bottom: 20%;
+            left: -100px;
+            animation-delay: -5s;
+        }
+
+        .shape-3 {
+            width: 250px;
+            height: 250px;
+            background: var(--warning);
+            top: 50%;
+            right: 10%;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(30px, -30px) scale(1.05); }
+            50% { transform: translate(-20px, 20px) scale(0.95); }
+            75% { transform: translate(20px, 30px) scale(1.02); }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        header {
+            padding: 30px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+            background: rgba(10, 22, 40, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 20px rgba(26, 115, 232, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .logo:hover .logo-img {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 30px rgba(26, 115, 232, 0.5);
+        }
+
+        .logo-text {
+            font-size: 1.3rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-link {
+            padding: 10px 20px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0 100px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 20px;
+            background: rgba(26, 115, 232, 0.1);
+            border: 1px solid rgba(26, 115, 232, 0.3);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: var(--primary-light);
+            margin-bottom: 30px;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .hero-badge::before {
+            content: '📱';
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            margin-bottom: 20px;
+            line-height: 1.3;
+            animation: fadeInUp 0.6s ease 0.1s both;
+        }
+
+        .hero h1 span {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            animation: fadeInUp 0.6s ease 0.2s both;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.6s ease 0.3s both;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Apps Section */
+        .apps-section {
+            padding: 60px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+        }
+
+        /* App Card */
+        .apps-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .app-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeInUp 0.6s ease both;
+        }
+
+        .app-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-card);
+            border-color: rgba(26, 115, 232, 0.3);
+            background: var(--bg-card-hover);
+        }
+
+        .app-card-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 30px;
+        }
+
+        .app-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .app-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .app-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .app-icon.calculator { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .app-icon.pdf { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .app-icon.shipment { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .app-icon.editor { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+        .app-icon.tiktok { background: linear-gradient(135deg, #000000 0%, #25f4ee 50%, #fe2c55 100%); }
+        .app-icon.medicine { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+
+        .app-title-wrap h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--text-primary);
+        }
+
+        .app-version {
+            display: inline-block;
+            padding: 3px 10px;
+            background: rgba(52, 168, 83, 0.15);
+            color: var(--secondary);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .app-tagline {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .app-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .feature-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            transition: all 0.3s;
+        }
+
+        .feature-tag:hover {
+            background: rgba(26, 115, 232, 0.15);
+            color: var(--primary-light);
+        }
+
+        .app-description {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            flex-grow: 1;
+        }
+
+        .app-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: auto;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: var(--radius-sm);
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: var(--shadow-button);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(26, 115, 232, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Screenshots */
+        .app-screenshots {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .screenshot {
+            width: 140px;
+            height: 280px;
+            background: var(--bg-dark);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .screenshot:first-child {
+            transform: rotate(-5deg) translateX(20px);
+        }
+
+        .screenshot:last-child {
+            transform: rotate(5deg) translateX(-20px);
+        }
+
+        .app-card:hover .screenshot:first-child {
+            transform: rotate(-8deg) translateX(10px) scale(1.02);
+        }
+
+        .app-card:hover .screenshot:last-child {
+            transform: rotate(8deg) translateX(-10px) scale(1.02);
+        }
+
+        .screenshot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .screenshot-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            background: linear-gradient(135deg, rgba(26, 115, 232, 0.1) 0%, rgba(52, 168, 83, 0.1) 100%);
+        }
+
+        .screenshot-placeholder span {
+            font-size: 2rem;
+        }
+
+        /* Expanded Features */
+        .features-list {
+            display: none;
+            padding: 0 30px 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: -1px;
+        }
+
+        .features-list.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding-top: 25px;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 12px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: var(--radius-sm);
+            transition: background 0.3s;
+        }
+
+        .feature-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: rgba(26, 115, 232, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .feature-content h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .feature-content p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            text-align: center;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-logo img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+        }
+
+        .footer-logo span {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-light);
+        }
+
+        .footer-bottom {
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            width: 100%;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom a {
+            color: var(--primary-light);
+            text-decoration: none;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 900px) {
+            .app-card-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .app-screenshots {
+                order: -1;
+                padding-bottom: 20px;
+            }
+
+            .screenshot {
+                width: 120px;
+                height: 240px;
+            }
+
+            .screenshot:first-child {
+                transform: rotate(-3deg) translateX(15px);
+            }
+
+            .screenshot:last-child {
+                transform: rotate(3deg) translateX(-15px);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: 50px 0 70px;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .stats {
+                gap: 30px;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .app-card-inner {
+                padding: 20px;
+            }
+
+            .app-icon {
+                width: 55px;
+                height: 55px;
+                font-size: 1.6rem;
+            }
+
+            .app-title-wrap h3 {
+                font-size: 1.2rem;
+            }
+
+            .screenshot {
+                width: 100px;
+                height: 200px;
+            }
+
+            .btn {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .app-actions {
+                flex-direction: column;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        /* Scroll animations */
+        .app-card {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .app-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--bg-card);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--bg-card-hover);
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Effects -->
+    <div class="bg-pattern"></div>
+    <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <img src="https://avatars.githubusercontent.com/u/239691345?v=4" alt="Logo" class="logo-img">
+                    <span class="logo-text">تطبيقاتي</span>
+                </a>
+                <nav class="nav-links">
+                    <a href="#apps" class="nav-link">التطبيقات</a>
+                    <a href="https://github.com/abosalehg-ui" target="_blank" class="nav-link">GitHub</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-badge">6 تطبيقات أندرويد مجانية</div>
+            <h1>تطبيقات <span>مبتكرة</span><br>لتسهيل حياتك اليومية</h1>
+            <p>مجموعة من التطبيقات المصممة بعناية لتلبية احتياجاتك اليومية، بواجهات سهلة الاستخدام وأداء عالي</p>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-number">6</div>
+                    <div class="stat-label">تطبيقات</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">مجاني</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">إعلانات</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Apps Section -->
+    <section class="apps-section" id="apps">
+        <div class="container">
+            <div class="section-header">
+                <h2>📱 التطبيقات المتاحة</h2>
+                <p>اختر التطبيق المناسب لاحتياجاتك وحمّله مباشرة</p>
+            </div>
+
+            <div class="apps-grid">
+                <!-- App 1: HiddenNotes -->
+                <article class="app-card" data-app="hidden-notes">
+                    <div class="app-card-inner">
+                        <div class="app-info">
+                            <div class="app-header">
+                                <div class="app-icon calculator">🧮</div>
+                                <div class="app-title-wrap">
+                                    <h3>Hidden Notes</h3>
+                                    <span class="app-version">الإصدار 2.1</span>
+                                </div>
+                            </div>
+                            <p class="app-tagline">آلة حاسبة ذكية مع نظام ملاحظات مخفي وآمن</p>
+                            <div class="app-features">
+                                <span class="feature-tag">🔐 تشفير AES-256</span>
+                                <span class="feature-tag">📝 ملاحظات سرية</span>
+                                <span class="feature-tag">🛡️ خصوصية عالية</span>
+                            </div>
+                            <p class="app-description">
+                                تطبيق مبتكر يجمع بين آلة حاسبة عملية ونظام ملاحظات مخفي عالي الأمان، مصمم لحماية خصوصيتك وإدارة بياناتك الحساسة بسرية تامة.
+                            </p>
+                            <div class="app-actions">
+                                <a href="assets/apps/HiddenNotes2.1.apk" class="btn btn-primary" download>
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                        <polyline points="7 10 12 15 17 10"></polyline>
+                                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                                    </svg>
+                                    تحميل APK
+                                </a>
+                                <button class="btn btn-secondary" onclick="toggleFeatures('hidden-notes')">
+                                    المزيد من التفاصيل
+                                </button>
+                            </div>
+                        </div>
+                        <div class="app-screenshots">
+                            <div class="screenshot">
+                                <img src="assets/screenshots/hidden-notes-1.png" alt="Hidden Notes Screenshot 1" onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'><span>📱</span>صورة 1</div>'">
+                            </div>
+                            <div class="screenshot">
+                                <img src="assets/screenshots/hidden-notes-2.png" alt="Hidden Notes Screenshot 2" onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'><span>📱</span>صورة 2</div>'">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="features-list" id="features-hidden-notes">
+                        <div class="features-grid">
+                            <div class="feature-item">
+                                <div class="feature-icon">🔢</div>
+                                <div class="feature-content">
+                                    <h4>آلة حاسبة كاملة</h4>
+                                    <p>واجهة أنيقة تدعم العمليات الأساسية والمتقدمة مثل النسبة المئوية</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">🔐</div>
+                                <div class="feature-content">
+                                    <h4>نظام مخفي</h4>
+                                    <p>كلمة مرور قابلة للتغيير مع تشفير قوي لجميع الملاحظات</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">📝</div>
+                                <div class="feature-content">
+                                    <h4>إدارة احترافية</h4>
+                                    <p>إضافة وتعديل وبحث وتصدير الملاحظات بسهولة</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">🛡️</div>
+                                <div class="feature-content">
+                                    <h4>أمان من المستوى العالي</h4>
+                                    <p>تشفير AES-256 مع حفظ المفاتيح في Android Keystore</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- App 2: PDF Compressor -->
+                <article class="app-card" data-app="pdf-compressor">
+                    <div class="app-card-inner">
+                        <div class="app-info">
+                            <div class="app-header">
+                                <div class="app-icon pdf">📄</div>
+                                <div class="app-title-wrap">
+                                    <h3>PDF Compressor Advanced</h3>
+                                    <span class="app-version">الإصدار 1.1</span>
+                                </div>
+                            </div>
+                            <p class="app-tagline">ضغط ملفات PDF على أربعة مستويات مختلفة</p>
+                            <div class="app-features">
+                                <span class="feature-tag">📉 ضغط فعال</span>
+                                <span class="feature-tag">🔒 معالجة محلية</span>
+                                <span class="feature-tag">🌙 وضع ليلي</span>
+                            </div>
+                            <p class="app-description">
+                                يتيح لك ضغط ملفات PDF على جهازك بسهولة وسرعة، مما يقلل من حجمها بشكل كبير دون المساس بالجودة. مثالي لإرسال المستندات عبر البريد الإلكتروني.
+                            </p>
+                            <div class="app-actions">
+                                <a href="assets/apps/PDFCompressorAdvanced1.1.apk" class="btn btn-primary" download>
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                        <polyline points="7 10 12 15 17 10"></polyline>
+                                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                                    </svg>
+                                    تحميل APK
+                                </a>
+                                <button class="btn btn-secondary" onclick="toggleFeatures('pdf-compressor')">
+                                    المزيد من التفاصيل
+                                </button>
+                            </div>
+                        </div>
+                        <div class="app-screenshots">
+                            <div class="screenshot">
+                                <img src="assets/screenshots/pdf-compressor-1.png" alt="PDF Compressor Screenshot 1" onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'><span>📱</span>صورة 1</div>'">
+                            </div>
+                            <div class="screenshot">
+                                <img src="assets/screenshots/pdf-compressor-2.png" alt="PDF Compressor Screenshot 2" onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'><span>📱</span>صورة 2</div>'">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="features-list" id="features-pdf-compressor">
+                        <div class="features-grid">
+                            <div class="feature-item">
+                                <div class="feature-icon">📉</div>
+                                <div class="feature-content">
+                                    <h4>ضغط فعال</h4>
+                                    <p>خوارزميات متقدمة لتقليل الحجم مع الحفاظ على الوضوح</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">🎚️</div>
+                                <div class="feature-content">
+                                    <h4>4 مستويات ضغط</h4>
+                                    <p>من الضغط الأساسي إلى الضغط الأقصى حسب احتياجاتك</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">🔒</div>
+                                <div class="feature-content">
+                                    <h4>معالجة محلية</h4>
+                                    <p>جميع العمليات على جهازك دون الحاجة للإنترنت</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">🌙</div>
+                                <div class="feature-content">
+                                    <h4>وضع ليلي</h4>
+                                    <p>واجهة مريحة للعينين في الإضاءة المنخفضة</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- App 3: Sh7na -->
+                <article class="app-card" data-app="sh7na">
+                    <div class="app-card-inner">
+                        <div class="app-info">
+                            <div class="app-header">
+                                <div class="app-icon shipment">📦</div>
+                                <div class="app-title-wrap">
+                                    <h3>شحنة</h3>
+                                    <span class="app-version">الإصدار 1.0</span>
+                                </div>
+                            </div>
+                            <p class="app-tagline">تذكر مواعيد وصول شحناتك!</p>
+                            <div class="app-features">
+                                <span class="feature-tag">🔔 تذكيرات ذكية</span>
+                                <span class="feature-tag">🏪 دعم المتاجر</span>
+                                <span class="feature-tag">📋 أرشفة الطلبات</span>
+                            </div>
+                            <p class="app-description">
+                                تطبيق بسيط لتتبع جميع شحناتك في مكان واحد. الصق رابط المنتج وسيقوم التطبيق بجلب التفاصيل تلقائياً مع تذكيرات في يوم الوصول.
+                            </p>
+                            <div class="app-actions">
+                                <a href="assets/apps/Sh7na1.0.apk" class="btn btn-primary" download>
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                        <polyline points="7 10 12 15 17 10"></polyline>
+                                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                                    </svg>
+                                    تحميل APK
+                                </a>
+                                <button class="btn btn-secondary" onclick="toggleFeatures('sh7na')">
+                                    المزيد من التفاصيل
+                                </button>
+                            </div>
+                        </div>
+                        <div class="app-screenshots">
+                            <div class="screenshot">
+                                <img src="assets/screenshots/sh7na-1.png" alt="Sh7na Screenshot 1" onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'><span>📱</span>صورة 1</div>'">
+                            </div>
+                            <div class="screenshot">
+                                <img src="assets/screenshots/sh7na-2.png" alt="Sh7na Screenshot 2" onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'><span>📱</span>صورة 2</div>'">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="features-list" id="features-sh7na">
+                        <div class="features-grid">
+                            <div class="feature-item">
+                                <div class="feature-icon">🔗</div>
+                                <div class="feature-content">
+                                    <h4>إضافة ذكية</h4>
+                                    <p>الصق الرابط ليجلب التفاصيل تلقائياً من أمازون، علي إكسبرس، نون وغيرها</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">🔔</div>
+                                <div class="feature-content">
+                                    <h4>تذكيرات مخصصة</h4>
+                                    <p>إشعارات في يوم الوصول واليوم الذي يسبقه</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">🎨</div>
+                                <div class="feature-content">
+                                    <h4>تصميم جذاب</h4>
+                                    <p>واجهة تشبه الملاحظات اللاصقة الملونة</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">📋</div>
+                                <div class="feature-content">
+                                    <h4>أرشفة الطلبات</h4>
+                                    <p>احتفظ بسجل لجميع الشحنات التي وصلت</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- App 4: Text Editor -->
+                <article class="app-card" data-app="text-editor">
+                    <div class="app-card-inner">
+                        <div class="app-info">
+                            <div class="app-header">
+                                <div class="app-icon editor">📝</div>
+                                <div class="app-title-wrap">
+                                    <h3>Text Editor</h3>
+                                    <span class="app-version">الإصدار 1.0</span>
+                                </div>
+                            </div>
+                            <p class="app-tagline">لاستعراض وتعديل وحفظ ملفات TXT و HTML</p>
+                            <div class="app-features">
+                                <span class="feature-tag">📂 دعم متعدد</span>
+                                <span class="feature-tag">💾 حفظ سريع</span>
+                                <span class="feature-tag">🚀 خفيف ومجاني</span>
+                            </div>
+                            <p class="app-description">
+                                أداتك المثالية لتدوين الملاحظات السريعة، تعديل الملفات النصية، وتحرير أكواد HTML بكل سهولة. واجهة نظيفة وبسيطة بدون أي تعقيدات.
+                            </p>
+                            <div class="app-actions">
+                                <a href="assets/apps/textEditor.apk" class="btn btn-primary" download>
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                        <polyline points="7 10 12 15 17 10"></polyline>
+                                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                                    </svg>
+                                    تحميل APK
+                                </a>
+                                <button class="btn btn-secondary" onclick="toggleFeatures('text-editor')">
+                                    المزيد من التفاصيل
+                                </button>
+                            </div>
+                        </div>
+                        <div class="app-screenshots">
+                            <div class="screenshot">
+                                <img src="assets/screenshots/text-editor-1.png" alt="Text Editor Screenshot 1" onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'><span>📱</span>صورة 1</div>'">
+                            </div>
+                            <div class="screenshot">
+                                <img src="assets/screenshots/text-editor-2.png" alt="Text Editor Screenshot 2" onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'><span>📱</span>صورة 2</div>'">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="features-list" id="features-text-editor">
+                        <div class="features-grid">
+                            <div class="feature-item">
+                                <div class="feature-icon">✍️</div>
+                                <div class="feature-content">
+                                    <h4>سهولة التحرير</h4>
+                                    <p>واجهة مستخدم بسيطة ومباشرة</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">📂</div>
+                                <div class="feature-content">
+                                    <h4>دعم متعدد الصيغ</h4>
+                                    <p>فتح وتعديل وحفظ ملفات .txt و .html</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">💾</div>
+                                <div class="feature-content">
+                                    <h4>حفظ سريع</h4>
+                                    <p>احتفظ بتغييراتك بضغطة زر واحدة</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">🔒</div>
+                                <div class="feature-content">
+                                    <h4>خصوصيتك أولاً</h4>
+                                    <p>لا يجمع أي بيانات ويعمل بالكامل على جهازك</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- App 5: TikTok Downloader -->
+                <article class="app-card" data-app="tiktok">
+                    <div class="app-card-inner">
+                        <div class="app-info">
+                            <div class="app-header">
+                                <div class="app-icon tiktok">🎵</div>
+                                <div class="app-title-wrap">
+                                    <h3>TikTok Downloader</h3>
+                                    <span class="app-version">الإصدار 1.0</span>
+                                </div>
+                            </div>
+                            <p class="app-tagline">تحميل مقاطع تيكتوك بجودة عالية بدون علامة مائية</p>
+                            <div class="app-features">
+                                <span class="feature-tag">✨ بدون علامة مائية</span>
+                                <span class="feature-tag">🚫 بدون إعلانات</span>
+                                <span class="feature-tag">⚡ تحميل تلقائي</span>
+                            </div>
+                            <p class="app-description">
+                                احصل على فيديوهات تيك توك نقية وعالية الجودة. كل ما عليك هو نسخ الرابط أو مشاركته مباشرة من التطبيق ليبدأ التحميل تلقائياً.
+                            </p>
+                            <div class="app-actions">
+                                <a href="assets/apps/TikTokDownloader1.0.apk" class="btn btn-primary" download>
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                        <polyline points="7 10 12 15 17 10"></polyline>
+                                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                                    </svg>
+                                    تحميل APK
+                                </a>
+                                <button class="btn btn-secondary" onclick="toggleFeatures('tiktok')">
+                                    المزيد من التفاصيل
+                                </button>
+                            </div>
+                        </div>
+                        <div class="app-screenshots">
+                            <div class="screenshot">
+                                <img src="assets/screenshots/tiktok-downloader-1.png" alt="TikTok Downloader Screenshot 1" onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'><span>📱</span>صورة 1</div>'">
+                            </div>
+                            <div class="screenshot">
+                                <img src="assets/screenshots/tiktok-downloader-2.png" alt="TikTok Downloader Screenshot 2" onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'><span>📱</span>صورة 2</div>'">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="features-list" id="features-tiktok">
+                        <div class="features-grid">
+                            <div class="feature-item">
+                                <div class="feature-icon">✨</div>
+                                <div class="feature-content">
+                                    <h4>بدون علامة مائية</h4>
+                                    <p>فيديوهات نقية للمشاهدة والمشاركة</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">⚡</div>
+                                <div class="feature-content">
+                                    <h4>تحميل تلقائي</h4>
+                                    <p>شارك الرابط من تيكتوك ليبدأ التنزيل مباشرة</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">🎬</div>
+                                <div class="feature-content">
+                                    <h4>جودة عالية HD</h4>
+                                    <p>يبحث تلقائياً عن أعلى جودة متاحة</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">📜</div>
+                                <div class="feature-content">
+                                    <h4>سجل التنزيلات</h4>
+                                    <p>وصول سريع لآخر الفيديوهات المحملة</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- App 6: Jureati -->
+                <article class="app-card" data-app="jureati">
+                    <div class="app-card-inner">
+                        <div class="app-info">
+                            <div class="app-header">
+                                <div class="app-icon medicine">💊</div>
+                                <div class="app-title-wrap">
+                                    <h3>Jureati - جرعتي</h3>
+                                    <span class="app-version">الإصدار 1.0</span>
+                                </div>
+                            </div>
+                            <p class="app-tagline">مدير الأدوية الخاص بك</p>
+                            <div class="app-features">
+                                <span class="feature-tag">⏰ تذكيرات موثوقة</span>
+                                <span class="feature-tag">📊 إدارة المخزون</span>
+                                <span class="feature-tag">🎨 سمات متعددة</span>
+                            </div>
+                            <p class="app-description">
+                                تطبيق شامل لإدارة الأدوية يساعدك على البقاء على اطلاع بنظامك الصحي. جدولة سهلة، سجل كامل، وتذكيرات لإعادة التعبئة.
+                            </p>
+                            <div class="app-actions">
+                                <a href="assets/apps/Jureati.apk" class="btn btn-primary" download>
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                        <polyline points="7 10 12 15 17 10"></polyline>
+                                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                                    </svg>
+                                    تحميل APK
+                                </a>
+                                <button class="btn btn-secondary" onclick="toggleFeatures('jureati')">
+                                    المزيد من التفاصيل
+                                </button>
+                            </div>
+                        </div>
+                        <div class="app-screenshots">
+                            <div class="screenshot">
+                                <img src="assets/screenshots/jureati-1.png" alt="Jureati Screenshot 1" onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'><span>📱</span>صورة 1</div>'">
+                            </div>
+                            <div class="screenshot">
+                                <img src="assets/screenshots/jureati-2.png" alt="Jureati Screenshot 2" onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'><span>📱</span>صورة 2</div>'">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="features-list" id="features-jureati">
+                        <div class="features-grid">
+                            <div class="feature-item">
+                                <div class="feature-icon">⏰</div>
+                                <div class="feature-content">
+                                    <h4>جدولة سهلة</h4>
+                                    <p>إعداد تذكيرات لجميع أدويتك ببضع نقرات</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">📋</div>
+                                <div class="feature-content">
+                                    <h4>سجل الأدوية</h4>
+                                    <p>تتبع جميع الأدوية التي تناولتها مع الوقت والجرعة</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">📦</div>
+                                <div class="feature-content">
+                                    <h4>إدارة المخزون</h4>
+                                    <p>تتبع الكمية المتبقية مع تذكيرات للتعبئة</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">🎨</div>
+                                <div class="feature-content">
+                                    <h4>سمات متعددة</h4>
+                                    <p>اختر بين السمة الفاتحة والداكنة والنظام</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="https://avatars.githubusercontent.com/u/239691345?v=4" alt="Logo">
+                    <span>تطبيقاتي</span>
+                </div>
+                <div class="footer-links">
+                    <a href="mailto:abo.saleh.g@gmail.com">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                        abo.saleh.g@gmail.com
+                    </a>
+                    <a href="https://github.com/abosalehg-ui" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                        GitHub
+                    </a>
+                </div>
+                <div class="footer-bottom">
+                    <p>تطوير: <a href="mailto:abo.saleh.g@gmail.com">عبدالكريم العبود</a></p>
+                    <p style="margin-top: 10px;">© 2024 Apps page - All Rights Reserved</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Toggle features section
+        function toggleFeatures(appId) {
+            const featuresEl = document.getElementById(`features-${appId}`);
+            const isActive = featuresEl.classList.contains('active');
+            
+            // Close all other features
+            document.querySelectorAll('.features-list').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // Toggle current
+            if (!isActive) {
+                featuresEl.classList.add('active');
+                // Scroll into view
+                setTimeout(() => {
+                    featuresEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 100);
+            }
+        }
+
+        // Scroll animation for app cards
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 100);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.app-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
