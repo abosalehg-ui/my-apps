@@ -1,7 +1,7 @@
 # 📱 تطبيقاتي
 صفحة عرض وتحميل تطبيقات أندرويد المجانية.
 
-🔗 **الموقع المباشر:** [https://abosalehg-ui.github.io/](https://abosalehg-ui.github.io/)
+🔗 **الموقع المباشر:** [[https://abosalehg-ui.github.io/](https://abosalehg-ui.github.io/my-apps/)]
 
 ---
 
