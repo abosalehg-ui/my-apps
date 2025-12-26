@@ -2,1389 +2,2521 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تطبيقاتي</title>
-    <link rel="icon" type="image/png" href="https://avatars.githubusercontent.com/u/239691345?v=4">
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>النجاة في الصحراء</title>
     <style>
-        :root {
-            --primary: #1a73e8;
-            --primary-dark: #1557b0;
-            --primary-light: #4a90e8;
-            --secondary: #34a853;
-            --accent: #ea4335;
-            --warning: #fbbc04;
-            --bg-dark: #0a1628;
-            --bg-card: #111d32;
-            --bg-card-hover: #152238;
-            --text-primary: #ffffff;
-            --text-secondary: #94a3b8;
-            --text-muted: #64748b;
-            --gradient-primary: linear-gradient(135deg, #1a73e8 0%, #34a853 100%);
-            --gradient-hero: linear-gradient(180deg, #0a1628 0%, #111d32 100%);
-            --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.3);
-            --shadow-button: 0 4px 16px rgba(26, 115, 232, 0.4);
-            --radius-lg: 20px;
-            --radius-md: 12px;
-            --radius-sm: 8px;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            -webkit-user-select: none;
         }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
+        
         body {
-            font-family: 'Tajawal', sans-serif;
-            background: var(--bg-dark);
-            color: var(--text-primary);
-            line-height: 1.7;
-            overflow-x: hidden;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1a0f00;
+            touch-action: none;
         }
-
-        /* Animated Background */
-        .bg-pattern {
+        
+        #gameCanvas {
+            display: block;
+            width: 100vw;
+            height: 100vh;
+        }
+        
+        /* Start Screen */
+        #startScreen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.03;
-            background-image: 
-                radial-gradient(circle at 20% 50%, var(--primary) 1px, transparent 1px),
-                radial-gradient(circle at 80% 50%, var(--secondary) 1px, transparent 1px);
-            background-size: 60px 60px;
-        }
-
-        .floating-shapes {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
+            background: linear-gradient(180deg, #1a0f00 0%, #3d2810 50%, #8b5a2b 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
             overflow: hidden;
         }
-
-        .shape {
+        
+        #startScreen canvas {
             position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.15;
-            animation: float 20s infinite ease-in-out;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
         }
-
-        .shape-1 {
-            width: 400px;
-            height: 400px;
-            background: var(--primary);
-            top: -100px;
-            right: -100px;
-            animation-delay: 0s;
-        }
-
-        .shape-2 {
-            width: 300px;
-            height: 300px;
-            background: var(--secondary);
-            bottom: 20%;
-            left: -100px;
-            animation-delay: -5s;
-        }
-
-        .shape-3 {
-            width: 250px;
-            height: 250px;
-            background: var(--warning);
-            top: 50%;
-            right: 10%;
-            animation-delay: -10s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            25% { transform: translate(30px, -30px) scale(1.05); }
-            50% { transform: translate(-20px, 20px) scale(0.95); }
-            75% { transform: translate(20px, 30px) scale(1.02); }
-        }
-
-        /* Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        
+        .start-content {
             position: relative;
             z-index: 1;
-        }
-
-        /* Header */
-        header {
-            padding: 30px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(20px);
-            background: rgba(10, 22, 40, 0.8);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .header-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            text-decoration: none;
-            color: var(--text-primary);
-        }
-
-        .logo-img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: 2px solid var(--primary);
-            box-shadow: 0 0 20px rgba(26, 115, 232, 0.3);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .logo:hover .logo-img {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 0 30px rgba(26, 115, 232, 0.5);
-        }
-
-        .logo-text {
-            font-size: 1.3rem;
-            font-weight: 800;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 10px;
-        }
-
-        .nav-link {
-            padding: 10px 20px;
-            border-radius: var(--radius-sm);
-            text-decoration: none;
-            color: var(--text-secondary);
-            font-weight: 500;
-            transition: all 0.3s;
-        }
-
-        .nav-link:hover {
-            color: var(--text-primary);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 80px 0 100px;
             text-align: center;
-            position: relative;
+            color: #fff;
         }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 20px;
-            background: rgba(26, 115, 232, 0.1);
-            border: 1px solid rgba(26, 115, 232, 0.3);
-            border-radius: 50px;
-            font-size: 0.9rem;
-            color: var(--primary-light);
-            margin-bottom: 30px;
-            animation: fadeInUp 0.6s ease;
-        }
-
-        .hero-badge::before {
-            content: '📱';
-        }
-
-        .hero h1 {
-            font-size: clamp(2.2rem, 5vw, 3.5rem);
-            font-weight: 900;
+        
+        .game-title {
+            font-size: clamp(2rem, 8vw, 4rem);
+            font-weight: bold;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.5), 0 0 40px rgba(255,180,100,0.3);
             margin-bottom: 20px;
-            line-height: 1.3;
-            animation: fadeInUp 0.6s ease 0.1s both;
+            animation: titleGlow 2s ease-in-out infinite alternate;
         }
-
-        .hero h1 span {
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        
+        @keyframes titleGlow {
+            from { text-shadow: 0 4px 20px rgba(0,0,0,0.5), 0 0 40px rgba(255,180,100,0.3); }
+            to { text-shadow: 0 4px 20px rgba(0,0,0,0.5), 0 0 60px rgba(255,200,120,0.5); }
         }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto 40px;
-            animation: fadeInUp 0.6s ease 0.2s both;
+        
+        .subtitle {
+            font-size: clamp(0.9rem, 3vw, 1.3rem);
+            color: #d4a574;
+            margin-bottom: 40px;
         }
-
-        .stats {
-            display: flex;
-            justify-content: center;
-            gap: 50px;
-            flex-wrap: wrap;
-            animation: fadeInUp 0.6s ease 0.3s both;
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 900;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .stat-label {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        /* Apps Section */
-        .apps-section {
-            padding: 60px 0;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .section-header h2 {
-            font-size: 2rem;
-            font-weight: 800;
-            margin-bottom: 15px;
-        }
-
-        .section-header p {
-            color: var(--text-secondary);
-        }
-
-        /* App Card */
-        .apps-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-        }
-
-        .app-card {
-            background: var(--bg-card);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            animation: fadeInUp 0.6s ease both;
-        }
-
-        .app-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-card);
-            border-color: rgba(26, 115, 232, 0.3);
-            background: var(--bg-card-hover);
-        }
-
-        .app-card-inner {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            padding: 30px;
-        }
-
-        .app-info {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .app-header {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-        }
-
-        .app-icon {
-            width: 70px;
-            height: 70px;
-            border-radius: var(--radius-md);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            flex-shrink: 0;
-        }
-
-        .app-icon.calculator { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-        .app-icon.pdf { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
-        .app-icon.shipment { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
-        .app-icon.editor { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
-        .app-icon.tiktok { background: linear-gradient(135deg, #000000 0%, #25f4ee 50%, #fe2c55 100%); }
-        .app-icon.medicine { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
-
-        .app-title-wrap h3 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-            color: var(--text-primary);
-        }
-
-        .app-version {
-            display: inline-block;
-            padding: 3px 10px;
-            background: rgba(52, 168, 83, 0.15);
-            color: var(--secondary);
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .app-tagline {
-            font-size: 1.05rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        .app-features {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .feature-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 14px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            transition: all 0.3s;
-        }
-
-        .feature-tag:hover {
-            background: rgba(26, 115, 232, 0.15);
-            color: var(--primary-light);
-        }
-
-        .app-description {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.8;
-            flex-grow: 1;
-        }
-
-        .app-actions {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-top: auto;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 14px 28px;
-            border-radius: var(--radius-sm);
-            font-family: 'Tajawal', sans-serif;
-            font-size: 1rem;
-            font-weight: 600;
-            text-decoration: none;
-            cursor: pointer;
+        
+        .start-btn, .next-btn, .retry-btn {
+            background: linear-gradient(135deg, #d4a574 0%, #8b5a2b 100%);
             border: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 15px 50px;
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
+            color: #fff;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            font-family: inherit;
         }
-
-        .btn-primary {
-            background: var(--gradient-primary);
-            color: white;
-            box-shadow: var(--shadow-button);
+        
+        .start-btn:hover, .start-btn:active,
+        .next-btn:hover, .next-btn:active,
+        .retry-btn:hover, .retry-btn:active {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
         }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 24px rgba(26, 115, 232, 0.5);
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text-primary);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        /* Screenshots */
-        .app-screenshots {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .screenshot {
-            width: 140px;
-            height: 280px;
-            background: var(--bg-dark);
-            border-radius: var(--radius-md);
-            overflow: hidden;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-        }
-
-        .screenshot:first-child {
-            transform: rotate(-5deg) translateX(20px);
-        }
-
-        .screenshot:last-child {
-            transform: rotate(5deg) translateX(-20px);
-        }
-
-        .app-card:hover .screenshot:first-child {
-            transform: rotate(-8deg) translateX(10px) scale(1.02);
-        }
-
-        .app-card:hover .screenshot:last-child {
-            transform: rotate(8deg) translateX(-10px) scale(1.02);
-        }
-
-        .screenshot img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .screenshot-placeholder {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            color: var(--text-muted);
-            font-size: 0.8rem;
-            background: linear-gradient(135deg, rgba(26, 115, 232, 0.1) 0%, rgba(52, 168, 83, 0.1) 100%);
-        }
-
-        .screenshot-placeholder span {
-            font-size: 2rem;
-        }
-
-        /* Expanded Features */
-        .features-list {
-            display: none;
-            padding: 0 30px 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            margin-top: -1px;
-        }
-
-        .features-list.active {
-            display: block;
-            animation: slideDown 0.3s ease;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            padding-top: 25px;
-        }
-
-        .feature-item {
-            display: flex;
-            gap: 12px;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: var(--radius-sm);
-            transition: background 0.3s;
-        }
-
-        .feature-item:hover {
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .feature-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            background: rgba(26, 115, 232, 0.15);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .feature-content h4 {
-            font-size: 0.95rem;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .feature-content p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-        }
-
-        /* Footer */
-        footer {
-            padding: 60px 0 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            margin-top: 60px;
-        }
-
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 30px;
+        
+        .credits {
+            position: absolute;
+            bottom: 20px;
             text-align: center;
+            color: #a08060;
+            font-size: clamp(0.7rem, 2vw, 0.9rem);
+            z-index: 1;
         }
-
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .footer-logo img {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-        }
-
-        .footer-logo span {
-            font-size: 1.2rem;
-            font-weight: 700;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 30px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .footer-links a {
-            color: var(--text-secondary);
+        
+        .credits a {
+            color: #d4a574;
             text-decoration: none;
+        }
+        
+        /* HUD */
+        #hud {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px;
+            display: none;
+            justify-content: space-between;
+            align-items: flex-start;
+            z-index: 100;
+            pointer-events: none;
+        }
+        
+        .hud-panel {
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 8px 12px;
+            color: #fff;
+        }
+        
+        .fuel-container {
             display: flex;
             align-items: center;
             gap: 8px;
-            transition: color 0.3s;
         }
-
-        .footer-links a:hover {
-            color: var(--primary-light);
+        
+        .fuel-icon {
+            font-size: clamp(1rem, 3vw, 1.3rem);
         }
-
-        .footer-bottom {
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            width: 100%;
+        
+        .fuel-bar {
+            width: clamp(80px, 20vw, 120px);
+            height: clamp(14px, 3vw, 20px);
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .fuel-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff4444, #ffaa00, #44ff44);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+        
+        .level-info {
+            text-align: left;
+        }
+        
+        .level-name {
+            font-size: clamp(0.65rem, 2.2vw, 0.9rem);
+            font-weight: bold;
+        }
+        
+        .distance {
+            font-size: clamp(0.6rem, 2vw, 0.8rem);
+            color: #aaa;
+        }
+        
+        /* Touch Controls Hint */
+        #touchHint {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.6);
+            font-size: 1rem;
             text-align: center;
+            z-index: 100;
+            pointer-events: none;
+            animation: fadeInOut 3s ease-in-out infinite;
         }
-
-        .footer-bottom p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
+        
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.8; }
         }
-
-        .footer-bottom a {
-            color: var(--primary-light);
-            text-decoration: none;
+        
+        /* Fuel Pickup Notification */
+        #fuelNotification {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 200, 0, 0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            display: none;
+            z-index: 200;
+            animation: popIn 0.3s ease;
         }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        
+        @keyframes popIn {
+            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
         }
-
-        /* Mobile Responsive */
-        @media (max-width: 900px) {
-            .app-card-inner {
-                grid-template-columns: 1fr;
-            }
-
-            .app-screenshots {
-                order: -1;
-                padding-bottom: 20px;
-            }
-
-            .screenshot {
-                width: 120px;
-                height: 240px;
-            }
-
-            .screenshot:first-child {
-                transform: rotate(-3deg) translateX(15px);
-            }
-
-            .screenshot:last-child {
-                transform: rotate(3deg) translateX(-15px);
-            }
+        
+        /* Level Complete Screen */
+        #levelCompleteScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 500;
+            color: #fff;
         }
-
-        @media (max-width: 600px) {
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .hero {
-                padding: 50px 0 70px;
-            }
-
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .stats {
-                gap: 30px;
-            }
-
-            .stat-number {
-                font-size: 2rem;
-            }
-
-            .app-card-inner {
-                padding: 20px;
-            }
-
-            .app-icon {
-                width: 55px;
-                height: 55px;
-                font-size: 1.6rem;
-            }
-
-            .app-title-wrap h3 {
-                font-size: 1.2rem;
-            }
-
-            .screenshot {
-                width: 100px;
-                height: 200px;
-            }
-
-            .btn {
-                padding: 12px 20px;
-                font-size: 0.9rem;
-                width: 100%;
-                justify-content: center;
-            }
-
-            .app-actions {
-                flex-direction: column;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-links {
-                flex-direction: column;
-                gap: 15px;
-            }
+        
+        .complete-title {
+            font-size: clamp(2rem, 7vw, 3.5rem);
+            margin-bottom: 15px;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+            animation: celebratePulse 0.5s ease-in-out infinite alternate;
         }
-
-        /* Scroll animations */
-        .app-card {
-            opacity: 0;
-            transform: translateY(40px);
+        
+        @keyframes celebratePulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.05); }
         }
-
-        .app-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        
+        .complete-subtitle {
+            font-size: clamp(1rem, 3vw, 1.4rem);
+            color: #d4a574;
+            margin-bottom: 30px;
         }
-
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
+        
+        .next-btn {
+            padding: 12px 40px;
+            font-size: 1.2rem;
+            pointer-events: auto;
         }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg-dark);
+        
+        /* Game Over Screen */
+        #endScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 600;
+            color: #fff;
         }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--bg-card);
-            border-radius: 5px;
+        
+        .end-title {
+            font-size: clamp(2rem, 7vw, 3.5rem);
+            margin-bottom: 20px;
         }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--bg-card-hover);
+        
+        .end-message {
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            color: #aaa;
+            margin-bottom: 30px;
+            text-align: center;
+            padding: 0 20px;
+        }
+        
+        .retry-btn {
+            padding: 12px 40px;
+            font-size: 1.2rem;
+            pointer-events: auto;
+        }
+        
+        /* Win Screen (Final) */
+        #winScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 600;
+            color: #fff;
+        }
+        
+        .win-title {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            margin-bottom: 20px;
+            text-shadow: 0 0 40px rgba(255, 215, 0, 0.9);
+            animation: celebratePulse 0.5s ease-in-out infinite alternate;
+        }
+        
+        .win-message {
+            font-size: clamp(1.1rem, 3.5vw, 1.5rem);
+            color: #ffd700;
+            margin-bottom: 30px;
+            text-align: center;
+            padding: 0 20px;
+        }
+        
+        /* Mirage Effect */
+        #mirageOverlay {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background: linear-gradient(to top, rgba(255,200,150,0.1), transparent);
+            pointer-events: none;
+            z-index: 50;
+            animation: mirageWave 3s ease-in-out infinite;
+        }
+        
+        @keyframes mirageWave {
+            0%, 100% { opacity: 0.3; transform: scaleY(1); }
+            50% { opacity: 0.5; transform: scaleY(1.05); }
         }
     </style>
 </head>
 <body>
-    <!-- Background Effects -->
-    <div class="bg-pattern"></div>
-    <div class="floating-shapes">
-        <div class="shape shape-1"></div>
-        <div class="shape shape-2"></div>
-        <div class="shape shape-3"></div>
+    <!-- Start Screen -->
+    <div id="startScreen">
+        <canvas id="bgCanvas"></canvas>
+        <div class="start-content">
+            <h1 class="game-title">🏜️ النجاة في الصحراء</h1>
+            <p class="subtitle">اجتز الصحراء القاسية وصل للمخيم قبل نفاذ الوقود</p>
+            <button class="start-btn" id="startBtn">🚙 ابدأ الرحلة</button>
+        </div>
+        <div class="credits">
+            <p>تطوير: عبدالكريم العبود | <a href="mailto:abo.saleh.g@gmail.com">abo.saleh.g@gmail.com</a></p>
+            <p>© 2024 [Survival Skills] - All Rights Reserved</p>
+        </div>
+    </div>
+    
+    <!-- Game Canvas -->
+    <canvas id="gameCanvas"></canvas>
+    
+    <!-- HUD -->
+    <div id="hud">
+        <div class="hud-panel fuel-container">
+            <span class="fuel-icon">⛽</span>
+            <div class="fuel-bar">
+                <div class="fuel-fill" id="fuelFill"></div>
+            </div>
+        </div>
+        <div class="hud-panel level-info">
+            <div class="level-name" id="levelName">المرحلة الأولى</div>
+            <div class="distance" id="distanceText">المسافة: 0 م</div>
+        </div>
+    </div>
+    
+    <!-- Touch Hint -->
+    <div id="touchHint">👆 اسحب يميناً ويساراً للتحكم</div>
+    
+    <!-- Fuel Notification -->
+    <div id="fuelNotification">⛽ +10% وقود!</div>
+    
+    <!-- Mirage Overlay -->
+    <div id="mirageOverlay"></div>
+    
+    <!-- Level Complete Screen -->
+    <div id="levelCompleteScreen">
+        <div class="complete-title" id="completeTitle">🎉 أحسنت!</div>
+        <div class="complete-subtitle" id="completeSubtitle">وصلت لمحطة البنزين!</div>
+        <button class="next-btn" id="nextLevelBtn">➡️ المرحلة التالية</button>
+    </div>
+    
+    <!-- Game Over Screen -->
+    <div id="endScreen">
+        <div class="end-title" id="endTitle">⛽ نفذ الوقود!</div>
+        <div class="end-message" id="endMessage">لم تستطع الوصول في الوقت المناسب.</div>
+        <button class="retry-btn" id="retryBtn">🔄 حاول مجدداً</button>
+    </div>
+    
+    <!-- Final Win Screen -->
+    <div id="winScreen">
+        <div class="win-title">🏆 مبروك!</div>
+        <div class="win-message">وصلت للمخيم الصحراوي بسلام!<br>أنت ناجٍ حقيقي!</div>
+        <button class="retry-btn" id="playAgainBtn">🔄 العب من البداية</button>
     </div>
 
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <a href="#" class="logo">
-                    <img src="https://avatars.githubusercontent.com/u/239691345?v=4" alt="Logo" class="logo-img">
-                    <span class="logo-text">تطبيقاتي</span>
-                </a>
-                <nav class="nav-links">
-                    <a href="#apps" class="nav-link">التطبيقات</a>
-                    <a href="https://github.com/abosalehg-ui" target="_blank" class="nav-link">GitHub</a>
-                </nav>
-            </div>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-badge">6 تطبيقات أندرويد مجانية</div>
-            <h1>تطبيقات <span>مبتكرة</span><br>لتسهيل حياتك اليومية</h1>
-            <p>مجموعة من التطبيقات المصممة بعناية لتلبية احتياجاتك اليومية، بواجهات سهلة الاستخدام وأداء عالي</p>
-            <div class="stats">
-                <div class="stat">
-                    <div class="stat-number">6</div>
-                    <div class="stat-label">تطبيقات</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">مجاني</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">0</div>
-                    <div class="stat-label">إعلانات</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Apps Section -->
-    <section class="apps-section" id="apps">
-        <div class="container">
-            <div class="section-header">
-                <h2>📱 التطبيقات المتاحة</h2>
-                <p>اختر التطبيق المناسب لاحتياجاتك وحمّله مباشرة</p>
-            </div>
-
-            <div class="apps-grid">
-                <!-- App 1: HiddenNotes -->
-                <article class="app-card" data-app="hidden-notes">
-                    <div class="app-card-inner">
-                        <div class="app-info">
-                            <div class="app-header">
-                                <div class="app-icon calculator">🧮</div>
-                                <div class="app-title-wrap">
-                                    <h3>Hidden Notes</h3>
-                                    <span class="app-version">الإصدار 2.1</span>
-                                </div>
-                            </div>
-                            <p class="app-tagline">آلة حاسبة ذكية مع نظام ملاحظات مخفي وآمن</p>
-                            <div class="app-features">
-                                <span class="feature-tag">🔐 تشفير AES-256</span>
-                                <span class="feature-tag">📝 ملاحظات سرية</span>
-                                <span class="feature-tag">🛡️ خصوصية عالية</span>
-                            </div>
-                            <p class="app-description">
-                                تطبيق مبتكر يجمع بين آلة حاسبة عملية ونظام ملاحظات مخفي عالي الأمان، مصمم لحماية خصوصيتك وإدارة بياناتك الحساسة بسرية تامة.
-                            </p>
-                            <div class="app-actions">
-                                <a href="https://drive.google.com/uc?export=download&id=1NlAZmUP5mTmbEu-pt0C3_JSb4jJwkchP" target="_blank" class="btn btn-primary" download>
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                        <polyline points="7 10 12 15 17 10"></polyline>
-                                        <line x1="12" y1="15" x2="12" y2="3"></line>
-                                    </svg>
-                                    تحميل APK
-                                </a>
-                                <button class="btn btn-secondary" onclick="toggleFeatures('hidden-notes')">
-                                    المزيد من التفاصيل
-                                </button>
-                            </div>
-                        </div>
-                        <div class="app-screenshots">
-                            <div class="screenshot">
-                                <img src="assets/screenshots/hidden-notes-1.png" alt="Hidden Notes Screenshot 1" onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'><span>📱</span>صورة 1</div>'">
-                            </div>
-                            <div class="screenshot">
-                                <img src="assets/screenshots/hidden-notes-2.png" alt="Hidden Notes Screenshot 2" onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'><span>📱</span>صورة 2</div>'">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="features-list" id="features-hidden-notes">
-                        <div class="features-grid">
-                            <div class="feature-item">
-                                <div class="feature-icon">🔢</div>
-                                <div class="feature-content">
-                                    <h4>آلة حاسبة كاملة</h4>
-                                    <p>واجهة أنيقة تدعم العمليات الأساسية والمتقدمة مثل النسبة المئوية</p>
-                                </div>
-                            </div>
-                            <div class="feature-item">
-                                <div class="feature-icon">🔐</div>
-                                <div class="feature-content">
-                                    <h4>نظام مخفي</h4>
-                                    <p>كلمة مرور قابلة للتغيير مع تشفير قوي لجميع الملاحظات</p>
-                                </div>
-                            </div>
-                            <div class="feature-item">
-                                <div class="feature-icon">📝</div>
-                                <div class="feature-content">
-                                    <h4>إدارة احترافية</h4>
-                                    <p>إضافة وتعديل وبحث وتصدير الملاحظات بسهولة</p>
-                                </div>
-                            </div>
-                            <div class="feature-item">
-                                <div class="feature-icon">🛡️</div>
-                                <div class="feature-content">
-                                    <h4>أمان من المستوى العالي</h4>
-                                    <p>تشفير AES-256 مع حفظ المفاتيح في Android Keystore</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- App 2: PDF Compressor -->
-                <article class="app-card" data-app="pdf-compressor">
-                    <div class="app-card-inner">
-                        <div class="app-info">
-                            <div class="app-header">
-                                <div class="app-icon pdf">📄</div>
-                                <div class="app-title-wrap">
-                                    <h3>PDF Compressor Advanced</h3>
-                                    <span class="app-version">الإصدار 1.1</span>
-                                </div>
-                            </div>
-                            <p class="app-tagline">ضغط ملفات PDF على أربعة مستويات مختلفة</p>
-                            <div class="app-features">
-                                <span class="feature-tag">📉 ضغط فعال</span>
-                                <span class="feature-tag">🔒 معالجة محلية</span>
-                                <span class="feature-tag">🌙 وضع ليلي</span>
-                            </div>
-                            <p class="app-description">
-                                يتيح لك ضغط ملفات PDF على جهازك بسهولة وسرعة، مما يقلل من حجمها بشكل كبير دون المساس بالجودة. مثالي لإرسال المستندات عبر البريد الإلكتروني.
-                            </p>
-                            <div class="app-actions">
-                                <a href="https://drive.google.com/uc?export=download&id=189OMRNqig210hJZ_M27C0AM1vRw6hEZG" target="_blank" class="btn btn-primary" download>
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                        <polyline points="7 10 12 15 17 10"></polyline>
-                                        <line x1="12" y1="15" x2="12" y2="3"></line>
-                                    </svg>
-                                    تحميل APK
-                                </a>
-                                <button class="btn btn-secondary" onclick="toggleFeatures('pdf-compressor')">
-                                    المزيد من التفاصيل
-                                </button>
-                            </div>
-                        </div>
-                        <div class="app-screenshots">
-                            <div class="screenshot">
-                                <img src="assets/screenshots/pdf-compressor-1.png" alt="PDF Compressor Screenshot 1" onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'><span>📱</span>صورة 1</div>'">
-                            </div>
-                            <div class="screenshot">
-                                <img src="assets/screenshots/pdf-compressor-2.png" alt="PDF Compressor Screenshot 2" onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'><span>📱</span>صورة 2</div>'">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="features-list" id="features-pdf-compressor">
-                        <div class="features-grid">
-                            <div class="feature-item">
-                                <div class="feature-icon">📉</div>
-                                <div class="feature-content">
-                                    <h4>ضغط فعال</h4>
-                                    <p>خوارزميات متقدمة لتقليل الحجم مع الحفاظ على الوضوح</p>
-                                </div>
-                            </div>
-                            <div class="feature-item">
-                                <div class="feature-icon">🎚️</div>
-                                <div class="feature-content">
-                                    <h4>4 مستويات ضغط</h4>
-                                    <p>من الضغط الأساسي إلى الضغط الأقصى حسب احتياجاتك</p>
-                                </div>
-                            </div>
-                            <div class="feature-item">
-                                <div class="feature-icon">🔒</div>
-                                <div class="feature-content">
-                                    <h4>معالجة محلية</h4>
-                                    <p>جميع العمليات على جهازك دون الحاجة للإنترنت</p>
-                                </div>
-                            </div>
-                            <div class="feature-item">
-                                <div class="feature-icon">🌙</div>
-                                <div class="feature-content">
-                                    <h4>وضع ليلي</h4>
-                                    <p>واجهة مريحة للعينين في الإضاءة المنخفضة</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- App 3: Sh7na -->
-                <article class="app-card" data-app="sh7na">
-                    <div class="app-card-inner">
-                        <div class="app-info">
-                            <div class="app-header">
-                                <div class="app-icon shipment">📦</div>
-                                <div class="app-title-wrap">
-                                    <h3>شحنة</h3>
-                                    <span class="app-version">الإصدار 1.0</span>
-                                </div>
-                            </div>
-                            <p class="app-tagline">تذكر مواعيد وصول شحناتك!</p>
-                            <div class="app-features">
-                                <span class="feature-tag">🔔 تذكيرات ذكية</span>
-                                <span class="feature-tag">🏪 دعم المتاجر</span>
-                                <span class="feature-tag">📋 أرشفة الطلبات</span>
-                            </div>
-                            <p class="app-description">
-                                تطبيق بسيط لتتبع جميع شحناتك في مكان واحد. الصق رابط المنتج وسيقوم التطبيق بجلب التفاصيل تلقائياً مع تذكيرات في يوم الوصول.
-                            </p>
-                            <div class="app-actions">
-                                <a href="https://drive.google.com/uc?export=download&id=1KnBT-Gn0canvC-jfo_S-p_5hGnpHoGF7" target="_blank" class="btn btn-primary" download>
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                        <polyline points="7 10 12 15 17 10"></polyline>
-                                        <line x1="12" y1="15" x2="12" y2="3"></line>
-                                    </svg>
-                                    تحميل APK
-                                </a>
-                                <button class="btn btn-secondary" onclick="toggleFeatures('sh7na')">
-                                    المزيد من التفاصيل
-                                </button>
-                            </div>
-                        </div>
-                        <div class="app-screenshots">
-                            <div class="screenshot">
-                                <img src="assets/screenshots/sh7na-1.png" alt="Sh7na Screenshot 1" onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'><span>📱</span>صورة 1</div>'">
-                            </div>
-                            <div class="screenshot">
-                                <img src="assets/screenshots/sh7na-2.png" alt="Sh7na Screenshot 2" onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'><span>📱</span>صورة 2</div>'">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="features-list" id="features-sh7na">
-                        <div class="features-grid">
-                            <div class="feature-item">
-                                <div class="feature-icon">🔗</div>
-                                <div class="feature-content">
-                                    <h4>إضافة ذكية</h4>
-                                    <p>الصق الرابط ليجلب التفاصيل تلقائياً من أمازون، علي إكسبرس، نون وغيرها</p>
-                                </div>
-                            </div>
-                            <div class="feature-item">
-                                <div class="feature-icon">🔔</div>
-                                <div class="feature-content">
-                                    <h4>تذكيرات مخصصة</h4>
-                                    <p>إشعارات في يوم الوصول واليوم الذي يسبقه</p>
-                                </div>
-                            </div>
-                            <div class="feature-item">
-                                <div class="feature-icon">🎨</div>
-                                <div class="feature-content">
-                                    <h4>تصميم جذاب</h4>
-                                    <p>واجهة تشبه الملاحظات اللاصقة الملونة</p>
-                                </div>
-                            </div>
-                            <div class="feature-item">
-                                <div class="feature-icon">📋</div>
-                                <div class="feature-content">
-                                    <h4>أرشفة الطلبات</h4>
-                                    <p>احتفظ بسجل لجميع الشحنات التي وصلت</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- App 4: Text Editor -->
-                <article class="app-card" data-app="text-editor">
-                    <div class="app-card-inner">
-                        <div class="app-info">
-                            <div class="app-header">
-                                <div class="app-icon editor">📝</div>
-                                <div class="app-title-wrap">
-                                    <h3>Text Editor</h3>
-                                    <span class="app-version">الإصدار 1.0</span>
-                                </div>
-                            </div>
-                            <p class="app-tagline">لاستعراض وتعديل وحفظ ملفات TXT و HTML</p>
-                            <div class="app-features">
-                                <span class="feature-tag">📂 دعم متعدد</span>
-                                <span class="feature-tag">💾 حفظ سريع</span>
-                                <span class="feature-tag">🚀 خفيف ومجاني</span>
-                            </div>
-                            <p class="app-description">
-                                أداتك المثالية لتدوين الملاحظات السريعة، تعديل الملفات النصية، وتحرير أكواد HTML بكل سهولة. واجهة نظيفة وبسيطة بدون أي تعقيدات.
-                            </p>
-                            <div class="app-actions">
-                                <a href="https://drive.google.com/uc?export=download&id=1G3nQSZBEVJZo6Flg0Mht1ur1RvL2OsJL" target="_blank" class="btn btn-primary" download>
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                        <polyline points="7 10 12 15 17 10"></polyline>
-                                        <line x1="12" y1="15" x2="12" y2="3"></line>
-                                    </svg>
-                                    تحميل APK
-                                </a>
-                                <button class="btn btn-secondary" onclick="toggleFeatures('text-editor')">
-                                    المزيد من التفاصيل
-                                </button>
-                            </div>
-                        </div>
-                        <div class="app-screenshots">
-                            <div class="screenshot">
-                                <img src="assets/screenshots/text-editor-1.png" alt="Text Editor Screenshot 1" onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'><span>📱</span>صورة 1</div>'">
-                            </div>
-                            <div class="screenshot">
-                                <img src="assets/screenshots/text-editor-2.png" alt="Text Editor Screenshot 2" onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'><span>📱</span>صورة 2</div>'">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="features-list" id="features-text-editor">
-                        <div class="features-grid">
-                            <div class="feature-item">
-                                <div class="feature-icon">✍️</div>
-                                <div class="feature-content">
-                                    <h4>سهولة التحرير</h4>
-                                    <p>واجهة مستخدم بسيطة ومباشرة</p>
-                                </div>
-                            </div>
-                            <div class="feature-item">
-                                <div class="feature-icon">📂</div>
-                                <div class="feature-content">
-                                    <h4>دعم متعدد الصيغ</h4>
-                                    <p>فتح وتعديل وحفظ ملفات .txt و .html</p>
-                                </div>
-                            </div>
-                            <div class="feature-item">
-                                <div class="feature-icon">💾</div>
-                                <div class="feature-content">
-                                    <h4>حفظ سريع</h4>
-                                    <p>احتفظ بتغييراتك بضغطة زر واحدة</p>
-                                </div>
-                            </div>
-                            <div class="feature-item">
-                                <div class="feature-icon">🔒</div>
-                                <div class="feature-content">
-                                    <h4>خصوصيتك أولاً</h4>
-                                    <p>لا يجمع أي بيانات ويعمل بالكامل على جهازك</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- App 5: TikTok Downloader -->
-                <article class="app-card" data-app="tiktok">
-                    <div class="app-card-inner">
-                        <div class="app-info">
-                            <div class="app-header">
-                                <div class="app-icon tiktok">🎵</div>
-                                <div class="app-title-wrap">
-                                    <h3>TikTok Downloader</h3>
-                                    <span class="app-version">الإصدار 1.0</span>
-                                </div>
-                            </div>
-                            <p class="app-tagline">تحميل مقاطع تيكتوك بجودة عالية بدون علامة مائية</p>
-                            <div class="app-features">
-                                <span class="feature-tag">✨ بدون علامة مائية</span>
-                                <span class="feature-tag">🚫 بدون إعلانات</span>
-                                <span class="feature-tag">⚡ تحميل تلقائي</span>
-                            </div>
-                            <p class="app-description">
-                                احصل على فيديوهات تيك توك نقية وعالية الجودة. كل ما عليك هو نسخ الرابط أو مشاركته مباشرة من التطبيق ليبدأ التحميل تلقائياً.
-                            </p>
-                            <div class="app-actions">
-                                <a href="https://drive.google.com/uc?export=download&id=1BJNadUtBtW27DbUtj8TtDb6Q_WnUylnA" target="_blank" class="btn btn-primary" download>
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                        <polyline points="7 10 12 15 17 10"></polyline>
-                                        <line x1="12" y1="15" x2="12" y2="3"></line>
-                                    </svg>
-                                    تحميل APK
-                                </a>
-                                <button class="btn btn-secondary" onclick="toggleFeatures('tiktok')">
-                                    المزيد من التفاصيل
-                                </button>
-                            </div>
-                        </div>
-                        <div class="app-screenshots">
-                            <div class="screenshot">
-                                <img src="assets/screenshots/tiktok-downloader-1.png" alt="TikTok Downloader Screenshot 1" onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'><span>📱</span>صورة 1</div>'">
-                            </div>
-                            <div class="screenshot">
-                                <img src="assets/screenshots/tiktok-downloader-2.png" alt="TikTok Downloader Screenshot 2" onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'><span>📱</span>صورة 2</div>'">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="features-list" id="features-tiktok">
-                        <div class="features-grid">
-                            <div class="feature-item">
-                                <div class="feature-icon">✨</div>
-                                <div class="feature-content">
-                                    <h4>بدون علامة مائية</h4>
-                                    <p>فيديوهات نقية للمشاهدة والمشاركة</p>
-                                </div>
-                            </div>
-                            <div class="feature-item">
-                                <div class="feature-icon">⚡</div>
-                                <div class="feature-content">
-                                    <h4>تحميل تلقائي</h4>
-                                    <p>شارك الرابط من تيكتوك ليبدأ التنزيل مباشرة</p>
-                                </div>
-                            </div>
-                            <div class="feature-item">
-                                <div class="feature-icon">🎬</div>
-                                <div class="feature-content">
-                                    <h4>جودة عالية HD</h4>
-                                    <p>يبحث تلقائياً عن أعلى جودة متاحة</p>
-                                </div>
-                            </div>
-                            <div class="feature-item">
-                                <div class="feature-icon">📜</div>
-                                <div class="feature-content">
-                                    <h4>سجل التنزيلات</h4>
-                                    <p>وصول سريع لآخر الفيديوهات المحملة</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- App 6: Jureati -->
-                <article class="app-card" data-app="jureati">
-                    <div class="app-card-inner">
-                        <div class="app-info">
-                            <div class="app-header">
-                                <div class="app-icon medicine">💊</div>
-                                <div class="app-title-wrap">
-                                    <h3>Jureati - جرعتي</h3>
-                                    <span class="app-version">الإصدار 1.0</span>
-                                </div>
-                            </div>
-                            <p class="app-tagline">مدير الأدوية الخاص بك</p>
-                            <div class="app-features">
-                                <span class="feature-tag">⏰ تذكيرات موثوقة</span>
-                                <span class="feature-tag">📊 إدارة المخزون</span>
-                                <span class="feature-tag">🎨 سمات متعددة</span>
-                            </div>
-                            <p class="app-description">
-                                تطبيق شامل لإدارة الأدوية يساعدك على البقاء على اطلاع بنظامك الصحي. جدولة سهلة، سجل كامل، وتذكيرات لإعادة التعبئة.
-                            </p>
-                            <div class="app-actions">
-                                <a href="https://drive.google.com/uc?export=download&id=1dgVXjLntJLa2m-EohVgTBo7963HiqPgJ" target="_blank" class="btn btn-primary" download>
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                        <polyline points="7 10 12 15 17 10"></polyline>
-                                        <line x1="12" y1="15" x2="12" y2="3"></line>
-                                    </svg>
-                                    تحميل APK
-                                </a>
-                                <button class="btn btn-secondary" onclick="toggleFeatures('jureati')">
-                                    المزيد من التفاصيل
-                                </button>
-                            </div>
-                        </div>
-                        <div class="app-screenshots">
-                            <div class="screenshot">
-                                <img src="assets/screenshots/jureati-1.png" alt="Jureati Screenshot 1" onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'><span>📱</span>صورة 1</div>'">
-                            </div>
-                            <div class="screenshot">
-                                <img src="assets/screenshots/jureati-2.png" alt="Jureati Screenshot 2" onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'><span>📱</span>صورة 2</div>'">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="features-list" id="features-jureati">
-                        <div class="features-grid">
-                            <div class="feature-item">
-                                <div class="feature-icon">⏰</div>
-                                <div class="feature-content">
-                                    <h4>جدولة سهلة</h4>
-                                    <p>إعداد تذكيرات لجميع أدويتك ببضع نقرات</p>
-                                </div>
-                            </div>
-                            <div class="feature-item">
-                                <div class="feature-icon">📋</div>
-                                <div class="feature-content">
-                                    <h4>سجل الأدوية</h4>
-                                    <p>تتبع جميع الأدوية التي تناولتها مع الوقت والجرعة</p>
-                                </div>
-                            </div>
-                            <div class="feature-item">
-                                <div class="feature-icon">📦</div>
-                                <div class="feature-content">
-                                    <h4>إدارة المخزون</h4>
-                                    <p>تتبع الكمية المتبقية مع تذكيرات للتعبئة</p>
-                                </div>
-                            </div>
-                            <div class="feature-item">
-                                <div class="feature-icon">🎨</div>
-                                <div class="feature-content">
-                                    <h4>سمات متعددة</h4>
-                                    <p>اختر بين السمة الفاتحة والداكنة والنظام</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <img src="https://avatars.githubusercontent.com/u/239691345?v=4" alt="Logo">
-                    <span>تطبيقاتي</span>
-                </div>
-                <div class="footer-links">
-                    <a href="mailto:abo.saleh.g@gmail.com">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                            <polyline points="22,6 12,13 2,6"></polyline>
-                        </svg>
-                        abo.saleh.g@gmail.com
-                    </a>
-                    <a href="https://github.com/abosalehg-ui" target="_blank">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                        </svg>
-                        GitHub
-                    </a>
-                </div>
-                <div class="footer-bottom">
-                    <p>تطوير: <a href="mailto:abo.saleh.g@gmail.com">عبدالكريم العبود</a></p>
-                    <p style="margin-top: 10px;">© 2024 Apps page - All Rights Reserved</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Toggle features section
-        function toggleFeatures(appId) {
-            const featuresEl = document.getElementById(`features-${appId}`);
-            const isActive = featuresEl.classList.contains('active');
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+    
+    <script type="module">
+        import * as THREE from 'three';
+        
+        // ============= GAME CONFIGURATION =============
+        const CONFIG = {
+            levels: [
+                {
+                    name: 'المرحلة الأولى - الصباح',
+                    timeOfDay: 'morning',
+                    distance: 800,
+                    fuelConsumption: 0.012,
+                    obstacleFrequency: 0.22,
+                    fuelCanFrequency: 0.08,
+                    duneHeight: 1.2,
+                    targetName: 'محطة البنزين',
+                    skyColors: { top: 0x87CEEB, horizon: 0xFFE4B5, bottom: 0xDEB887 },
+                    fogColor: 0xD4C4A8,
+                    fogNear: 15,
+                    fogFar: 80,
+                    sunIntensity: 1.2,
+                    cloudColor: 0xffffff,
+                    mountainColor: 0xC4A484
+                },
+                {
+                    name: 'المرحلة الثانية - العصر',
+                    timeOfDay: 'afternoon',
+                    distance: 1000,
+                    fuelConsumption: 0.015,
+                    obstacleFrequency: 0.28,
+                    fuelCanFrequency: 0.07,
+                    duneHeight: 1.5,
+                    targetName: 'محطة البنزين',
+                    skyColors: { top: 0xFF6B35, horizon: 0xFFD700, bottom: 0xDEB887 },
+                    fogColor: 0xC9A86C,
+                    fogNear: 12,
+                    fogFar: 70,
+                    sunIntensity: 1.5,
+                    cloudColor: 0xffccaa,
+                    mountainColor: 0x8B6914
+                },
+                {
+                    name: 'المرحلة الثالثة - الليل',
+                    timeOfDay: 'night',
+                    distance: 900,
+                    fuelConsumption: 0.014,
+                    obstacleFrequency: 0.25,
+                    fuelCanFrequency: 0.06,
+                    duneHeight: 1.3,
+                    targetName: 'المخيم الصحراوي',
+                    skyColors: { top: 0x0a0a20, horizon: 0x1a1a3a, bottom: 0x2a2a4a },
+                    fogColor: 0x151525,
+                    fogNear: 10,
+                    fogFar: 50,
+                    sunIntensity: 0.1,
+                    cloudColor: 0x333355,
+                    mountainColor: 0x1a1a2a
+                }
+            ],
+            vehicle: {
+                speed: 18,
+                steeringSensitivity: 0.003,
+                maxSteerAngle: 0.8,
+                steeringDamping: 0.92,
+                bodyTiltFactor: 0.15,
+                gravity: 30,
+                groundOffset: 0.6,
+                terrainFollowSpeed: 0.2
+            },
+            camera: {
+                rotationDuration: 3.5
+            }
+        };
+        
+        // ============= AUDIO SYSTEM =============
+        class AudioSystem {
+            constructor() {
+                this.ctx = null;
+                this.masterGain = null;
+                this.engineOsc = null;
+                this.engineGain = null;
+                this.windGain = null;
+                this.initialized = false;
+            }
             
-            // Close all other features
-            document.querySelectorAll('.features-list').forEach(el => {
-                el.classList.remove('active');
-            });
+            init() {
+                if (this.initialized) return;
+                try {
+                    this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                    this.masterGain = this.ctx.createGain();
+                    this.masterGain.gain.value = 0.3;
+                    this.masterGain.connect(this.ctx.destination);
+                    
+                    this.setupEngine();
+                    this.setupWind();
+                    
+                    this.initialized = true;
+                } catch (e) {
+                    console.log('Audio not available');
+                }
+            }
             
-            // Toggle current
-            if (!isActive) {
-                featuresEl.classList.add('active');
-                // Scroll into view
-                setTimeout(() => {
-                    featuresEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                }, 100);
+            setupEngine() {
+                this.engineOsc = this.ctx.createOscillator();
+                this.engineOsc.type = 'sawtooth';
+                this.engineOsc.frequency.value = 80;
+                this.engineGain = this.ctx.createGain();
+                this.engineGain.gain.value = 0;
+                
+                const engineFilter = this.ctx.createBiquadFilter();
+                engineFilter.type = 'lowpass';
+                engineFilter.frequency.value = 200;
+                
+                this.engineOsc.connect(engineFilter);
+                engineFilter.connect(this.engineGain);
+                this.engineGain.connect(this.masterGain);
+                this.engineOsc.start();
+            }
+            
+            setupWind() {
+                const windBuffer = this.ctx.createBuffer(1, this.ctx.sampleRate * 2, this.ctx.sampleRate);
+                const windData = windBuffer.getChannelData(0);
+                for (let i = 0; i < windData.length; i++) {
+                    windData[i] = Math.random() * 2 - 1;
+                }
+                
+                this.windSource = this.ctx.createBufferSource();
+                this.windSource.buffer = windBuffer;
+                this.windSource.loop = true;
+                
+                const windFilter = this.ctx.createBiquadFilter();
+                windFilter.type = 'bandpass';
+                windFilter.frequency.value = 800;
+                windFilter.Q.value = 0.5;
+                
+                this.windGain = this.ctx.createGain();
+                this.windGain.gain.value = 0;
+                
+                this.windSource.connect(windFilter);
+                windFilter.connect(this.windGain);
+                this.windGain.connect(this.masterGain);
+                this.windSource.start();
+            }
+            
+            startEngine() {
+                if (!this.initialized) return;
+                this.engineGain.gain.setTargetAtTime(0.15, this.ctx.currentTime, 0.5);
+                this.windGain.gain.setTargetAtTime(0.08, this.ctx.currentTime, 0.5);
+            }
+            
+            stopEngine() {
+                if (!this.initialized) return;
+                this.engineGain.gain.setTargetAtTime(0, this.ctx.currentTime, 0.3);
+                this.windGain.gain.setTargetAtTime(0, this.ctx.currentTime, 0.3);
+            }
+            
+            updateEngine(speed, steering) {
+                if (!this.initialized) return;
+                const freq = 60 + Math.abs(speed) * 2 + Math.abs(steering) * 20;
+                this.engineOsc.frequency.setTargetAtTime(freq, this.ctx.currentTime, 0.1);
+            }
+            
+            playCrash() {
+                if (!this.initialized) return;
+                
+                const bufferSize = this.ctx.sampleRate * 0.4;
+                const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+                const data = buffer.getChannelData(0);
+                
+                for (let i = 0; i < bufferSize; i++) {
+                    const decay = Math.pow(1 - (i / bufferSize), 2);
+                    data[i] = (Math.random() * 2 - 1) * decay;
+                }
+                
+                const noiseSource = this.ctx.createBufferSource();
+                noiseSource.buffer = buffer;
+                
+                const filter = this.ctx.createBiquadFilter();
+                filter.type = 'lowpass';
+                filter.frequency.value = 400;
+                
+                const gain = this.ctx.createGain();
+                gain.gain.value = 0.6;
+                
+                noiseSource.connect(filter);
+                filter.connect(gain);
+                gain.connect(this.masterGain);
+                noiseSource.start();
+                
+                const osc = this.ctx.createOscillator();
+                osc.type = 'triangle';
+                osc.frequency.value = 120;
+                
+                const oscGain = this.ctx.createGain();
+                oscGain.gain.value = 0.4;
+                oscGain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.3);
+                
+                osc.connect(oscGain);
+                oscGain.connect(this.masterGain);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 0.35);
+            }
+            
+            playFuelPickup() {
+                if (!this.initialized) return;
+                
+                const frequencies = [523, 659, 784];
+                
+                frequencies.forEach((freq, i) => {
+                    const osc = this.ctx.createOscillator();
+                    osc.type = 'sine';
+                    osc.frequency.value = freq;
+                    
+                    const gain = this.ctx.createGain();
+                    gain.gain.value = 0;
+                    gain.gain.setTargetAtTime(0.2, this.ctx.currentTime + i * 0.08, 0.01);
+                    gain.gain.setTargetAtTime(0, this.ctx.currentTime + i * 0.08 + 0.2, 0.1);
+                    
+                    osc.connect(gain);
+                    gain.connect(this.masterGain);
+                    osc.start(this.ctx.currentTime + i * 0.08);
+                    osc.stop(this.ctx.currentTime + i * 0.08 + 0.4);
+                });
+            }
+            
+            // Simple celebration sound - just a pleasant ding
+            playCelebration() {
+                if (!this.initialized) return;
+                
+                // Simple pleasant chime - 2 notes only
+                const osc1 = this.ctx.createOscillator();
+                osc1.type = 'sine';
+                osc1.frequency.value = 880; // A5
+                
+                const gain1 = this.ctx.createGain();
+                gain1.gain.value = 0;
+                gain1.gain.setTargetAtTime(0.3, this.ctx.currentTime, 0.01);
+                gain1.gain.setTargetAtTime(0, this.ctx.currentTime + 0.3, 0.15);
+                
+                osc1.connect(gain1);
+                gain1.connect(this.masterGain);
+                osc1.start();
+                osc1.stop(this.ctx.currentTime + 0.5);
+                
+                // Second higher note
+                const osc2 = this.ctx.createOscillator();
+                osc2.type = 'sine';
+                osc2.frequency.value = 1320; // E6
+                
+                const gain2 = this.ctx.createGain();
+                gain2.gain.value = 0;
+                gain2.gain.setTargetAtTime(0.25, this.ctx.currentTime + 0.15, 0.01);
+                gain2.gain.setTargetAtTime(0, this.ctx.currentTime + 0.5, 0.2);
+                
+                osc2.connect(gain2);
+                gain2.connect(this.masterGain);
+                osc2.start(this.ctx.currentTime + 0.15);
+                osc2.stop(this.ctx.currentTime + 0.8);
+            }
+            
+            playDefeat() {
+                if (!this.initialized) return;
+                
+                // Simple sad descending tone
+                const osc = this.ctx.createOscillator();
+                osc.type = 'triangle';
+                osc.frequency.value = 400;
+                osc.frequency.setTargetAtTime(200, this.ctx.currentTime, 0.4);
+                
+                const gain = this.ctx.createGain();
+                gain.gain.value = 0.25;
+                gain.gain.setTargetAtTime(0, this.ctx.currentTime + 0.8, 0.2);
+                
+                osc.connect(gain);
+                gain.connect(this.masterGain);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 1.2);
             }
         }
-
-        // Scroll animation for app cards
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
+        
+        // ============= GAME STATE =============
+        const state = {
+            currentLevel: 0,
+            fuel: 100,
+            distance: 0,
+            isPlaying: false,
+            isPaused: false,
+            steering: 0,
+            targetSteering: 0,
+            touchStartX: 0,
+            gameOver: false,
+            vehicleVelocityY: 0,
+            vehicleY: 0,
+            isGrounded: true,
+            cargoItems: [],
+            lastCollisionTime: 0,
+            cameraRotating: false,
+            cameraRotationStart: 0,
+            cameraRotationType: null,
+            showNextButton: false
         };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.classList.add('visible');
-                    }, index * 100);
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.app-card').forEach(card => {
-            observer.observe(card);
-        });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+        
+        // ============= THREE.JS SETUP =============
+        let scene, camera, renderer, vehicle, clock;
+        let terrain = [];
+        let obstacles = [];
+        let fuelCans = [];
+        let decorations = [];
+        let stars = [];
+        let clouds = [];
+        let mountains = [];
+        let dustParticles;
+        let goalMarker;
+        const audio = new AudioSystem();
+        
+        const TERRAIN_CHUNK_SIZE = 50;
+        const TERRAIN_RESOLUTION = 40;
+        
+        // DOM Elements
+        const startScreen = document.getElementById('startScreen');
+        const startBtn = document.getElementById('startBtn');
+        const hud = document.getElementById('hud');
+        const fuelFill = document.getElementById('fuelFill');
+        const levelName = document.getElementById('levelName');
+        const distanceText = document.getElementById('distanceText');
+        const touchHint = document.getElementById('touchHint');
+        const fuelNotification = document.getElementById('fuelNotification');
+        const levelCompleteScreen = document.getElementById('levelCompleteScreen');
+        const completeTitle = document.getElementById('completeTitle');
+        const completeSubtitle = document.getElementById('completeSubtitle');
+        const nextLevelBtn = document.getElementById('nextLevelBtn');
+        const endScreen = document.getElementById('endScreen');
+        const endTitle = document.getElementById('endTitle');
+        const endMessage = document.getElementById('endMessage');
+        const retryBtn = document.getElementById('retryBtn');
+        const winScreen = document.getElementById('winScreen');
+        const playAgainBtn = document.getElementById('playAgainBtn');
+        const mirageOverlay = document.getElementById('mirageOverlay');
+        
+        // ============= BACKGROUND ANIMATION =============
+        function initBackgroundCanvas() {
+            const canvas = document.getElementById('bgCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+            
+            const dunes = [];
+            for (let i = 0; i < 5; i++) {
+                dunes.push({
+                    y: canvas.height * (0.5 + i * 0.1),
+                    amplitude: 30 + i * 15,
+                    frequency: 0.002 - i * 0.0003,
+                    speed: 0.0002 + i * 0.0001,
+                    color: `rgba(${139 - i * 15}, ${90 - i * 10}, ${43 - i * 5}, ${0.3 + i * 0.15})`
+                });
+            }
+            
+            let time = 0;
+            function animate() {
+                if (!startScreen.style.display || startScreen.style.display !== 'none') {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    
+                    dunes.forEach(dune => {
+                        ctx.beginPath();
+                        ctx.moveTo(0, canvas.height);
+                        for (let x = 0; x <= canvas.width; x += 5) {
+                            const y = dune.y + Math.sin(x * dune.frequency + time * dune.speed * 1000) * dune.amplitude;
+                            ctx.lineTo(x, y);
+                        }
+                        ctx.lineTo(canvas.width, canvas.height);
+                        ctx.closePath();
+                        ctx.fillStyle = dune.color;
+                        ctx.fill();
                     });
+                    
+                    time += 0.016;
+                    requestAnimationFrame(animate);
+                }
+            }
+            animate();
+        }
+        
+        // ============= THREE.JS INITIALIZATION =============
+        function initThreeJS() {
+            scene = new THREE.Scene();
+            
+            camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.set(0, 8, -15);
+            camera.lookAt(0, 2, 10);
+            
+            renderer = new THREE.WebGLRenderer({ 
+                canvas: document.getElementById('gameCanvas'),
+                antialias: true,
+                alpha: false
+            });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            
+            clock = new THREE.Clock();
+            
+            window.addEventListener('resize', onResize);
+        }
+        
+        function onResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+        
+        // ============= SKY ENVIRONMENT =============
+        function createMountains() {
+            const level = CONFIG.levels[state.currentLevel];
+            const group = new THREE.Group();
+            
+            // Create mountain range in the distance
+            const mountainCount = 15;
+            for (let i = 0; i < mountainCount; i++) {
+                const width = 80 + Math.random() * 120;
+                const height = 30 + Math.random() * 50;
+                const geom = new THREE.ConeGeometry(width / 2, height, 4);
+                const mat = new THREE.MeshBasicMaterial({ 
+                    color: level.mountainColor,
+                    transparent: true,
+                    opacity: 0.6,
+                    fog: true
+                });
+                const mountain = new THREE.Mesh(geom, mat);
+                
+                const angle = (i / mountainCount) * Math.PI * 2;
+                const distance = 400 + Math.random() * 100;
+                mountain.position.set(
+                    Math.sin(angle) * distance,
+                    height / 2 - 10,
+                    Math.cos(angle) * distance
+                );
+                mountain.rotation.y = Math.random() * Math.PI;
+                group.add(mountain);
+            }
+            
+            return group;
+        }
+        
+        function createClouds() {
+            const level = CONFIG.levels[state.currentLevel];
+            const group = new THREE.Group();
+            
+            const cloudCount = 20;
+            for (let i = 0; i < cloudCount; i++) {
+                const cloudGroup = new THREE.Group();
+                
+                // Create fluffy cloud from multiple spheres
+                const puffCount = 5 + Math.floor(Math.random() * 5);
+                for (let j = 0; j < puffCount; j++) {
+                    const size = 15 + Math.random() * 25;
+                    const geom = new THREE.SphereGeometry(size, 8, 8);
+                    const mat = new THREE.MeshBasicMaterial({
+                        color: level.cloudColor,
+                        transparent: true,
+                        opacity: level.timeOfDay === 'night' ? 0.3 : 0.7,
+                        fog: false
+                    });
+                    const puff = new THREE.Mesh(geom, mat);
+                    puff.position.set(
+                        (Math.random() - 0.5) * size * 2,
+                        (Math.random() - 0.5) * size * 0.5,
+                        (Math.random() - 0.5) * size * 2
+                    );
+                    puff.scale.y = 0.4 + Math.random() * 0.3;
+                    cloudGroup.add(puff);
+                }
+                
+                // Position cloud in sky
+                const angle = Math.random() * Math.PI * 2;
+                const distance = 200 + Math.random() * 300;
+                const height = 80 + Math.random() * 60;
+                cloudGroup.position.set(
+                    Math.sin(angle) * distance,
+                    height,
+                    Math.cos(angle) * distance
+                );
+                
+                cloudGroup.userData = {
+                    speed: 0.5 + Math.random() * 1,
+                    originalX: cloudGroup.position.x,
+                    originalZ: cloudGroup.position.z
+                };
+                
+                group.add(cloudGroup);
+            }
+            
+            return group;
+        }
+        
+        // ============= TOYOTA LAND CRUISER 70 PICKUP =============
+        function createVehicle() {
+            const group = new THREE.Group();
+            
+            const bodyColor = 0xD4B896;
+            const darkColor = 0x1a1a1a;
+            const chromeColor = 0xcccccc;
+            const glassColor = 0x87CEEB;
+            
+            // === CHASSIS ===
+            const chassisGeom = new THREE.BoxGeometry(2.0, 0.25, 5.5);
+            const chassisMat = new THREE.MeshStandardMaterial({ color: darkColor, roughness: 0.8 });
+            const chassis = new THREE.Mesh(chassisGeom, chassisMat);
+            chassis.position.y = 0.4;
+            group.add(chassis);
+            
+            // === FRONT SECTION ===
+            const hoodGeom = new THREE.BoxGeometry(2.0, 0.6, 1.8);
+            const bodyMat = new THREE.MeshStandardMaterial({ color: bodyColor, roughness: 0.6, metalness: 0.1 });
+            const hood = new THREE.Mesh(hoodGeom, bodyMat);
+            hood.position.set(0, 1.0, 2.0);
+            hood.castShadow = true;
+            group.add(hood);
+            
+            const hoodLineGeom = new THREE.BoxGeometry(0.05, 0.02, 1.6);
+            const hoodLineMat = new THREE.MeshStandardMaterial({ color: 0xaaa080 });
+            [-0.5, 0.5].forEach(x => {
+                const line = new THREE.Mesh(hoodLineGeom, hoodLineMat);
+                line.position.set(x, 1.32, 2.0);
+                group.add(line);
+            });
+            
+            // === GRILLE ===
+            const grilleGeom = new THREE.BoxGeometry(1.6, 0.5, 0.1);
+            const grilleMat = new THREE.MeshStandardMaterial({ color: chromeColor, metalness: 0.8, roughness: 0.3 });
+            const grille = new THREE.Mesh(grilleGeom, grilleMat);
+            grille.position.set(0, 0.95, 2.95);
+            group.add(grille);
+            
+            for (let i = -0.6; i <= 0.6; i += 0.15) {
+                const barGeom = new THREE.BoxGeometry(0.03, 0.4, 0.05);
+                const bar = new THREE.Mesh(barGeom, grilleMat);
+                bar.position.set(i, 0.95, 2.98);
+                group.add(bar);
+            }
+            
+            // === BULL BAR ===
+            const bullBarMat = new THREE.MeshStandardMaterial({ color: darkColor, roughness: 0.7 });
+            
+            const mainBarGeom = new THREE.CylinderGeometry(0.06, 0.06, 2.2, 8);
+            const mainBar = new THREE.Mesh(mainBarGeom, bullBarMat);
+            mainBar.rotation.z = Math.PI / 2;
+            mainBar.position.set(0, 0.8, 3.15);
+            group.add(mainBar);
+            
+            [-0.9, 0.9].forEach(x => {
+                const supportGeom = new THREE.CylinderGeometry(0.05, 0.05, 0.5, 8);
+                const support = new THREE.Mesh(supportGeom, bullBarMat);
+                support.position.set(x, 0.6, 3.1);
+                group.add(support);
+            });
+            
+            // === CABIN ===
+            const cabinGeom = new THREE.BoxGeometry(2.0, 1.1, 1.6);
+            const cabin = new THREE.Mesh(cabinGeom, bodyMat);
+            cabin.position.set(0, 1.65, 0.5);
+            cabin.castShadow = true;
+            group.add(cabin);
+            
+            const roofGeom = new THREE.BoxGeometry(1.9, 0.15, 1.5);
+            const roof = new THREE.Mesh(roofGeom, bodyMat);
+            roof.position.set(0, 2.28, 0.5);
+            roof.castShadow = true;
+            group.add(roof);
+            
+            // === WINDOWS ===
+            const windowMat = new THREE.MeshStandardMaterial({ 
+                color: glassColor, 
+                roughness: 0.1, 
+                metalness: 0.8,
+                transparent: true,
+                opacity: 0.7
+            });
+            
+            const windshieldGeom = new THREE.BoxGeometry(1.6, 0.7, 0.08);
+            const windshield = new THREE.Mesh(windshieldGeom, windowMat);
+            windshield.position.set(0, 1.75, 1.35);
+            windshield.rotation.x = -0.15;
+            group.add(windshield);
+            
+            const sideWindowGeom = new THREE.BoxGeometry(0.08, 0.5, 0.8);
+            [-1.0, 1.0].forEach(x => {
+                const sideWindow = new THREE.Mesh(sideWindowGeom, windowMat);
+                sideWindow.position.set(x, 1.75, 0.5);
+                group.add(sideWindow);
+            });
+            
+            const rearWindowGeom = new THREE.BoxGeometry(1.4, 0.45, 0.08);
+            const rearWindow = new THREE.Mesh(rearWindowGeom, windowMat);
+            rearWindow.position.set(0, 1.75, -0.28);
+            group.add(rearWindow);
+            
+            // === DOORS ===
+            const doorLineMat = new THREE.MeshStandardMaterial({ color: 0x8a7a5a });
+            [-0.99, 0.99].forEach(x => {
+                const vLineGeom = new THREE.BoxGeometry(0.02, 0.9, 0.03);
+                const vLine = new THREE.Mesh(vLineGeom, doorLineMat);
+                vLine.position.set(x * 0.5, 1.2, 0.5);
+                group.add(vLine);
+                
+                const handleGeom = new THREE.BoxGeometry(0.15, 0.06, 0.05);
+                const handleMat = new THREE.MeshStandardMaterial({ color: chromeColor, metalness: 0.9 });
+                const handle = new THREE.Mesh(handleGeom, handleMat);
+                handle.position.set(x, 1.5, 0.8);
+                group.add(handle);
+            });
+            
+            // === PICKUP BED ===
+            const bedFloorGeom = new THREE.BoxGeometry(1.9, 0.15, 2.2);
+            const bedFloor = new THREE.Mesh(bedFloorGeom, bodyMat);
+            bedFloor.position.set(0, 0.85, -1.4);
+            bedFloor.castShadow = true;
+            group.add(bedFloor);
+            
+            const bedWallMat = new THREE.MeshStandardMaterial({ color: bodyColor, roughness: 0.7 });
+            
+            const sideWallGeom = new THREE.BoxGeometry(0.08, 0.5, 2.2);
+            [-0.95, 0.95].forEach(x => {
+                const sideWall = new THREE.Mesh(sideWallGeom, bedWallMat);
+                sideWall.position.set(x, 1.15, -1.4);
+                sideWall.castShadow = true;
+                group.add(sideWall);
+            });
+            
+            // Tailgate
+            const tailgateGeom = new THREE.BoxGeometry(1.9, 0.5, 0.08);
+            const tailgate = new THREE.Mesh(tailgateGeom, bedWallMat);
+            tailgate.position.set(0, 1.15, -2.5);
+            tailgate.castShadow = true;
+            group.add(tailgate);
+            
+            // === TOYOTA TEXT ON TAILGATE ===
+            // Create TOYOTA letters using boxes
+            const letterMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.3, metalness: 0.5 });
+            const letterHeight = 0.12;
+            const letterDepth = 0.03;
+            
+            // T
+            const t1 = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.02, letterDepth), letterMat);
+            t1.position.set(-0.55, 1.2, -2.54);
+            group.add(t1);
+            const t2 = new THREE.Mesh(new THREE.BoxGeometry(0.02, letterHeight, letterDepth), letterMat);
+            t2.position.set(-0.55, 1.13, -2.54);
+            group.add(t2);
+            
+            // O
+            const oGeom = new THREE.TorusGeometry(0.05, 0.015, 8, 16);
+            const o1 = new THREE.Mesh(oGeom, letterMat);
+            o1.position.set(-0.35, 1.14, -2.54);
+            group.add(o1);
+            
+            // Y
+            const y1 = new THREE.Mesh(new THREE.BoxGeometry(0.02, 0.06, letterDepth), letterMat);
+            y1.position.set(-0.18, 1.18, -2.54);
+            y1.rotation.z = 0.4;
+            group.add(y1);
+            const y2 = new THREE.Mesh(new THREE.BoxGeometry(0.02, 0.06, letterDepth), letterMat);
+            y2.position.set(-0.12, 1.18, -2.54);
+            y2.rotation.z = -0.4;
+            group.add(y2);
+            const y3 = new THREE.Mesh(new THREE.BoxGeometry(0.02, 0.07, letterDepth), letterMat);
+            y3.position.set(-0.15, 1.08, -2.54);
+            group.add(y3);
+            
+            // O
+            const o2 = new THREE.Mesh(oGeom, letterMat);
+            o2.position.set(0.05, 1.14, -2.54);
+            group.add(o2);
+            
+            // T
+            const t3 = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.02, letterDepth), letterMat);
+            t3.position.set(0.25, 1.2, -2.54);
+            group.add(t3);
+            const t4 = new THREE.Mesh(new THREE.BoxGeometry(0.02, letterHeight, letterDepth), letterMat);
+            t4.position.set(0.25, 1.13, -2.54);
+            group.add(t4);
+            
+            // A
+            const a1 = new THREE.Mesh(new THREE.BoxGeometry(0.02, letterHeight, letterDepth), letterMat);
+            a1.position.set(0.42, 1.13, -2.54);
+            a1.rotation.z = 0.15;
+            group.add(a1);
+            const a2 = new THREE.Mesh(new THREE.BoxGeometry(0.02, letterHeight, letterDepth), letterMat);
+            a2.position.set(0.50, 1.13, -2.54);
+            a2.rotation.z = -0.15;
+            group.add(a2);
+            const a3 = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.02, letterDepth), letterMat);
+            a3.position.set(0.46, 1.12, -2.54);
+            group.add(a3);
+            
+            const bedFrontGeom = new THREE.BoxGeometry(1.9, 0.5, 0.08);
+            const bedFront = new THREE.Mesh(bedFrontGeom, bedWallMat);
+            bedFront.position.set(0, 1.15, -0.35);
+            group.add(bedFront);
+            
+            // === CARGO ===
+            group.cargo = [];
+            
+            const cargoBounds = {
+                minX: -0.75,
+                maxX: 0.75,
+                minZ: -2.35,
+                maxZ: -0.5,
+                minY: 0.95
+            };
+            group.cargoBounds = cargoBounds;
+            
+            // Barrel
+            const barrelGeom = new THREE.CylinderGeometry(0.28, 0.28, 0.65, 12);
+            const barrelMat = new THREE.MeshStandardMaterial({ color: 0x2255aa, roughness: 0.6 });
+            const barrel = new THREE.Mesh(barrelGeom, barrelMat);
+            barrel.position.set(-0.4, 1.28, -1.8);
+            barrel.userData = {
+                originalPos: new THREE.Vector3(-0.4, 1.28, -1.8),
+                velocity: new THREE.Vector3(0, 0, 0),
+                fallen: false
+            };
+            barrel.castShadow = true;
+            group.add(barrel);
+            group.cargo.push(barrel);
+            
+            // Crate 1
+            const crateGeom = new THREE.BoxGeometry(0.45, 0.38, 0.45);
+            const crateMat = new THREE.MeshStandardMaterial({ color: 0x8B4513, roughness: 0.9 });
+            const crate1 = new THREE.Mesh(crateGeom, crateMat);
+            crate1.position.set(0.35, 1.12, -1.1);
+            crate1.userData = {
+                originalPos: new THREE.Vector3(0.35, 1.12, -1.1),
+                velocity: new THREE.Vector3(0, 0, 0),
+                fallen: false
+            };
+            crate1.castShadow = true;
+            group.add(crate1);
+            group.cargo.push(crate1);
+            
+            // Crate 2
+            const crate2 = new THREE.Mesh(crateGeom, crateMat);
+            crate2.position.set(0.25, 1.12, -2.0);
+            crate2.userData = {
+                originalPos: new THREE.Vector3(0.25, 1.12, -2.0),
+                velocity: new THREE.Vector3(0, 0, 0),
+                fallen: false
+            };
+            crate2.castShadow = true;
+            group.add(crate2);
+            group.cargo.push(crate2);
+            
+            // Jerry can
+            const jerryGeom = new THREE.BoxGeometry(0.22, 0.38, 0.14);
+            const jerryMat = new THREE.MeshStandardMaterial({ color: 0xcc2222, roughness: 0.5 });
+            const jerry = new THREE.Mesh(jerryGeom, jerryMat);
+            jerry.position.set(-0.4, 1.12, -1.1);
+            jerry.userData = {
+                originalPos: new THREE.Vector3(-0.4, 1.12, -1.1),
+                velocity: new THREE.Vector3(0, 0, 0),
+                fallen: false
+            };
+            jerry.castShadow = true;
+            group.add(jerry);
+            group.cargo.push(jerry);
+            
+            // === WHEELS ===
+            const wheelGeom = new THREE.CylinderGeometry(0.55, 0.55, 0.35, 20);
+            const wheelMat = new THREE.MeshStandardMaterial({ color: darkColor, roughness: 0.9 });
+            const hubGeom = new THREE.CylinderGeometry(0.25, 0.25, 0.36, 12);
+            const hubMat = new THREE.MeshStandardMaterial({ color: chromeColor, metalness: 0.7, roughness: 0.4 });
+            
+            const wheelPositions = [
+                [-1.1, 0.55, 1.8],
+                [1.1, 0.55, 1.8],
+                [-1.1, 0.55, -1.5],
+                [1.1, 0.55, -1.5]
+            ];
+            
+            group.wheels = [];
+            wheelPositions.forEach(pos => {
+                const wheelGroup = new THREE.Group();
+                
+                const wheel = new THREE.Mesh(wheelGeom, wheelMat);
+                wheel.rotation.z = Math.PI / 2;
+                wheelGroup.add(wheel);
+                
+                const hub = new THREE.Mesh(hubGeom, hubMat);
+                hub.rotation.z = Math.PI / 2;
+                wheelGroup.add(hub);
+                
+                wheelGroup.position.set(...pos);
+                wheelGroup.castShadow = true;
+                group.add(wheelGroup);
+                group.wheels.push(wheelGroup);
+            });
+            
+            // === HEADLIGHTS (Physical) ===
+            const headlightGeom = new THREE.CylinderGeometry(0.15, 0.12, 0.1, 12);
+            const headlightMat = new THREE.MeshStandardMaterial({ 
+                color: 0xffffee, 
+                emissive: 0xffffaa, 
+                emissiveIntensity: 0.5 
+            });
+            
+            [-0.65, 0.65].forEach(x => {
+                const headlight = new THREE.Mesh(headlightGeom, headlightMat);
+                headlight.rotation.x = Math.PI / 2;
+                headlight.position.set(x, 1.0, 2.95);
+                group.add(headlight);
+            });
+            
+            // === HEADLIGHT BEAMS (Much stronger for night) ===
+            group.headlights = [];
+            [-0.65, 0.65].forEach(x => {
+                const spotLight = new THREE.SpotLight(0xffffcc, 0, 100, 0.6, 0.3);
+                spotLight.position.set(x, 1.0, 2.95);
+                spotLight.target.position.set(x, -2, 50);
+                spotLight.castShadow = true;
+                group.add(spotLight);
+                group.add(spotLight.target);
+                group.headlights.push(spotLight);
+            });
+            
+            // Add extra front light for better visibility
+            const frontLight = new THREE.PointLight(0xffffcc, 0, 40);
+            frontLight.position.set(0, 1.5, 4);
+            group.add(frontLight);
+            group.frontLight = frontLight;
+            
+            // === TAIL LIGHTS ===
+            const tailLightGeom = new THREE.BoxGeometry(0.2, 0.15, 0.05);
+            const tailLightMat = new THREE.MeshStandardMaterial({ color: 0xff0000, emissive: 0x440000 });
+            [-0.8, 0.8].forEach(x => {
+                const tailLight = new THREE.Mesh(tailLightGeom, tailLightMat);
+                tailLight.position.set(x, 1.0, -2.55);
+                group.add(tailLight);
+            });
+            
+            // === SIDE MIRRORS ===
+            const mirrorGeom = new THREE.BoxGeometry(0.15, 0.1, 0.08);
+            const mirrorMat = new THREE.MeshStandardMaterial({ color: darkColor });
+            [-1.1, 1.1].forEach(x => {
+                const mirror = new THREE.Mesh(mirrorGeom, mirrorMat);
+                mirror.position.set(x, 1.6, 1.0);
+                group.add(mirror);
+            });
+            
+            // === ROOF RACK ===
+            const rackBarGeom = new THREE.CylinderGeometry(0.03, 0.03, 1.8, 6);
+            const rackMat = new THREE.MeshStandardMaterial({ color: darkColor });
+            
+            [-0.5, 0.5].forEach(z => {
+                const bar = new THREE.Mesh(rackBarGeom, rackMat);
+                bar.rotation.z = Math.PI / 2;
+                bar.position.set(0, 2.45, 0.5 + z * 0.6);
+                group.add(bar);
+            });
+            
+            [[-0.85, 0.2], [0.85, 0.2], [-0.85, 0.8], [0.85, 0.8]].forEach(([x, z]) => {
+                const supportGeom = new THREE.CylinderGeometry(0.02, 0.02, 0.15, 6);
+                const support = new THREE.Mesh(supportGeom, rackMat);
+                support.position.set(x, 2.36, z);
+                group.add(support);
+            });
+            
+            return group;
+        }
+        
+        // ============= PARKED VEHICLES =============
+        function createOldJeep(color) {
+            const group = new THREE.Group();
+            const mat = new THREE.MeshStandardMaterial({ color: color, roughness: 0.7 });
+            const darkMat = new THREE.MeshStandardMaterial({ color: 0x1a1a1a, roughness: 0.9 });
+            
+            const bodyGeom = new THREE.BoxGeometry(1.8, 0.8, 3.5);
+            const body = new THREE.Mesh(bodyGeom, mat);
+            body.position.y = 0.9;
+            body.castShadow = true;
+            group.add(body);
+            
+            const cabinGeom = new THREE.BoxGeometry(1.6, 0.8, 1.4);
+            const cabin = new THREE.Mesh(cabinGeom, mat);
+            cabin.position.set(0, 1.6, -0.3);
+            cabin.castShadow = true;
+            group.add(cabin);
+            
+            const wheelGeom = new THREE.CylinderGeometry(0.4, 0.4, 0.3, 12);
+            [[-0.9, 0.4, 1.2], [0.9, 0.4, 1.2], [-0.9, 0.4, -1.2], [0.9, 0.4, -1.2]].forEach(pos => {
+                const wheel = new THREE.Mesh(wheelGeom, darkMat);
+                wheel.rotation.z = Math.PI / 2;
+                wheel.position.set(...pos);
+                group.add(wheel);
+            });
+            
+            const lightGeom = new THREE.SphereGeometry(0.12, 8, 8);
+            const lightMat = new THREE.MeshStandardMaterial({ color: 0xffffcc, emissive: 0x333300 });
+            [-0.5, 0.5].forEach(x => {
+                const light = new THREE.Mesh(lightGeom, lightMat);
+                light.position.set(x, 0.9, 1.8);
+                group.add(light);
+            });
+            
+            return group;
+        }
+        
+        function createPickupTruck(color) {
+            const group = new THREE.Group();
+            const mat = new THREE.MeshStandardMaterial({ color: color, roughness: 0.6 });
+            const darkMat = new THREE.MeshStandardMaterial({ color: 0x1a1a1a, roughness: 0.9 });
+            
+            const cabinGeom = new THREE.BoxGeometry(1.9, 1.0, 1.8);
+            const cabin = new THREE.Mesh(cabinGeom, mat);
+            cabin.position.set(0, 1.2, 0.8);
+            cabin.castShadow = true;
+            group.add(cabin);
+            
+            const roofGeom = new THREE.BoxGeometry(1.8, 0.15, 1.6);
+            const roof = new THREE.Mesh(roofGeom, mat);
+            roof.position.set(0, 1.8, 0.8);
+            group.add(roof);
+            
+            const hoodGeom = new THREE.BoxGeometry(1.9, 0.5, 1.2);
+            const hood = new THREE.Mesh(hoodGeom, mat);
+            hood.position.set(0, 0.9, 1.9);
+            hood.castShadow = true;
+            group.add(hood);
+            
+            const bedGeom = new THREE.BoxGeometry(1.8, 0.1, 2.0);
+            const bed = new THREE.Mesh(bedGeom, mat);
+            bed.position.set(0, 0.75, -1.0);
+            group.add(bed);
+            
+            const wallGeom = new THREE.BoxGeometry(0.08, 0.4, 2.0);
+            [-0.9, 0.9].forEach(x => {
+                const wall = new THREE.Mesh(wallGeom, mat);
+                wall.position.set(x, 0.95, -1.0);
+                group.add(wall);
+            });
+            
+            const tailGeom = new THREE.BoxGeometry(1.8, 0.4, 0.08);
+            const tail = new THREE.Mesh(tailGeom, mat);
+            tail.position.set(0, 0.95, -2.0);
+            group.add(tail);
+            
+            const wheelGeom = new THREE.CylinderGeometry(0.45, 0.45, 0.3, 14);
+            [[-1.0, 0.45, 1.5], [1.0, 0.45, 1.5], [-1.0, 0.45, -1.2], [1.0, 0.45, -1.2]].forEach(pos => {
+                const wheel = new THREE.Mesh(wheelGeom, darkMat);
+                wheel.rotation.z = Math.PI / 2;
+                wheel.position.set(...pos);
+                group.add(wheel);
+            });
+            
+            return group;
+        }
+        
+        function createSmallTruck(color) {
+            const group = new THREE.Group();
+            const mat = new THREE.MeshStandardMaterial({ color: color, roughness: 0.6 });
+            const darkMat = new THREE.MeshStandardMaterial({ color: 0x1a1a1a, roughness: 0.9 });
+            
+            const cabinGeom = new THREE.BoxGeometry(2.0, 1.2, 1.5);
+            const cabin = new THREE.Mesh(cabinGeom, mat);
+            cabin.position.set(0, 1.3, 1.5);
+            cabin.castShadow = true;
+            group.add(cabin);
+            
+            const cargoGeom = new THREE.BoxGeometry(2.0, 0.8, 3.0);
+            const cargo = new THREE.Mesh(cargoGeom, mat);
+            cargo.position.set(0, 1.0, -0.8);
+            cargo.castShadow = true;
+            group.add(cargo);
+            
+            const wheelGeom = new THREE.CylinderGeometry(0.5, 0.5, 0.35, 14);
+            [
+                [-1.0, 0.5, 1.8], [1.0, 0.5, 1.8],
+                [-1.0, 0.5, -0.5], [1.0, 0.5, -0.5],
+                [-1.0, 0.5, -1.8], [1.0, 0.5, -1.8]
+            ].forEach(pos => {
+                const wheel = new THREE.Mesh(wheelGeom, darkMat);
+                wheel.rotation.z = Math.PI / 2;
+                wheel.position.set(...pos);
+                group.add(wheel);
+            });
+            
+            return group;
+        }
+        
+        // ============= TERRAIN GENERATION =============
+        function getTerrainHeight(x, z) {
+            const level = CONFIG.levels[state.currentLevel];
+            
+            let height = 0;
+            height += Math.sin(x * 0.06 + z * 0.025) * level.duneHeight;
+            height += Math.cos(x * 0.04 + z * 0.04) * level.duneHeight * 0.5;
+            height += Math.sin(x * 0.12 + z * 0.06) * level.duneHeight * 0.25;
+            
+            const roadWidth = 10;
+            const roadFactor = Math.exp(-(x * x) / (roadWidth * roadWidth));
+            height *= (1 - roadFactor * 0.85);
+            
+            return height;
+        }
+        
+        function createTerrainChunk(zPosition, chunkIndex) {
+            const level = CONFIG.levels[state.currentLevel];
+            
+            const geometry = new THREE.PlaneGeometry(100, TERRAIN_CHUNK_SIZE, TERRAIN_RESOLUTION, TERRAIN_RESOLUTION);
+            const positions = geometry.attributes.position.array;
+            
+            for (let i = 0; i < positions.length; i += 3) {
+                const x = positions[i];
+                const localZ = positions[i + 1];
+                const worldZ = zPosition + localZ;
+                positions[i + 2] = getTerrainHeight(x, worldZ);
+            }
+            
+            geometry.computeVertexNormals();
+            
+            const sandColors = {
+                morning: 0xE8D4A8,
+                afternoon: 0xDEB887,
+                night: 0x3a3a4a
+            };
+            
+            const material = new THREE.MeshStandardMaterial({
+                color: sandColors[level.timeOfDay],
+                roughness: 0.95,
+                metalness: 0,
+                flatShading: true
+            });
+            
+            const mesh = new THREE.Mesh(geometry, material);
+            mesh.rotation.x = -Math.PI / 2;
+            mesh.position.z = zPosition;
+            mesh.position.y = 0;
+            mesh.receiveShadow = true;
+            
+            const baseGeometry = new THREE.BoxGeometry(100, 8, TERRAIN_CHUNK_SIZE);
+            const baseMaterial = new THREE.MeshStandardMaterial({ color: sandColors[level.timeOfDay], roughness: 1 });
+            const base = new THREE.Mesh(baseGeometry, baseMaterial);
+            base.position.set(0, -4, zPosition);
+            
+            return { surface: mesh, base: base };
+        }
+        
+        // ============= OBSTACLES =============
+        function createObstacle(z) {
+            const level = CONFIG.levels[state.currentLevel];
+            const type = Math.random() > 0.35 ? 'rock' : 'hole';
+            
+            let mesh;
+            const x = (Math.random() - 0.5) * 14;
+            
+            if (type === 'rock') {
+                const rockSize = 0.7 + Math.random() * 1.0;
+                const geom = new THREE.DodecahedronGeometry(rockSize, 1);
+                // Make rocks more visible at night
+                const rockColor = level.timeOfDay === 'night' ? 0x6a6a7a : 0x8B7355;
+                const mat = new THREE.MeshStandardMaterial({
+                    color: rockColor,
+                    roughness: 0.9,
+                    flatShading: true,
+                    emissive: level.timeOfDay === 'night' ? 0x222233 : 0x000000,
+                    emissiveIntensity: level.timeOfDay === 'night' ? 0.1 : 0
+                });
+                mesh = new THREE.Mesh(geom, mat);
+                
+                const terrainHeight = getTerrainHeight(x, z);
+                mesh.scale.y = 0.5 + Math.random() * 0.3;
+                mesh.position.set(x, terrainHeight + rockSize * 0.3, z);
+                mesh.rotation.set(Math.random(), Math.random(), Math.random());
+                mesh.castShadow = true;
+                mesh.userData = { type: 'rock', radius: rockSize + 0.3 };
+            } else {
+                const holeSize = 1.0 + Math.random() * 0.6;
+                const geom = new THREE.CircleGeometry(holeSize, 16);
+                const mat = new THREE.MeshStandardMaterial({
+                    color: level.timeOfDay === 'night' ? 0x0a0a15 : 0x3a2a1a,
+                    roughness: 1
+                });
+                mesh = new THREE.Mesh(geom, mat);
+                mesh.rotation.x = -Math.PI / 2;
+                const terrainHeight = getTerrainHeight(x, z);
+                mesh.position.set(x, terrainHeight + 0.02, z);
+                mesh.userData = { type: 'hole', radius: holeSize };
+            }
+            
+            return mesh;
+        }
+        
+        // ============= FUEL CANS =============
+        function createFuelCan(z) {
+            const x = (Math.random() - 0.5) * 12;
+            const group = new THREE.Group();
+            
+            const canGeom = new THREE.BoxGeometry(0.4, 0.6, 0.25);
+            const canMat = new THREE.MeshStandardMaterial({ color: 0x22aa22, roughness: 0.5, metalness: 0.3 });
+            const can = new THREE.Mesh(canGeom, canMat);
+            can.castShadow = true;
+            group.add(can);
+            
+            const handleGeom = new THREE.TorusGeometry(0.1, 0.025, 8, 12, Math.PI);
+            const handleMat = new THREE.MeshStandardMaterial({ color: 0x1a1a1a });
+            const handle = new THREE.Mesh(handleGeom, handleMat);
+            handle.position.set(0, 0.35, 0);
+            handle.rotation.x = Math.PI / 2;
+            group.add(handle);
+            
+            const spoutGeom = new THREE.CylinderGeometry(0.05, 0.05, 0.15, 8);
+            const spout = new THREE.Mesh(spoutGeom, handleMat);
+            spout.position.set(0.1, 0.35, 0);
+            group.add(spout);
+            
+            const glowGeom = new THREE.SphereGeometry(0.5, 16, 16);
+            const glowMat = new THREE.MeshBasicMaterial({ color: 0x44ff44, transparent: true, opacity: 0.2 });
+            const glow = new THREE.Mesh(glowGeom, glowMat);
+            group.add(glow);
+            group.glowMesh = glow;
+            
+            const terrainHeight = getTerrainHeight(x, z);
+            group.position.set(x, terrainHeight + 0.4, z);
+            group.userData = { radius: 1.5 };
+            
+            return group;
+        }
+        
+        // ============= DECORATIONS =============
+        function createPalmTree(x, z) {
+            const group = new THREE.Group();
+            const level = CONFIG.levels[state.currentLevel];
+            
+            const trunkGeom = new THREE.CylinderGeometry(0.15, 0.35, 5, 8);
+            const trunkMat = new THREE.MeshStandardMaterial({ 
+                color: level.timeOfDay === 'night' ? 0x2a1a10 : 0x4a3520, 
+                roughness: 0.9 
+            });
+            const trunk = new THREE.Mesh(trunkGeom, trunkMat);
+            trunk.position.y = 2.5;
+            trunk.castShadow = true;
+            group.add(trunk);
+            
+            const leafMat = new THREE.MeshStandardMaterial({ 
+                color: level.timeOfDay === 'night' ? 0x1a4a1a : 0x228B22, 
+                roughness: 0.8, 
+                side: THREE.DoubleSide 
+            });
+            for (let i = 0; i < 8; i++) {
+                const leafGeom = new THREE.PlaneGeometry(0.6, 2.5);
+                const leaf = new THREE.Mesh(leafGeom, leafMat);
+                leaf.position.y = 5;
+                leaf.rotation.y = (i / 8) * Math.PI * 2;
+                leaf.rotation.x = -0.6;
+                group.add(leaf);
+            }
+            
+            const terrainHeight = getTerrainHeight(x, z);
+            group.position.set(x, terrainHeight, z);
+            return group;
+        }
+        
+        function createTent(x, z) {
+            const group = new THREE.Group();
+            const level = CONFIG.levels[state.currentLevel];
+            
+            const tentGeom = new THREE.ConeGeometry(2.5, 2.2, 4);
+            const tentMat = new THREE.MeshStandardMaterial({ 
+                color: 0x1a1a1a,
+                roughness: 0.9,
+                side: THREE.DoubleSide
+            });
+            const tent = new THREE.Mesh(tentGeom, tentMat);
+            tent.position.y = 1.1;
+            tent.rotation.y = Math.PI / 4;
+            tent.castShadow = true;
+            group.add(tent);
+            
+            if (level.timeOfDay === 'night') {
+                const fireLight = new THREE.PointLight(0xff6600, 1.5, 12);
+                fireLight.position.set(3.5, 0.8, 0);
+                group.add(fireLight);
+                
+                const fireGeom = new THREE.ConeGeometry(0.25, 0.8, 8);
+                const fireMat = new THREE.MeshBasicMaterial({ color: 0xff4400 });
+                const fire = new THREE.Mesh(fireGeom, fireMat);
+                fire.position.set(3.5, 0.4, 0);
+                group.add(fire);
+            }
+            
+            const terrainHeight = getTerrainHeight(x, z);
+            group.position.set(x, terrainHeight, z);
+            return group;
+        }
+        
+        function createGasStation(z) {
+            const group = new THREE.Group();
+            const level = CONFIG.levels[state.currentLevel];
+            
+            const platformGeom = new THREE.BoxGeometry(18, 0.4, 14);
+            const platformMat = new THREE.MeshStandardMaterial({ color: 0x555555, roughness: 0.8 });
+            const platform = new THREE.Mesh(platformGeom, platformMat);
+            platform.position.y = 0.2;
+            platform.receiveShadow = true;
+            group.add(platform);
+            
+            const roofGeom = new THREE.BoxGeometry(14, 0.4, 10);
+            const roofMat = new THREE.MeshStandardMaterial({ 
+                color: level.timeOfDay === 'night' ? 0x2a2a3a : 0xCC0000, 
+                roughness: 0.7 
+            });
+            const roof = new THREE.Mesh(roofGeom, roofMat);
+            roof.position.y = 5;
+            roof.castShadow = true;
+            group.add(roof);
+            
+            const pillarGeom = new THREE.CylinderGeometry(0.25, 0.25, 4.6, 8);
+            const pillarMat = new THREE.MeshStandardMaterial({ color: 0xeeeeee });
+            [[-5.5, 2.7, 4], [5.5, 2.7, 4], [-5.5, 2.7, -4], [5.5, 2.7, -4]].forEach(pos => {
+                const pillar = new THREE.Mesh(pillarGeom, pillarMat);
+                pillar.position.set(...pos);
+                pillar.castShadow = true;
+                group.add(pillar);
+            });
+            
+            const pumpGeom = new THREE.BoxGeometry(0.8, 2.2, 0.6);
+            const pumpMat = new THREE.MeshStandardMaterial({ color: 0xff4444 });
+            [-2.5, 0, 2.5].forEach(px => {
+                const pump = new THREE.Mesh(pumpGeom, pumpMat);
+                pump.position.set(px, 1.5, 0);
+                pump.castShadow = true;
+                group.add(pump);
+            });
+            
+            if (level.timeOfDay === 'night') {
+                const light = new THREE.PointLight(0xffffcc, 4, 45);
+                light.position.set(0, 4.5, 0);
+                group.add(light);
+            }
+            
+            [-14, 14].forEach(px => {
+                const palm = createPalmTree(px, 0);
+                palm.position.y = 0;
+                group.add(palm);
+            });
+            
+            const vehicleColors = [0xffffff, 0x4a4a4a, 0x8B4513, 0x1a3d5c, 0x5c1a1a];
+            
+            const jeep1 = createOldJeep(vehicleColors[0]);
+            jeep1.position.set(-12, 0, -5);
+            jeep1.rotation.y = Math.PI / 6;
+            group.add(jeep1);
+            
+            const pickup1 = createPickupTruck(vehicleColors[1]);
+            pickup1.position.set(-13, 0, 5);
+            pickup1.rotation.y = -Math.PI / 8;
+            group.add(pickup1);
+            
+            const jeep2 = createOldJeep(vehicleColors[2]);
+            jeep2.position.set(12, 0, -4);
+            jeep2.rotation.y = -Math.PI / 5;
+            group.add(jeep2);
+            
+            const truck1 = createSmallTruck(vehicleColors[3]);
+            truck1.position.set(14, 0, 6);
+            truck1.rotation.y = Math.PI / 4;
+            group.add(truck1);
+            
+            group.position.set(0, 0, z);
+            return group;
+        }
+        
+        function createCamp(z) {
+            const group = new THREE.Group();
+            
+            const mainTentGeom = new THREE.ConeGeometry(4.5, 3.5, 6);
+            const mainTentMat = new THREE.MeshStandardMaterial({ 
+                color: 0x1a1a1a,
+                roughness: 0.9,
+                side: THREE.DoubleSide
+            });
+            const mainTent = new THREE.Mesh(mainTentGeom, mainTentMat);
+            mainTent.position.set(0, 1.75, 0);
+            mainTent.rotation.y = Math.PI / 6;
+            mainTent.castShadow = true;
+            group.add(mainTent);
+            
+            [[-9, 4], [9, 3], [-7, -5], [7, -4]].forEach(([tx, tz]) => {
+                const tent = createTent(tx, tz);
+                tent.position.y = 0;
+                group.add(tent);
+            });
+            
+            [[-16, 0], [16, 0], [0, -10], [-11, 7], [11, 7]].forEach(([px, pz]) => {
+                const palm = createPalmTree(px, pz);
+                palm.position.y = 0;
+                group.add(palm);
+            });
+            
+            const fireLight = new THREE.PointLight(0xff6600, 6, 30);
+            fireLight.position.set(0, 1.5, 9);
+            group.add(fireLight);
+            
+            const fireGeom = new THREE.ConeGeometry(0.6, 1.5, 8);
+            const fireMat = new THREE.MeshBasicMaterial({ color: 0xff4400 });
+            const fire = new THREE.Mesh(fireGeom, fireMat);
+            fire.position.set(0, 0.75, 9);
+            group.add(fire);
+            
+            const archGeom = new THREE.TorusGeometry(3.5, 0.25, 8, 16, Math.PI);
+            const archMat = new THREE.MeshStandardMaterial({ color: 0x8B4513 });
+            const arch = new THREE.Mesh(archGeom, archMat);
+            arch.position.set(0, 3.5, 18);
+            arch.rotation.x = Math.PI / 2;
+            group.add(arch);
+            
+            [-3.5, 3.5].forEach(px => {
+                const poleGeom = new THREE.CylinderGeometry(0.25, 0.25, 3.5, 8);
+                const pole = new THREE.Mesh(poleGeom, archMat);
+                pole.position.set(px, 1.75, 18);
+                group.add(pole);
+            });
+            
+            const vehicleColors = [0xffffff, 0x4a4a4a, 0x8B4513, 0x1a3d5c, 0xd4b896, 0x2a4a2a];
+            
+            const jeep1 = createOldJeep(vehicleColors[0]);
+            jeep1.position.set(-18, 0, -3);
+            jeep1.rotation.y = Math.PI / 4;
+            group.add(jeep1);
+            
+            const pickup1 = createPickupTruck(vehicleColors[4]);
+            pickup1.position.set(-20, 0, 5);
+            pickup1.rotation.y = Math.PI / 6;
+            group.add(pickup1);
+            
+            const truck1 = createSmallTruck(vehicleColors[1]);
+            truck1.position.set(-16, 0, 12);
+            truck1.rotation.y = -Math.PI / 8;
+            group.add(truck1);
+            
+            const jeep2 = createOldJeep(vehicleColors[2]);
+            jeep2.position.set(18, 0, -2);
+            jeep2.rotation.y = -Math.PI / 3;
+            group.add(jeep2);
+            
+            const pickup2 = createPickupTruck(vehicleColors[3]);
+            pickup2.position.set(20, 0, 6);
+            pickup2.rotation.y = -Math.PI / 5;
+            group.add(pickup2);
+            
+            const jeep3 = createOldJeep(vehicleColors[5]);
+            jeep3.position.set(17, 0, 13);
+            jeep3.rotation.y = Math.PI / 7;
+            group.add(jeep3);
+            
+            group.position.set(0, 0, z);
+            return group;
+        }
+        
+        // ============= STARS =============
+        function createStars() {
+            const geometry = new THREE.BufferGeometry();
+            const vertices = [];
+            
+            for (let i = 0; i < 1000; i++) {
+                const x = (Math.random() - 0.5) * 800;
+                const y = 40 + Math.random() * 200;
+                const z = (Math.random() - 0.5) * 800;
+                vertices.push(x, y, z);
+            }
+            
+            geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+            
+            const material = new THREE.PointsMaterial({
+                color: 0xffffff,
+                size: 1.2,
+                transparent: true,
+                opacity: 0.9,
+                sizeAttenuation: true
+            });
+            
+            return new THREE.Points(geometry, material);
+        }
+        
+        // ============= DUST PARTICLES =============
+        function createDustParticles() {
+            const count = 200;
+            const geometry = new THREE.BufferGeometry();
+            const positions = new Float32Array(count * 3);
+            const velocities = [];
+            
+            for (let i = 0; i < count; i++) {
+                positions[i * 3] = (Math.random() - 0.5) * 6;
+                positions[i * 3 + 1] = Math.random() * 1.0;
+                positions[i * 3 + 2] = Math.random() * -6 - 2;
+                
+                velocities.push({
+                    x: (Math.random() - 0.5) * 0.5,
+                    y: Math.random() * 0.3 + 0.1,
+                    z: -Math.random() * 0.8 - 0.2
+                });
+            }
+            
+            geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+            
+            const level = CONFIG.levels[state.currentLevel];
+            const material = new THREE.PointsMaterial({
+                color: level.timeOfDay === 'night' ? 0x666688 : 0xD4B896,
+                size: 0.15,
+                transparent: true,
+                opacity: 0.7
+            });
+            
+            const particles = new THREE.Points(geometry, material);
+            particles.userData.velocities = velocities;
+            
+            return particles;
+        }
+        
+        // ============= LEVEL SETUP =============
+        function setupLevel() {
+            terrain.forEach(t => {
+                scene.remove(t.surface);
+                scene.remove(t.base);
+            });
+            obstacles.forEach(o => scene.remove(o));
+            fuelCans.forEach(f => scene.remove(f));
+            decorations.forEach(d => scene.remove(d));
+            stars.forEach(s => scene.remove(s));
+            clouds.forEach(c => scene.remove(c));
+            mountains.forEach(m => scene.remove(m));
+            if (dustParticles) {
+                if (dustParticles.parent) dustParticles.parent.remove(dustParticles);
+                scene.remove(dustParticles);
+            }
+            if (goalMarker) scene.remove(goalMarker);
+            
+            terrain = [];
+            obstacles = [];
+            fuelCans = [];
+            decorations = [];
+            stars = [];
+            clouds = [];
+            mountains = [];
+            
+            const level = CONFIG.levels[state.currentLevel];
+            
+            scene.background = new THREE.Color(level.skyColors.top);
+            scene.fog = new THREE.Fog(level.fogColor, level.fogNear, level.fogFar);
+            
+            scene.children = scene.children.filter(c => !(c instanceof THREE.Light) || c.parent === vehicle);
+            
+            const ambientLight = new THREE.AmbientLight(0xffffff, level.timeOfDay === 'night' ? 0.2 : 0.5);
+            scene.add(ambientLight);
+            
+            const sunLight = new THREE.DirectionalLight(
+                level.timeOfDay === 'night' ? 0x6666aa : 0xffffee,
+                level.sunIntensity
+            );
+            sunLight.position.set(level.timeOfDay === 'afternoon' ? -40 : 40, 60, 40);
+            sunLight.castShadow = true;
+            sunLight.shadow.mapSize.width = 1024;
+            sunLight.shadow.mapSize.height = 1024;
+            sunLight.shadow.camera.near = 1;
+            sunLight.shadow.camera.far = 200;
+            sunLight.shadow.camera.left = -60;
+            sunLight.shadow.camera.right = 60;
+            sunLight.shadow.camera.top = 60;
+            sunLight.shadow.camera.bottom = -60;
+            scene.add(sunLight);
+            
+            // Add mountains
+            const mountainGroup = createMountains();
+            mountains.push(mountainGroup);
+            scene.add(mountainGroup);
+            
+            // Add clouds
+            const cloudGroup = createClouds();
+            clouds.push(cloudGroup);
+            scene.add(cloudGroup);
+            
+            const numChunks = Math.ceil((level.distance + 200) / TERRAIN_CHUNK_SIZE) + 3;
+            for (let i = 0; i < numChunks; i++) {
+                const zPos = i * TERRAIN_CHUNK_SIZE - TERRAIN_CHUNK_SIZE;
+                const chunk = createTerrainChunk(zPos, i);
+                terrain.push(chunk);
+                scene.add(chunk.surface);
+                scene.add(chunk.base);
+            }
+            
+            for (let z = 50; z < level.distance - 40; z += 18) {
+                if (Math.random() < level.obstacleFrequency) {
+                    const obstacle = createObstacle(z);
+                    obstacles.push(obstacle);
+                    scene.add(obstacle);
+                }
+            }
+            
+            for (let z = 80; z < level.distance - 60; z += 50) {
+                if (Math.random() < level.fuelCanFrequency) {
+                    const fuelCan = createFuelCan(z);
+                    fuelCans.push(fuelCan);
+                    scene.add(fuelCan);
+                }
+            }
+            
+            for (let z = 100; z < level.distance - 150; z += 130) {
+                if (Math.random() > 0.55) {
+                    const side = Math.random() > 0.5 ? 1 : -1;
+                    const tent = createTent(side * (22 + Math.random() * 12), z);
+                    decorations.push(tent);
+                    scene.add(tent);
+                }
+            }
+            
+            if (state.currentLevel === 2) {
+                goalMarker = createCamp(level.distance + 25);
+            } else {
+                goalMarker = createGasStation(level.distance + 25);
+            }
+            scene.add(goalMarker);
+            
+            if (level.timeOfDay === 'night') {
+                const starField = createStars();
+                stars.push(starField);
+                scene.add(starField);
+                
+                // Much stronger headlights for night
+                vehicle.headlights.forEach(light => { 
+                    light.intensity = 15; 
+                    light.distance = 100;
+                });
+                if (vehicle.frontLight) {
+                    vehicle.frontLight.intensity = 8;
+                    vehicle.frontLight.distance = 50;
+                }
+                
+                const moonGeom = new THREE.SphereGeometry(10, 16, 16);
+                const moonMat = new THREE.MeshBasicMaterial({ color: 0xffffee });
+                const moon = new THREE.Mesh(moonGeom, moonMat);
+                moon.position.set(100, 120, 300);
+                stars.push(moon);
+                scene.add(moon);
+                
+                const moonLight = new THREE.PointLight(0xaaaaff, 0.3, 600);
+                moonLight.position.copy(moon.position);
+                scene.add(moonLight);
+            } else {
+                vehicle.headlights.forEach(light => { light.intensity = 0; });
+                if (vehicle.frontLight) {
+                    vehicle.frontLight.intensity = 0;
+                }
+            }
+            
+            dustParticles = createDustParticles();
+            vehicle.add(dustParticles);
+            dustParticles.position.set(0, 0.3, -2.5);
+            
+            mirageOverlay.style.display = level.timeOfDay === 'night' ? 'none' : 'block';
+            
+            // Reset cargo
+            if (vehicle.cargo) {
+                vehicle.cargo.forEach(item => {
+                    if (item.userData.fallen && item.parent !== vehicle) {
+                        scene.remove(item);
+                        vehicle.add(item);
+                    }
+                    item.position.copy(item.userData.originalPos);
+                    item.rotation.set(0, 0, 0);
+                    item.userData.velocity.set(0, 0, 0);
+                    item.userData.fallen = false;
+                });
+            }
+            
+            state.fuel = 100;
+            state.distance = 0;
+            state.steering = 0;
+            state.targetSteering = 0;
+            state.vehicleVelocityY = 0;
+            state.vehicleY = CONFIG.vehicle.groundOffset;
+            state.isGrounded = true;
+            state.lastCollisionTime = 0;
+            state.cameraRotating = false;
+            state.showNextButton = false;
+            
+            vehicle.position.set(0, state.vehicleY, 0);
+            vehicle.rotation.set(0, 0, 0);
+            
+            levelName.textContent = level.name;
+            updateHUD();
+        }
+        
+        // ============= GAME INITIALIZATION =============
+        function initGame() {
+            initThreeJS();
+            vehicle = createVehicle();
+            scene.add(vehicle);
+            setupLevel();
+        }
+        
+        // ============= INPUT HANDLING =============
+        function setupControls() {
+            document.addEventListener('touchstart', (e) => {
+                if (!state.isPlaying || state.cameraRotating) return;
+                state.touchStartX = e.touches[0].clientX;
+            }, { passive: false });
+            
+            document.addEventListener('touchmove', (e) => {
+                if (!state.isPlaying || state.cameraRotating) return;
+                e.preventDefault();
+                
+                const touchX = e.touches[0].clientX;
+                const deltaX = touchX - state.touchStartX;
+                
+                state.targetSteering = -deltaX * CONFIG.vehicle.steeringSensitivity;
+                state.targetSteering = Math.max(-CONFIG.vehicle.maxSteerAngle, 
+                                        Math.min(CONFIG.vehicle.maxSteerAngle, state.targetSteering));
+            }, { passive: false });
+            
+            document.addEventListener('touchend', () => {
+                state.targetSteering = 0;
+            });
+            
+            document.addEventListener('keydown', (e) => {
+                if (!state.isPlaying || state.cameraRotating) return;
+                if (e.key === 'ArrowLeft' || e.key === 'a') {
+                    state.targetSteering = CONFIG.vehicle.maxSteerAngle;
+                } else if (e.key === 'ArrowRight' || e.key === 'd') {
+                    state.targetSteering = -CONFIG.vehicle.maxSteerAngle;
                 }
             });
-        });
+            
+            document.addEventListener('keyup', (e) => {
+                if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'ArrowRight' || e.key === 'd') {
+                    state.targetSteering = 0;
+                }
+            });
+        }
+        
+        // ============= COLLISION DETECTION =============
+        function checkCollisions() {
+            const vehiclePos = vehicle.position;
+            const now = Date.now();
+            
+            for (let i = obstacles.length - 1; i >= 0; i--) {
+                const obstacle = obstacles[i];
+                const dx = vehiclePos.x - obstacle.position.x;
+                const dz = vehiclePos.z - obstacle.position.z;
+                const dist = Math.sqrt(dx * dx + dz * dz);
+                
+                if (dist < obstacle.userData.radius + 1.0) {
+                    if (now - state.lastCollisionTime > 500) {
+                        state.fuel -= 8;
+                        audio.playCrash();
+                        
+                        if (state.isGrounded) {
+                            state.vehicleVelocityY = 6;
+                            state.isGrounded = false;
+                        }
+                        
+                        if (vehicle.cargo) {
+                            vehicle.cargo.forEach(item => {
+                                if (!item.userData.fallen) {
+                                    const force = 3 + Math.random() * 2;
+                                    item.userData.velocity.set(
+                                        (Math.random() - 0.5) * force,
+                                        force * 0.8,
+                                        -force * 0.5
+                                    );
+                                }
+                            });
+                        }
+                        
+                        state.lastCollisionTime = now;
+                    }
+                    
+                    vehicle.position.z -= 0.2;
+                    scene.remove(obstacle);
+                    obstacles.splice(i, 1);
+                    return true;
+                }
+            }
+            
+            for (let i = fuelCans.length - 1; i >= 0; i--) {
+                const fuelCan = fuelCans[i];
+                const dx = vehiclePos.x - fuelCan.position.x;
+                const dz = vehiclePos.z - fuelCan.position.z;
+                const dist = Math.sqrt(dx * dx + dz * dz);
+                
+                if (dist < fuelCan.userData.radius + 1.0) {
+                    state.fuel = Math.min(100, state.fuel + 10);
+                    audio.playFuelPickup();
+                    
+                    fuelNotification.style.display = 'block';
+                    setTimeout(() => { fuelNotification.style.display = 'none'; }, 1500);
+                    
+                    scene.remove(fuelCan);
+                    fuelCans.splice(i, 1);
+                }
+            }
+            
+            return false;
+        }
+        
+        // ============= UPDATE CARGO =============
+        function updateCargo(delta) {
+            if (!vehicle.cargo || !vehicle.cargoBounds) return;
+            
+            const bounds = vehicle.cargoBounds;
+            
+            vehicle.cargo.forEach(item => {
+                if (item.userData.fallen) {
+                    item.userData.velocity.y -= 15 * delta;
+                    item.position.x += item.userData.velocity.x * delta;
+                    item.position.y += item.userData.velocity.y * delta;
+                    item.position.z += item.userData.velocity.z * delta;
+                    
+                    const groundHeight = getTerrainHeight(item.position.x, item.position.z);
+                    if (item.position.y < groundHeight + 0.2) {
+                        item.position.y = groundHeight + 0.2;
+                        item.userData.velocity.multiplyScalar(0.3);
+                    }
+                    
+                    item.rotation.x += item.userData.velocity.z * delta;
+                    item.rotation.z += item.userData.velocity.x * delta;
+                    
+                } else if (item.userData.velocity.lengthSq() > 0.1) {
+                    item.userData.velocity.y -= 20 * delta;
+                    
+                    const newX = item.position.x + item.userData.velocity.x * delta;
+                    const newY = item.position.y + item.userData.velocity.y * delta;
+                    const newZ = item.position.z + item.userData.velocity.z * delta;
+                    
+                    const margin = 0.15;
+                    
+                    if (newX < bounds.minX + margin) {
+                        item.userData.velocity.x = Math.abs(item.userData.velocity.x) * 0.5;
+                    } else if (newX > bounds.maxX - margin) {
+                        item.userData.velocity.x = -Math.abs(item.userData.velocity.x) * 0.5;
+                    } else {
+                        item.position.x = newX;
+                    }
+                    
+                    if (newZ < bounds.minZ + margin) {
+                        item.userData.velocity.z = Math.abs(item.userData.velocity.z) * 0.5;
+                    } else if (newZ > bounds.maxZ - margin) {
+                        item.userData.velocity.z = -Math.abs(item.userData.velocity.z) * 0.5;
+                    } else {
+                        item.position.z = newZ;
+                    }
+                    
+                    const totalVelocity = item.userData.velocity.length();
+                    if (totalVelocity > 8 && (newY > 2.2 || newX < bounds.minX - 0.3 || newX > bounds.maxX + 0.3)) {
+                        const worldPos = new THREE.Vector3();
+                        item.getWorldPosition(worldPos);
+                        
+                        vehicle.remove(item);
+                        scene.add(item);
+                        item.position.copy(worldPos);
+                        item.userData.fallen = true;
+                        item.userData.velocity.z += CONFIG.vehicle.speed * 0.3;
+                    } else {
+                        item.position.y = Math.max(newY, item.userData.originalPos.y);
+                        if (newY <= item.userData.originalPos.y) {
+                            item.userData.velocity.y = 0;
+                        }
+                    }
+                    
+                    item.userData.velocity.multiplyScalar(0.95);
+                    
+                    item.rotation.x = item.userData.velocity.z * 0.08;
+                    item.rotation.z = -item.userData.velocity.x * 0.08;
+                }
+            });
+        }
+        
+        // ============= HUD UPDATE =============
+        function updateHUD() {
+            fuelFill.style.width = `${Math.max(0, state.fuel)}%`;
+            
+            if (state.fuel > 50) {
+                fuelFill.style.background = 'linear-gradient(90deg, #44ff44, #88ff88)';
+            } else if (state.fuel > 25) {
+                fuelFill.style.background = 'linear-gradient(90deg, #ffaa00, #ffcc00)';
+            } else {
+                fuelFill.style.background = 'linear-gradient(90deg, #ff4444, #ff6666)';
+            }
+            
+            const level = CONFIG.levels[state.currentLevel];
+            const remaining = Math.max(0, Math.floor(level.distance - state.distance));
+            distanceText.textContent = `المتبقي: ${remaining} م`;
+        }
+        
+        // ============= UPDATE DUST PARTICLES =============
+        function updateDustParticles(delta) {
+            if (!dustParticles || !state.isGrounded) return;
+            
+            const positions = dustParticles.geometry.attributes.position.array;
+            const velocities = dustParticles.userData.velocities;
+            
+            for (let i = 0; i < positions.length / 3; i++) {
+                const idx = i * 3;
+                
+                positions[idx] += velocities[i].x * delta * 60;
+                positions[idx + 1] += velocities[i].y * delta * 60;
+                positions[idx + 2] += velocities[i].z * delta * 60;
+                
+                if (positions[idx + 2] < -10 || positions[idx + 1] > 2.5) {
+                    positions[idx] = (Math.random() - 0.5) * 5;
+                    positions[idx + 1] = Math.random() * 0.3;
+                    positions[idx + 2] = Math.random() * -1.5 - 1;
+                    
+                    velocities[i].x = (Math.random() - 0.5) * 0.5;
+                    velocities[i].y = Math.random() * 0.3 + 0.1;
+                    velocities[i].z = -Math.random() * 0.8 - 0.2;
+                }
+            }
+            
+            dustParticles.geometry.attributes.position.needsUpdate = true;
+        }
+        
+        // ============= UPDATE CLOUDS =============
+        function updateClouds(delta) {
+            clouds.forEach(cloudGroup => {
+                cloudGroup.children.forEach(cloud => {
+                    if (cloud.userData && cloud.userData.speed) {
+                        cloud.position.x += cloud.userData.speed * delta;
+                        
+                        // Wrap around
+                        if (cloud.position.x > 500) {
+                            cloud.position.x = -500;
+                        }
+                    }
+                });
+            });
+        }
+        
+        // ============= CAMERA ROTATION =============
+        function updateCameraRotation(delta) {
+            if (!state.cameraRotating) return;
+            
+            const elapsed = (Date.now() - state.cameraRotationStart) / 1000;
+            const duration = CONFIG.camera.rotationDuration;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            const angle = progress * Math.PI * 2;
+            const radius = 18;
+            const height = vehicle.position.y + 6;
+            
+            camera.position.x = vehicle.position.x + Math.sin(angle) * radius;
+            camera.position.z = vehicle.position.z + Math.cos(angle) * radius;
+            camera.position.y = height + Math.sin(progress * Math.PI) * 3;
+            
+            camera.lookAt(vehicle.position.x, vehicle.position.y + 1.5, vehicle.position.z);
+            
+            if (progress >= 1) {
+                state.cameraRotating = false;
+                
+                if (state.cameraRotationType === 'levelComplete') {
+                    showLevelCompleteScreen();
+                } else if (state.cameraRotationType === 'win') {
+                    showWinScreen();
+                } else if (state.cameraRotationType === 'lose') {
+                    showLoseScreen();
+                }
+            }
+        }
+        
+        function showLevelCompleteScreen() {
+            const level = CONFIG.levels[state.currentLevel];
+            completeTitle.textContent = '🎉 أحسنت!';
+            completeSubtitle.textContent = `وصلت إلى ${level.targetName}!`;
+            levelCompleteScreen.style.display = 'flex';
+        }
+        
+        function showWinScreen() {
+            winScreen.style.display = 'flex';
+        }
+        
+        function showLoseScreen() {
+            endScreen.style.display = 'flex';
+        }
+        
+        // ============= GAME LOOP =============
+        function gameLoop() {
+            requestAnimationFrame(gameLoop);
+            
+            const delta = Math.min(clock.getDelta(), 0.05);
+            
+            // Update clouds always
+            updateClouds(delta);
+            
+            if (state.cameraRotating) {
+                updateCameraRotation(delta);
+                
+                fuelCans.forEach(can => {
+                    can.rotation.y += delta * 2;
+                    can.position.y = getTerrainHeight(can.position.x, can.position.z) + 0.4 + Math.sin(Date.now() * 0.003) * 0.15;
+                });
+                
+                const level = CONFIG.levels[state.currentLevel];
+                if (level.timeOfDay === 'night' && stars[0]) {
+                    stars[0].material.opacity = 0.6 + Math.sin(Date.now() * 0.003) * 0.3;
+                }
+                
+                renderer.render(scene, camera);
+                return;
+            }
+            
+            if (!state.isPlaying || state.isPaused) {
+                renderer.render(scene, camera);
+                return;
+            }
+            
+            const level = CONFIG.levels[state.currentLevel];
+            
+            state.steering += (state.targetSteering - state.steering) * (1 - CONFIG.vehicle.steeringDamping);
+            
+            const speed = CONFIG.vehicle.speed;
+            vehicle.position.z += speed * delta;
+            state.distance = vehicle.position.z;
+            
+            vehicle.position.x += state.steering * speed * delta;
+            vehicle.position.x = Math.max(-25, Math.min(25, vehicle.position.x));
+            
+            const targetHeight = getTerrainHeight(vehicle.position.x, vehicle.position.z) + CONFIG.vehicle.groundOffset;
+            
+            if (!state.isGrounded) {
+                state.vehicleVelocityY -= CONFIG.vehicle.gravity * delta;
+                state.vehicleY += state.vehicleVelocityY * delta;
+                
+                if (state.vehicleY <= targetHeight) {
+                    state.vehicleY = targetHeight;
+                    state.vehicleVelocityY = 0;
+                    state.isGrounded = true;
+                }
+            } else {
+                const heightDiff = targetHeight - state.vehicleY;
+                state.vehicleY += heightDiff * CONFIG.vehicle.terrainFollowSpeed;
+                
+                if (heightDiff < -0.3) {
+                    state.isGrounded = false;
+                    state.vehicleVelocityY = 0;
+                }
+            }
+            
+            vehicle.position.y = state.vehicleY;
+            
+            const frontHeight = getTerrainHeight(vehicle.position.x, vehicle.position.z + 2);
+            const backHeight = getTerrainHeight(vehicle.position.x, vehicle.position.z - 2);
+            const terrainPitch = Math.atan2(frontHeight - backHeight, 4);
+            
+            vehicle.rotation.z = -state.steering * CONFIG.vehicle.bodyTiltFactor;
+            vehicle.rotation.y = state.steering * 0.3;
+            vehicle.rotation.x = -terrainPitch * 0.6;
+            
+            vehicle.wheels.forEach(wheel => {
+                wheel.children[0].rotation.x += speed * delta * 2;
+                wheel.children[1].rotation.x += speed * delta * 2;
+            });
+            
+            camera.position.x = vehicle.position.x * 0.3;
+            camera.position.y = vehicle.position.y + 7;
+            camera.position.z = vehicle.position.z - 14;
+            camera.lookAt(vehicle.position.x * 0.5, vehicle.position.y + 2, vehicle.position.z + 18);
+            
+            // Move mountains and clouds with camera (parallax)
+            mountains.forEach(m => {
+                m.position.z = vehicle.position.z;
+            });
+            clouds.forEach(c => {
+                c.position.z = vehicle.position.z;
+            });
+            
+            updateDustParticles(delta);
+            updateCargo(delta);
+            
+            fuelCans.forEach(can => {
+                can.rotation.y += delta * 2;
+                can.position.y = getTerrainHeight(can.position.x, can.position.z) + 0.4 + Math.sin(Date.now() * 0.003) * 0.15;
+                if (can.glowMesh) {
+                    can.glowMesh.material.opacity = 0.15 + Math.sin(Date.now() * 0.005) * 0.1;
+                }
+            });
+            
+            if (level.timeOfDay === 'night' && stars[0]) {
+                stars[0].material.opacity = 0.6 + Math.sin(Date.now() * 0.003) * 0.3;
+            }
+            
+            state.fuel -= level.fuelConsumption * delta * 60;
+            
+            checkCollisions();
+            
+            audio.updateEngine(speed, state.steering);
+            
+            updateHUD();
+            
+            // Win condition - 1 meter before goal
+            if (state.distance >= level.distance - 1) {
+                completeLevel();
+            }
+            
+            if (state.fuel <= 0) {
+                gameOver(false);
+            }
+            
+            renderer.render(scene, camera);
+        }
+        
+        // ============= LEVEL COMPLETION =============
+        function completeLevel() {
+            state.isPaused = true;
+            audio.stopEngine();
+            audio.playCelebration();
+            hud.style.display = 'none';
+            
+            state.cameraRotating = true;
+            state.cameraRotationStart = Date.now();
+            
+            if (state.currentLevel < 2) {
+                state.cameraRotationType = 'levelComplete';
+            } else {
+                state.cameraRotationType = 'win';
+            }
+        }
+        
+        // ============= GAME OVER =============
+        function gameOver(won) {
+            state.isPaused = true;
+            audio.stopEngine();
+            hud.style.display = 'none';
+            
+            if (!won) {
+                audio.playDefeat();
+                state.cameraRotating = true;
+                state.cameraRotationStart = Date.now();
+                state.cameraRotationType = 'lose';
+            }
+        }
+        
+        // ============= GO TO NEXT LEVEL =============
+        function goToNextLevel() {
+            levelCompleteScreen.style.display = 'none';
+            state.currentLevel++;
+            state.isPlaying = true;
+            state.isPaused = false;
+            state.cameraRotating = false;
+            
+            setupLevel();
+            hud.style.display = 'flex';
+            audio.startEngine();
+        }
+        
+        // ============= START GAME =============
+        function startGame() {
+            audio.init();
+            startScreen.style.display = 'none';
+            hud.style.display = 'flex';
+            touchHint.style.display = 'block';
+            
+            state.isPlaying = true;
+            state.gameOver = false;
+            state.currentLevel = 0;
+            state.isPaused = false;
+            state.cameraRotating = false;
+            
+            setupLevel();
+            audio.startEngine();
+            clock.start();
+            
+            setTimeout(() => { touchHint.style.display = 'none'; }, 5000);
+        }
+        
+        // ============= RESTART GAME =============
+        function restartGame() {
+            endScreen.style.display = 'none';
+            winScreen.style.display = 'none';
+            levelCompleteScreen.style.display = 'none';
+            
+            state.currentLevel = 0;
+            state.isPlaying = true;
+            state.isPaused = false;
+            state.gameOver = false;
+            state.cameraRotating = false;
+            
+            clock.stop();
+            clock.start();
+            
+            setupLevel();
+            hud.style.display = 'flex';
+            audio.startEngine();
+        }
+        
+        // ============= EVENT LISTENERS =============
+        startBtn.addEventListener('click', startGame);
+        nextLevelBtn.addEventListener('click', goToNextLevel);
+        retryBtn.addEventListener('click', restartGame);
+        playAgainBtn.addEventListener('click', restartGame);
+        
+        // ============= INITIALIZE =============
+        initBackgroundCanvas();
+        initGame();
+        setupControls();
+        gameLoop();
     </script>
 </body>
 </html>
