@@ -8,7 +8,7 @@
 
 [![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://www.android.com/)
 [![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-222222?style=for-the-badge&logo=github)](https://abosalehg-ui.github.io/my-apps/)
-[![Apps](https://img.shields.io/badge/التطبيقات-6-blue?style=for-the-badge)]()
+[![Apps](https://img.shields.io/badge/التطبيقات-7-blue?style=for-the-badge)]()
 [![Free](https://img.shields.io/badge/مجاني-100%25-green?style=for-the-badge)]()
 
 [🌐 زيارة الموقع](https://abosalehg-ui.github.io/my-apps/) · [📝 الإبلاغ عن مشكلة](https://github.com/abosalehg-ui/my-apps/issues)
@@ -25,7 +25,7 @@
 
 | 📱 | 💰 | 📢 |
 |:---:|:---:|:---:|
-| **6 تطبيقات** | **مجاني 100%** | **بدون إعلانات** |
+| **7 تطبيقات** | **مجاني 100%** | **بدون إعلانات** |
 
 </div>
 
@@ -50,14 +50,14 @@
 
 ---
 
-### 💰 ميزانية العائلة
+### 💰 ميزانية العائلة (FamilyBudget)
 > تطبيق ذكي وسهل الاستخدام لتنظيم ميزانية الأسرة، تتبع المصروفات اليومية، وتحقيق أهدافك المالية
 
 | المعلومات | التفاصيل |
 |-----------|----------|
-| 📌 الإصدار | 1.1 |
-| 🎚️ المستويات | 4 مستويات ضغط |
-| 🌙 الوضع | دعم الوضع الليلي |
+| 📌 الإصدار | 1.0 |
+| 🗂️ التصنيف | فئات جاهزة وتصنيف ذكي للمصروفات |
+| ⚠️ التنبيهات | حد استهلاك، توقع عجز، نصائح ذكية |
 
 **المميزات:**
 - 📉 إعداد ميزانية شاملة
@@ -118,8 +118,8 @@
 
 ---
 
-### 🎵 TikTok Downloader
-> تحميل مقاطع تيكتوك بجودة عالية بدون علامة مائية
+### 🎵 Download Media
+> تحميل مقاطع تيكتوك وانستقرام و X بجودة عالية بدون علامة مائية
 
 | المعلومات | التفاصيل |
 |-----------|----------|
@@ -170,13 +170,15 @@ my-apps/
 ├── index.html              # صفحة العرض الرئيسية
 ├── README.md               # التوثيق
 └── assets/
+    ├── apps/               # ملفات APK
     └── screenshots/        # صور التطبيقات
         ├── hidden-notes-*.png
         ├── pdf-compressor-*.png
         ├── sh7na-*.png
         ├── text-editor-*.png
         ├── tiktok-downloader-*.png
-        └── jureati-*.png
+        ├── jureati-*.png
+        └── FamilyBudget-*.png
 ```
 
 ---
@@ -211,8 +213,9 @@ my-apps/
 | 📄 PDF Compressor | ضغط PDF | 1.1 | ✅ متاح |
 | 📦 شحنة | تتبع الشحنات | 1.0 | ✅ متاح |
 | 📝 Text Editor | محرر نصوص | 1.0 | ✅ متاح |
-| 🎵 TikTok Downloader | تحميل تيكتوك | 1.0 | ✅ متاح |
+| 🎵 Download Media | تحميل الفيديوهات | 1.0 | ✅ متاح |
 | 💊 جرعتي | مدير الأدوية | 1.0 | ✅ متاح |
+| 💰 FamilyBudget | ميزانية العائلة | 1.0 | ✅ متاح |
 
 ---
 
