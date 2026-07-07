@@ -3,8 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تطبيقاتي</title>
+    <title>تطبيقاتي - تطبيقات أندرويد مجانية</title>
+    <meta name="description" content="مجموعة من 7 تطبيقات أندرويد مجانية بدون إعلانات: ملاحظات مشفرة، ضغط PDF، تتبع الشحنات، محرر نصوص، تحميل الفيديو، تذكير الأدوية، وميزانية العائلة.">
+    <meta name="theme-color" content="#0a1628">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="تطبيقاتي - تطبيقات أندرويد مجانية">
+    <meta property="og:description" content="مجموعة من 7 تطبيقات أندرويد مجانية بدون إعلانات، مصممة لتسهيل حياتك اليومية.">
+    <meta property="og:url" content="https://abosalehg-ui.github.io/my-apps/">
+    <meta property="og:image" content="https://avatars.githubusercontent.com/u/239691345?v=4">
+    <meta property="og:locale" content="ar_AR">
+    <meta name="twitter:card" content="summary">
     <link rel="icon" type="image/png" href="https://avatars.githubusercontent.com/u/239691345?v=4">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -270,6 +281,7 @@
         /* Apps Section */
         .apps-section {
             padding: 60px 0;
+            scroll-margin-top: 110px;
         }
 
         .section-header {
@@ -300,7 +312,6 @@
             overflow: hidden;
             border: 1px solid rgba(255, 255, 255, 0.05);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            animation: fadeInUp 0.6s ease both;
         }
 
         .app-card:hover {
@@ -346,6 +357,7 @@
         .app-icon.editor { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
         .app-icon.tiktok { background: linear-gradient(135deg, #000000 0%, #25f4ee 50%, #fe2c55 100%); }
         .app-icon.medicine { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+        .app-icon.budget { background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); }
 
         .app-title-wrap h3 {
             font-size: 1.4rem;
@@ -676,13 +688,32 @@
         }
 
         @media (max-width: 600px) {
+            header {
+                padding: 12px 0;
+            }
+
             .header-content {
                 flex-direction: column;
                 text-align: center;
+                gap: 10px;
+            }
+
+            .logo-img {
+                width: 40px;
+                height: 40px;
             }
 
             .nav-links {
-                display: none;
+                gap: 5px;
+            }
+
+            .nav-link {
+                padding: 6px 14px;
+                font-size: 0.9rem;
+            }
+
+            .apps-section {
+                scroll-margin-top: 130px;
             }
 
             .hero {
@@ -774,7 +805,119 @@
         ::-webkit-scrollbar-thumb:hover {
             background: var(--bg-card-hover);
         }
+
+        /* Accessibility: visible focus for keyboard users */
+        a:focus-visible,
+        button:focus-visible {
+            outline: 3px solid var(--primary-light);
+            outline-offset: 3px;
+            border-radius: var(--radius-sm);
+        }
+
+        /* Details button arrow */
+        .btn-details-arrow {
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+
+        .btn-details[aria-expanded="true"] .btn-details-arrow {
+            transform: rotate(180deg);
+        }
+
+        /* Install hint under section header */
+        .install-note {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 18px;
+            background: rgba(251, 188, 4, 0.08);
+            border: 1px solid rgba(251, 188, 4, 0.25);
+            border-radius: 50px;
+            color: var(--warning);
+            font-size: 0.85rem;
+        }
+
+        /* Screenshot lightbox */
+        .screenshot img {
+            cursor: zoom-in;
+        }
+
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(4, 10, 20, 0.92);
+            backdrop-filter: blur(8px);
+        }
+
+        .lightbox[hidden] {
+            display: none;
+        }
+
+        .lightbox img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            cursor: zoom-out;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 16px;
+            inset-inline-start: 16px;
+            width: 44px;
+            height: 44px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .lightbox-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Respect reduced-motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            html {
+                scroll-behavior: auto;
+            }
+
+            .shape {
+                display: none;
+            }
+
+            .app-card {
+                opacity: 1;
+                transform: none;
+            }
+        }
     </style>
+    <noscript>
+        <style>
+            .app-card {
+                opacity: 1;
+                transform: none;
+            }
+        </style>
+    </noscript>
 </head>
 <body>
     <!-- Background Effects -->
@@ -804,12 +947,12 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <div class="hero-badge">6 تطبيقات أندرويد مجانية</div>
+            <div class="hero-badge">7 تطبيقات أندرويد مجانية</div>
             <h1>تطبيقات <span>مبتكرة</span><br>لتسهيل حياتك اليومية</h1>
             <p>مجموعة من التطبيقات المصممة بعناية لتلبية احتياجاتك اليومية، بواجهات سهلة الاستخدام وأداء عالي</p>
             <div class="stats">
                 <div class="stat">
-                    <div class="stat-number">6</div>
+                    <div class="stat-number">7</div>
                     <div class="stat-label">تطبيقات</div>
                 </div>
                 <div class="stat">
@@ -830,6 +973,7 @@
             <div class="section-header">
                 <h2>📱 التطبيقات المتاحة</h2>
                 <p>اختر التطبيق المناسب لاحتياجاتك وحمّله مباشرة</p>
+                <p class="install-note">⚠️ قد تحتاج لتفعيل «التثبيت من مصادر غير معروفة» في إعدادات جهازك</p>
             </div>
 
             <div class="apps-grid">
@@ -854,7 +998,7 @@
                                 تطبيق مبتكر يجمع بين آلة حاسبة عملية ونظام ملاحظات مخفي عالي الأمان، مصمم لحماية خصوصيتك وإدارة بياناتك الحساسة بسرية تامة.
                             </p>
                             <div class="app-actions">
-                                <a href="https://drive.google.com/file/d/1-iZFWAyCwemHzOhKPxeKxKdCvvc9GlQ_/view?usp=sharing" target="_blank" class="btn btn-primary" download>
+                                <a href="https://drive.google.com/uc?export=download&amp;id=1-iZFWAyCwemHzOhKPxeKxKdCvvc9GlQ_" target="_blank" rel="noopener" class="btn btn-primary">
                                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                                         <polyline points="7 10 12 15 17 10"></polyline>
@@ -862,17 +1006,18 @@
                                     </svg>
                                     تحميل APK
                                 </a>
-                                <button class="btn btn-secondary" onclick="toggleFeatures('hidden-notes')">
-                                    المزيد من التفاصيل
+                                <button class="btn btn-secondary btn-details" onclick="toggleFeatures('hidden-notes')" aria-expanded="false" aria-controls="features-hidden-notes">
+                                    <span class="btn-details-text">المزيد من التفاصيل</span>
+                                    <span class="btn-details-arrow" aria-hidden="true">▾</span>
                                 </button>
                             </div>
                         </div>
                         <div class="app-screenshots">
                             <div class="screenshot">
-                                <img src="assets/screenshots/hidden-notes-1.png" alt="Hidden Notes Screenshot 1" onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'><span>📱</span>صورة 1</div>'">
+                                <img src="assets/screenshots/hidden-notes-1.png" alt="لقطة شاشة 1 من تطبيق Hidden Notes" width="1280" height="2800" loading="lazy">
                             </div>
                             <div class="screenshot">
-                                <img src="assets/screenshots/hidden-notes-2.png" alt="Hidden Notes Screenshot 2" onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'><span>📱</span>صورة 2</div>'">
+                                <img src="assets/screenshots/hidden-notes-2.png" alt="لقطة شاشة 2 من تطبيق Hidden Notes" width="1280" height="2800" loading="lazy">
                             </div>
                         </div>
                     </div>
@@ -931,7 +1076,7 @@
                                 يتيح لك ضغط ملفات PDF على جهازك بسهولة وسرعة، مما يقلل من حجمها بشكل كبير دون المساس بالجودة. مثالي لإرسال المستندات عبر البريد الإلكتروني.
                             </p>
                             <div class="app-actions">
-                                <a href="https://drive.google.com/file/d/1VavdahvjdIj2lkDYRMr30x8MuYh0GNRZ/view?usp=sharing" target="_blank" class="btn btn-primary" download>
+                                <a href="https://drive.google.com/uc?export=download&amp;id=1VavdahvjdIj2lkDYRMr30x8MuYh0GNRZ" target="_blank" rel="noopener" class="btn btn-primary">
                                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                                         <polyline points="7 10 12 15 17 10"></polyline>
@@ -939,17 +1084,18 @@
                                     </svg>
                                     تحميل APK
                                 </a>
-                                <button class="btn btn-secondary" onclick="toggleFeatures('pdf-compressor')">
-                                    المزيد من التفاصيل
+                                <button class="btn btn-secondary btn-details" onclick="toggleFeatures('pdf-compressor')" aria-expanded="false" aria-controls="features-pdf-compressor">
+                                    <span class="btn-details-text">المزيد من التفاصيل</span>
+                                    <span class="btn-details-arrow" aria-hidden="true">▾</span>
                                 </button>
                             </div>
                         </div>
                         <div class="app-screenshots">
                             <div class="screenshot">
-                                <img src="assets/screenshots/pdf-compressor-1.png" alt="PDF Compressor Screenshot 1" onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'><span>📱</span>صورة 1</div>'">
+                                <img src="assets/screenshots/pdf-compressor-1.png" alt="لقطة شاشة 1 من تطبيق PDF Compressor Advanced" width="1280" height="2800" loading="lazy">
                             </div>
                             <div class="screenshot">
-                                <img src="assets/screenshots/pdf-compressor-2.png" alt="PDF Compressor Screenshot 2" onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'><span>📱</span>صورة 2</div>'">
+                                <img src="assets/screenshots/pdf-compressor-2.png" alt="لقطة شاشة 2 من تطبيق PDF Compressor Advanced" width="1280" height="2800" loading="lazy">
                             </div>
                         </div>
                     </div>
@@ -1008,7 +1154,7 @@
                                 تطبيق بسيط لتتبع جميع شحناتك في مكان واحد. الصق رابط المنتج وسيقوم التطبيق بجلب التفاصيل تلقائياً مع تذكيرات في يوم الوصول.
                             </p>
                             <div class="app-actions">
-                                <a href="https://drive.google.com/file/d/1KnBT-Gn0canvC-jfo_S-p_5hGnpHoGF7/view?usp=sharing" target="_blank" class="btn btn-primary" download>
+                                <a href="https://drive.google.com/uc?export=download&amp;id=1KnBT-Gn0canvC-jfo_S-p_5hGnpHoGF7" target="_blank" rel="noopener" class="btn btn-primary">
                                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                                         <polyline points="7 10 12 15 17 10"></polyline>
@@ -1016,17 +1162,18 @@
                                     </svg>
                                     تحميل APK
                                 </a>
-                                <button class="btn btn-secondary" onclick="toggleFeatures('sh7na')">
-                                    المزيد من التفاصيل
+                                <button class="btn btn-secondary btn-details" onclick="toggleFeatures('sh7na')" aria-expanded="false" aria-controls="features-sh7na">
+                                    <span class="btn-details-text">المزيد من التفاصيل</span>
+                                    <span class="btn-details-arrow" aria-hidden="true">▾</span>
                                 </button>
                             </div>
                         </div>
                         <div class="app-screenshots">
                             <div class="screenshot">
-                                <img src="assets/screenshots/sh7na-1.png" alt="Sh7na Screenshot 1" onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'><span>📱</span>صورة 1</div>'">
+                                <img src="assets/screenshots/sh7na-1.png" alt="لقطة شاشة 1 من تطبيق شحنة" width="1280" height="2800" loading="lazy">
                             </div>
                             <div class="screenshot">
-                                <img src="assets/screenshots/sh7na-2.png" alt="Sh7na Screenshot 2" onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'><span>📱</span>صورة 2</div>'">
+                                <img src="assets/screenshots/sh7na-2.png" alt="لقطة شاشة 2 من تطبيق شحنة" width="1280" height="2800" loading="lazy">
                             </div>
                         </div>
                     </div>
@@ -1085,7 +1232,7 @@
                                 أداتك المثالية لتدوين الملاحظات السريعة، تعديل الملفات النصية، وتحرير أكواد HTML بكل سهولة. واجهة نظيفة وبسيطة بدون أي تعقيدات.
                             </p>
                             <div class="app-actions">
-                                <a href="https://drive.google.com/file/d/14l4Q6jaR3_xa4YDsOSyHyeWAAL1huuh1/view?usp=sharing" target="_blank" class="btn btn-primary" download>
+                                <a href="https://drive.google.com/uc?export=download&amp;id=14l4Q6jaR3_xa4YDsOSyHyeWAAL1huuh1" target="_blank" rel="noopener" class="btn btn-primary">
                                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                                         <polyline points="7 10 12 15 17 10"></polyline>
@@ -1093,17 +1240,18 @@
                                     </svg>
                                     تحميل APK
                                 </a>
-                                <button class="btn btn-secondary" onclick="toggleFeatures('text-editor')">
-                                    المزيد من التفاصيل
+                                <button class="btn btn-secondary btn-details" onclick="toggleFeatures('text-editor')" aria-expanded="false" aria-controls="features-text-editor">
+                                    <span class="btn-details-text">المزيد من التفاصيل</span>
+                                    <span class="btn-details-arrow" aria-hidden="true">▾</span>
                                 </button>
                             </div>
                         </div>
                         <div class="app-screenshots">
                             <div class="screenshot">
-                                <img src="assets/screenshots/text-editor-1.png" alt="Text Editor Screenshot 1" onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'><span>📱</span>صورة 1</div>'">
+                                <img src="assets/screenshots/text-editor-1.png" alt="لقطة شاشة 1 من تطبيق Text Editor" width="1280" height="2800" loading="lazy">
                             </div>
                             <div class="screenshot">
-                                <img src="assets/screenshots/text-editor-2.png" alt="Text Editor Screenshot 2" onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'><span>📱</span>صورة 2</div>'">
+                                <img src="assets/screenshots/text-editor-2.png" alt="لقطة شاشة 2 من تطبيق Text Editor" width="1280" height="2800" loading="lazy">
                             </div>
                         </div>
                     </div>
@@ -1162,7 +1310,7 @@
                                 احصل على فيديوهات نقية وعالية الجودة. كل ما عليك هو نسخ الرابط أو مشاركته مباشرة من التطبيق ليبدأ التحميل تلقائياً.
                             </p>
                             <div class="app-actions">
-                                <a href="https://drive.google.com/file/d/1FgGbPlMPD6_ydX52VNrIvq3NJSanSKO0/view?usp=sharing" target="_blank" class="btn btn-primary" download>
+                                <a href="https://drive.google.com/uc?export=download&amp;id=1FgGbPlMPD6_ydX52VNrIvq3NJSanSKO0" target="_blank" rel="noopener" class="btn btn-primary">
                                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                                         <polyline points="7 10 12 15 17 10"></polyline>
@@ -1170,17 +1318,18 @@
                                     </svg>
                                     تحميل APK
                                 </a>
-                                <button class="btn btn-secondary" onclick="toggleFeatures('tiktok')">
-                                    المزيد من التفاصيل
+                                <button class="btn btn-secondary btn-details" onclick="toggleFeatures('tiktok')" aria-expanded="false" aria-controls="features-tiktok">
+                                    <span class="btn-details-text">المزيد من التفاصيل</span>
+                                    <span class="btn-details-arrow" aria-hidden="true">▾</span>
                                 </button>
                             </div>
                         </div>
                         <div class="app-screenshots">
                             <div class="screenshot">
-                                <img src="assets/screenshots/tiktok-downloader-1.png" alt="TikTok Downloader Screenshot 1" onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'><span>📱</span>صورة 1</div>'">
+                                <img src="assets/screenshots/tiktok-downloader-1.png" alt="لقطة شاشة 1 من تطبيق Download Media" width="1279" height="2706" loading="lazy">
                             </div>
                             <div class="screenshot">
-                                <img src="assets/screenshots/tiktok-downloader-2.png" alt="TikTok Downloader Screenshot 2" onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'><span>📱</span>صورة 2</div>'">
+                                <img src="assets/screenshots/tiktok-downloader-2.png" alt="لقطة شاشة 2 من تطبيق Download Media" width="1279" height="2659" loading="lazy">
                             </div>
                         </div>
                     </div>
@@ -1239,7 +1388,7 @@
                                 تطبيق شامل لإدارة الأدوية يساعدك على البقاء على اطلاع بنظامك الصحي. جدولة سهلة، سجل كامل، وتذكيرات لإعادة التعبئة.
                             </p>
                             <div class="app-actions">
-                                <a href="https://drive.google.com/file/d/1OL3aod4WdwJ2fMH7k6OvmWCbfvfhMFfn/view?usp=sharing" target="_blank" class="btn btn-primary" download>
+                                <a href="https://drive.google.com/uc?export=download&amp;id=1OL3aod4WdwJ2fMH7k6OvmWCbfvfhMFfn" target="_blank" rel="noopener" class="btn btn-primary">
                                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                                         <polyline points="7 10 12 15 17 10"></polyline>
@@ -1247,17 +1396,18 @@
                                     </svg>
                                     تحميل APK
                                 </a>
-                                <button class="btn btn-secondary" onclick="toggleFeatures('jureati')">
-                                    المزيد من التفاصيل
+                                <button class="btn btn-secondary btn-details" onclick="toggleFeatures('jureati')" aria-expanded="false" aria-controls="features-jureati">
+                                    <span class="btn-details-text">المزيد من التفاصيل</span>
+                                    <span class="btn-details-arrow" aria-hidden="true">▾</span>
                                 </button>
                             </div>
                         </div>
                         <div class="app-screenshots">
                             <div class="screenshot">
-                                <img src="assets/screenshots/jureati-1.png" alt="Jureati Screenshot 1" onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'><span>📱</span>صورة 1</div>'">
+                                <img src="assets/screenshots/jureati-1.png" alt="لقطة شاشة 1 من تطبيق جرعتي Jureati" width="1280" height="2800" loading="lazy">
                             </div>
                             <div class="screenshot">
-                                <img src="assets/screenshots/jureati-2.png" alt="Jureati Screenshot 2" onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'><span>📱</span>صورة 2</div>'">
+                                <img src="assets/screenshots/jureati-2.png" alt="لقطة شاشة 2 من تطبيق جرعتي Jureati" width="1280" height="2800" loading="lazy">
                             </div>
                         </div>
                     </div>
@@ -1296,11 +1446,11 @@
                 </article>
 
                 <!-- App 7: FamilyBudget -->
-                <article class="app-card" data-app="FamilyBudget">
+                <article class="app-card" data-app="family-budget">
                     <div class="app-card-inner">
                         <div class="app-info">
                             <div class="app-header">
-                                <div class="app-icon FamilyBudget">💰</div>
+                                <div class="app-icon budget">💰</div>
                                 <div class="app-title-wrap">
                                     <h3>FamilyBudget</h3>
                                     <span class="app-version">الإصدار 1.0</span>
@@ -1316,7 +1466,7 @@
                                 تطبيق ذكي وسهل الاستخدام لتنظيم ميزانية الأسرة، تتبع المصروفات اليومية، وتحقيق أهدافك المالية.
                             </p>
                             <div class="app-actions">
-                                <a href="https://drive.google.com/file/d/1eJnwSjFxwLOWjeHqFrD8GAMcxtqKzzsa/view?usp=sharing"_blank" class="btn btn-primary" download>
+                                <a href="https://drive.google.com/uc?export=download&amp;id=1eJnwSjFxwLOWjeHqFrD8GAMcxtqKzzsa" target="_blank" rel="noopener" class="btn btn-primary">
                                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                                         <polyline points="7 10 12 15 17 10"></polyline>
@@ -1324,21 +1474,22 @@
                                     </svg>
                                     تحميل APK
                                 </a>
-                                <button class="btn btn-secondary" onclick="toggleFeatures('tiktok')">
-                                    المزيد من التفاصيل
+                                <button class="btn btn-secondary btn-details" onclick="toggleFeatures('family-budget')" aria-expanded="false" aria-controls="features-family-budget">
+                                    <span class="btn-details-text">المزيد من التفاصيل</span>
+                                    <span class="btn-details-arrow" aria-hidden="true">▾</span>
                                 </button>
                             </div>
                         </div>
                         <div class="app-screenshots">
                             <div class="screenshot">
-                                <img src="assets/screenshots/FamilyBudget-1.png" alt="TikTok Downloader Screenshot 1" onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'><span>📱</span>صورة 1</div>'">
+                                <img src="assets/screenshots/FamilyBudget-1.png" alt="لقطة شاشة 1 من تطبيق FamilyBudget" width="1280" height="2800" loading="lazy">
                             </div>
                             <div class="screenshot">
-                                <img src="assets/screenshots/FamilyBudget-2.png" alt="TikTok Downloader Screenshot 2" onerror="this.parentElement.innerHTML='<div class=\'screenshot-placeholder\'><span>📱</span>صورة 2</div>'">
+                                <img src="assets/screenshots/FamilyBudget-2.png" alt="لقطة شاشة 2 من تطبيق FamilyBudget" width="1280" height="2800" loading="lazy">
                             </div>
                         </div>
                     </div>
-                    <div class="features-list" id="features-tiktok">
+                    <div class="features-list" id="features-family-budget">
                         <div class="features-grid">
                             <div class="feature-item">
                                 <div class="feature-icon">📉</div>
@@ -1400,27 +1551,41 @@
                 </div>
                 <div class="footer-bottom">
                     <p>تطوير: <a href="mailto:abo.saleh.g@gmail.com">عبدالكريم العبود</a></p>
-                    <p style="margin-top: 10px;">© 2024 Apps page - All Rights Reserved</p>
+                    <p style="margin-top: 10px;">© <span id="copyright-year">2026</span> Apps page - All Rights Reserved</p>
                 </div>
             </div>
         </div>
     </footer>
+
+    <!-- Screenshot Lightbox -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="عرض لقطة الشاشة" hidden>
+        <button type="button" class="lightbox-close" aria-label="إغلاق">✕</button>
+        <img src="" alt="">
+    </div>
 
     <script>
         // Toggle features section
         function toggleFeatures(appId) {
             const featuresEl = document.getElementById(`features-${appId}`);
             const isActive = featuresEl.classList.contains('active');
-            
-            // Close all other features
+
+            // Close all features and reset their buttons
             document.querySelectorAll('.features-list').forEach(el => {
                 el.classList.remove('active');
             });
-            
-            // Toggle current
+            document.querySelectorAll('.btn-details').forEach(btn => {
+                btn.setAttribute('aria-expanded', 'false');
+                btn.querySelector('.btn-details-text').textContent = 'المزيد من التفاصيل';
+            });
+
+            // Open current
             if (!isActive) {
                 featuresEl.classList.add('active');
-                // Scroll into view
+                const btn = document.querySelector(`[aria-controls="features-${appId}"]`);
+                if (btn) {
+                    btn.setAttribute('aria-expanded', 'true');
+                    btn.querySelector('.btn-details-text').textContent = 'إخفاء التفاصيل';
+                }
                 setTimeout(() => {
                     featuresEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 }, 100);
@@ -1449,19 +1614,69 @@
             observer.observe(card);
         });
 
-        // Smooth scroll for anchor links
+        // Smooth scroll for anchor links (skip bare "#" which scrolls to top)
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
+                const href = this.getAttribute('href');
+                if (href === '#') {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    return;
+                }
+                const target = document.querySelector(href);
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
+
+        // Screenshot lightbox
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = lightbox.querySelector('img');
+        const lightboxClose = lightbox.querySelector('.lightbox-close');
+        let lastFocused = null;
+
+        function openLightbox(img) {
+            lastFocused = document.activeElement;
+            lightboxImg.src = img.src;
+            lightboxImg.alt = img.alt;
+            lightbox.hidden = false;
+            document.body.style.overflow = 'hidden';
+            lightboxClose.focus();
+        }
+
+        function closeLightbox() {
+            lightbox.hidden = true;
+            lightboxImg.src = '';
+            document.body.style.overflow = '';
+            if (lastFocused) {
+                lastFocused.focus();
+            }
+        }
+
+        lightbox.addEventListener('click', closeLightbox);
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !lightbox.hidden) {
+                closeLightbox();
+            }
+        });
+
+        // Screenshots: open in lightbox on click, placeholder on load failure
+        document.querySelectorAll('.screenshot img').forEach(img => {
+            const showPlaceholder = () => {
+                img.parentElement.innerHTML = '<div class="screenshot-placeholder"><span>📱</span>الصورة غير متاحة</div>';
+            };
+            if (img.complete && img.naturalWidth === 0) {
+                showPlaceholder();
+                return;
+            }
+            img.addEventListener('error', showPlaceholder);
+            img.addEventListener('click', () => openLightbox(img));
+        });
+
+        // Keep copyright year current
+        document.getElementById('copyright-year').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>
