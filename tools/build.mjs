@@ -39,7 +39,7 @@ function shot(s) {
     return `<button type="button" class="screenshot" aria-label="تكبير ${esc(s.alt)}">
     <img src="${src(320)}"
          srcset="${src(320)} 320w, ${src(720)} 720w"
-         sizes="(max-width: 900px) min(60vw, 240px), 140px"
+         sizes="(max-width: 400px) 60vw, (max-width: 900px) 240px, 140px"
          alt="${esc(s.alt)}" width="${s.width}" height="${s.height}" loading="lazy" decoding="async">
 </button>`;
 }

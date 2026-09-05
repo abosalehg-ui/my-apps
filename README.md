@@ -8,8 +8,8 @@
 
 [![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://www.android.com/)
 [![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-222222?style=for-the-badge&logo=github)](https://abosalehg-ui.github.io/my-apps/)
-[![Apps](https://img.shields.io/badge/التطبيقات-7-blue?style=for-the-badge)]()
-[![Free](https://img.shields.io/badge/مجاني-100%25-green?style=for-the-badge)]()
+![Apps](https://img.shields.io/badge/التطبيقات-7-blue?style=for-the-badge)
+![Free](https://img.shields.io/badge/مجاني-100%25-green?style=for-the-badge)
 
 [🌐 زيارة الموقع](https://abosalehg-ui.github.io/my-apps/) · [📝 الإبلاغ عن مشكلة](https://github.com/abosalehg-ui/my-apps/issues)
 
