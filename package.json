@@ -1,0 +1,16 @@
+{
+  "name": "my-apps-page",
+  "version": "1.0.0",
+  "private": true,
+  "description": "صفحة عرض تطبيقات أندرويد — تُبنى من data/apps.json",
+  "type": "module",
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "check": "node tools/build.mjs --check",
+    "images": "node tools/optimize-images.mjs",
+    "serve": "python3 -m http.server 8000"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.4"
+  }
+}

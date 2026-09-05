@@ -1,0 +1,11 @@
+# APKs are distributed from Google Drive, not from the repo.
+# Committing them bloated git history by ~67 MB once already.
+*.apk
+
+# Source screenshots before WebP conversion (see tools/README-assets.md)
+assets/screenshots/*.png
+assets/screenshots/*.jpg
+assets/screenshots/*.jpeg
+
+node_modules/
+.DS_Store
