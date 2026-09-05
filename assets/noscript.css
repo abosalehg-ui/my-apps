@@ -1,0 +1,6 @@
+/* Loaded only when JavaScript is disabled: the scroll-reveal never runs,
+   so the cards must not stay at opacity 0. */
+.app-card {
+    opacity: 1;
+    transform: none;
+}

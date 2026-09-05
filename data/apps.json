@@ -1,0 +1,415 @@
+{
+  "categories": [
+    {
+      "id": "all",
+      "label": "الكل"
+    },
+    {
+      "id": "productivity",
+      "label": "إنتاجية"
+    },
+    {
+      "id": "tools",
+      "label": "أدوات"
+    },
+    {
+      "id": "media",
+      "label": "وسائط"
+    },
+    {
+      "id": "finance",
+      "label": "مالية"
+    },
+    {
+      "id": "health",
+      "label": "صحة"
+    }
+  ],
+  "apps": [
+    {
+      "id": "hidden-notes",
+      "name": "Hidden Notes",
+      "version": "2.1",
+      "category": "productivity",
+      "icon": "🧮",
+      "iconClass": "calculator",
+      "tagline": "آلة حاسبة ذكية مع نظام ملاحظات مخفي وآمن",
+      "description": "تطبيق مبتكر يجمع بين آلة حاسبة عملية ونظام ملاحظات مخفي عالي الأمان، مصمم لحماية خصوصيتك وإدارة بياناتك الحساسة بسرية تامة.",
+      "tags": [
+        "🔐 تشفير AES-256",
+        "📝 ملاحظات سرية",
+        "🛡️ خصوصية عالية"
+      ],
+      "download": {
+        "url": "https://drive.google.com/uc?export=download&id=1-iZFWAyCwemHzOhKPxeKxKdCvvc9GlQ_",
+        "size": "6.8 ميجابايت"
+      },
+      "shots": [
+        {
+          "base": "hidden-notes-1",
+          "alt": "لقطة شاشة 1 من تطبيق Hidden Notes",
+          "width": 320,
+          "height": 700
+        },
+        {
+          "base": "hidden-notes-2",
+          "alt": "لقطة شاشة 2 من تطبيق Hidden Notes",
+          "width": 320,
+          "height": 700
+        }
+      ],
+      "features": [
+        {
+          "icon": "🔢",
+          "title": "آلة حاسبة كاملة",
+          "text": "واجهة أنيقة تدعم العمليات الأساسية والمتقدمة مثل النسبة المئوية"
+        },
+        {
+          "icon": "🔐",
+          "title": "نظام مخفي",
+          "text": "كلمة مرور قابلة للتغيير مع تشفير قوي لجميع الملاحظات"
+        },
+        {
+          "icon": "📝",
+          "title": "إدارة احترافية",
+          "text": "إضافة وتعديل وبحث وتصدير الملاحظات بسهولة"
+        },
+        {
+          "icon": "🛡️",
+          "title": "أمان من المستوى العالي",
+          "text": "تشفير AES-256 مع حفظ المفاتيح في Android Keystore"
+        }
+      ]
+    },
+    {
+      "id": "pdf-compressor",
+      "name": "PDF Compressor Advanced",
+      "version": "1.1",
+      "category": "tools",
+      "icon": "📄",
+      "iconClass": "pdf",
+      "tagline": "ضغط ملفات PDF على أربعة مستويات مختلفة",
+      "description": "يتيح لك ضغط ملفات PDF على جهازك بسهولة وسرعة، مما يقلل من حجمها بشكل كبير دون المساس بالجودة. مثالي لإرسال المستندات عبر البريد الإلكتروني.",
+      "tags": [
+        "📉 ضغط فعال",
+        "🔒 معالجة محلية",
+        "🌙 وضع ليلي"
+      ],
+      "download": {
+        "url": "https://drive.google.com/uc?export=download&id=1VavdahvjdIj2lkDYRMr30x8MuYh0GNRZ",
+        "size": "15 ميجابايت"
+      },
+      "shots": [
+        {
+          "base": "pdf-compressor-1",
+          "alt": "لقطة شاشة 1 من تطبيق PDF Compressor Advanced",
+          "width": 320,
+          "height": 700
+        },
+        {
+          "base": "pdf-compressor-2",
+          "alt": "لقطة شاشة 2 من تطبيق PDF Compressor Advanced",
+          "width": 320,
+          "height": 700
+        }
+      ],
+      "features": [
+        {
+          "icon": "📉",
+          "title": "ضغط فعال",
+          "text": "خوارزميات متقدمة لتقليل الحجم مع الحفاظ على الوضوح"
+        },
+        {
+          "icon": "🎚️",
+          "title": "4 مستويات ضغط",
+          "text": "من الضغط الأساسي إلى الضغط الأقصى حسب احتياجاتك"
+        },
+        {
+          "icon": "🔒",
+          "title": "معالجة محلية",
+          "text": "جميع العمليات على جهازك دون الحاجة للإنترنت"
+        },
+        {
+          "icon": "🌙",
+          "title": "وضع ليلي",
+          "text": "واجهة مريحة للعينين في الإضاءة المنخفضة"
+        }
+      ]
+    },
+    {
+      "id": "sh7na",
+      "name": "شحنة",
+      "version": "1.0",
+      "category": "tools",
+      "icon": "📦",
+      "iconClass": "shipment",
+      "tagline": "تذكر مواعيد وصول شحناتك!",
+      "description": "تطبيق بسيط لتتبع جميع شحناتك في مكان واحد. الصق رابط المنتج وسيقوم التطبيق بجلب التفاصيل تلقائياً مع تذكيرات في يوم الوصول.",
+      "tags": [
+        "🔔 تذكيرات ذكية",
+        "🏪 دعم المتاجر",
+        "📋 أرشفة الطلبات"
+      ],
+      "download": {
+        "url": "https://drive.google.com/uc?export=download&id=1KnBT-Gn0canvC-jfo_S-p_5hGnpHoGF7",
+        "size": "68 ميجابايت"
+      },
+      "shots": [
+        {
+          "base": "sh7na-1",
+          "alt": "لقطة شاشة 1 من تطبيق شحنة",
+          "width": 320,
+          "height": 700
+        },
+        {
+          "base": "sh7na-2",
+          "alt": "لقطة شاشة 2 من تطبيق شحنة",
+          "width": 320,
+          "height": 700
+        }
+      ],
+      "features": [
+        {
+          "icon": "🔗",
+          "title": "إضافة ذكية",
+          "text": "الصق الرابط ليجلب التفاصيل تلقائياً من أمازون، علي إكسبرس، نون وغيرها"
+        },
+        {
+          "icon": "🔔",
+          "title": "تذكيرات مخصصة",
+          "text": "إشعارات في يوم الوصول واليوم الذي يسبقه"
+        },
+        {
+          "icon": "🎨",
+          "title": "تصميم جذاب",
+          "text": "واجهة تشبه الملاحظات اللاصقة الملونة"
+        },
+        {
+          "icon": "📋",
+          "title": "أرشفة الطلبات",
+          "text": "احتفظ بسجل لجميع الشحنات التي وصلت"
+        }
+      ]
+    },
+    {
+      "id": "text-editor",
+      "name": "Text Editor",
+      "version": "1.0",
+      "category": "productivity",
+      "icon": "📝",
+      "iconClass": "editor",
+      "tagline": "لاستعراض وتعديل وحفظ ملفات TXT و HTML",
+      "description": "أداتك المثالية لتدوين الملاحظات السريعة، تعديل الملفات النصية، وتحرير أكواد HTML بكل سهولة. واجهة نظيفة وبسيطة بدون أي تعقيدات.",
+      "tags": [
+        "📂 دعم متعدد",
+        "💾 حفظ سريع",
+        "🚀 خفيف ومجاني"
+      ],
+      "download": {
+        "url": "https://drive.google.com/uc?export=download&id=14l4Q6jaR3_xa4YDsOSyHyeWAAL1huuh1",
+        "size": "19 ميجابايت"
+      },
+      "shots": [
+        {
+          "base": "text-editor-1",
+          "alt": "لقطة شاشة 1 من تطبيق Text Editor",
+          "width": 320,
+          "height": 700
+        },
+        {
+          "base": "text-editor-2",
+          "alt": "لقطة شاشة 2 من تطبيق Text Editor",
+          "width": 320,
+          "height": 700
+        }
+      ],
+      "features": [
+        {
+          "icon": "✍️",
+          "title": "سهولة التحرير",
+          "text": "واجهة مستخدم بسيطة ومباشرة"
+        },
+        {
+          "icon": "📂",
+          "title": "دعم متعدد الصيغ",
+          "text": "فتح وتعديل وحفظ ملفات .txt و .html"
+        },
+        {
+          "icon": "💾",
+          "title": "حفظ سريع",
+          "text": "احتفظ بتغييراتك بضغطة زر واحدة"
+        },
+        {
+          "icon": "🔒",
+          "title": "خصوصيتك أولاً",
+          "text": "لا يجمع أي بيانات ويعمل بالكامل على جهازك"
+        }
+      ]
+    },
+    {
+      "id": "download-media",
+      "name": "Download Media",
+      "version": "1.0",
+      "category": "media",
+      "icon": "🎵",
+      "iconClass": "tiktok",
+      "tagline": "تحميل مقاطع تيكتوك وانستقرام و X بجودة عالية بدون علامة مائية",
+      "description": "احصل على فيديوهات نقية وعالية الجودة. كل ما عليك هو نسخ الرابط أو مشاركته مباشرة من التطبيق ليبدأ التحميل تلقائياً.",
+      "tags": [
+        "✨ بدون علامة مائية",
+        "🚫 بدون إعلانات",
+        "⚡ تحميل تلقائي"
+      ],
+      "download": {
+        "url": "https://drive.google.com/uc?export=download&id=1FgGbPlMPD6_ydX52VNrIvq3NJSanSKO0",
+        "size": "9.4 ميجابايت"
+      },
+      "shots": [
+        {
+          "base": "download-media-1",
+          "alt": "لقطة شاشة 1 من تطبيق Download Media",
+          "width": 320,
+          "height": 677
+        },
+        {
+          "base": "download-media-2",
+          "alt": "لقطة شاشة 2 من تطبيق Download Media",
+          "width": 320,
+          "height": 665
+        }
+      ],
+      "features": [
+        {
+          "icon": "✨",
+          "title": "بدون علامة مائية",
+          "text": "فيديوهات نقية للمشاهدة والمشاركة"
+        },
+        {
+          "icon": "⚡",
+          "title": "تحميل تلقائي",
+          "text": "شارك الرابط من تيكتوك ليبدأ التنزيل مباشرة"
+        },
+        {
+          "icon": "🎬",
+          "title": "جودة عالية HD",
+          "text": "يبحث تلقائياً عن أعلى جودة متاحة"
+        },
+        {
+          "icon": "📜",
+          "title": "سجل التنزيلات",
+          "text": "وصول سريع لآخر الفيديوهات المحملة"
+        }
+      ]
+    },
+    {
+      "id": "jureati",
+      "name": "Jureati - جرعتي",
+      "version": "1.0",
+      "category": "health",
+      "icon": "💊",
+      "iconClass": "medicine",
+      "tagline": "مدير الأدوية الخاص بك",
+      "description": "تطبيق شامل لإدارة الأدوية يساعدك على البقاء على اطلاع بنظامك الصحي. جدولة سهلة، سجل كامل، وتذكيرات لإعادة التعبئة.",
+      "tags": [
+        "⏰ تذكيرات موثوقة",
+        "📊 إدارة المخزون",
+        "🎨 سمات متعددة"
+      ],
+      "download": {
+        "url": "https://drive.google.com/uc?export=download&id=1OL3aod4WdwJ2fMH7k6OvmWCbfvfhMFfn",
+        "size": "16 ميجابايت"
+      },
+      "shots": [
+        {
+          "base": "jureati-1",
+          "alt": "لقطة شاشة 1 من تطبيق جرعتي Jureati",
+          "width": 320,
+          "height": 700
+        },
+        {
+          "base": "jureati-2",
+          "alt": "لقطة شاشة 2 من تطبيق جرعتي Jureati",
+          "width": 320,
+          "height": 700
+        }
+      ],
+      "features": [
+        {
+          "icon": "⏰",
+          "title": "جدولة سهلة",
+          "text": "إعداد تذكيرات لجميع أدويتك ببضع نقرات"
+        },
+        {
+          "icon": "📋",
+          "title": "سجل الأدوية",
+          "text": "تتبع جميع الأدوية التي تناولتها مع الوقت والجرعة"
+        },
+        {
+          "icon": "📦",
+          "title": "إدارة المخزون",
+          "text": "تتبع الكمية المتبقية مع تذكيرات للتعبئة"
+        },
+        {
+          "icon": "🎨",
+          "title": "سمات متعددة",
+          "text": "اختر بين السمة الفاتحة والداكنة والنظام"
+        }
+      ]
+    },
+    {
+      "id": "family-budget",
+      "name": "FamilyBudget",
+      "version": "1.0",
+      "category": "finance",
+      "icon": "💰",
+      "iconClass": "budget",
+      "tagline": "إدارة ذكية لمصاريف أسرتك",
+      "description": "تطبيق ذكي وسهل الاستخدام لتنظيم ميزانية الأسرة، تتبع المصروفات اليومية، وتحقيق أهدافك المالية.",
+      "tags": [
+        "📉 إعداد ميزانية شاملة",
+        "🗂️ تصنيف ذكي للمصروفات",
+        "⚠️ تنبيهات وتحذيرات ذكية"
+      ],
+      "download": {
+        "url": "https://drive.google.com/uc?export=download&id=1TgMsvk_c6-FiXrh6ppwke2E97cG2CmJ_",
+        "size": "20 ميجابايت"
+      },
+      "shots": [
+        {
+          "base": "family-budget-1",
+          "alt": "لقطة شاشة 1 من تطبيق FamilyBudget",
+          "width": 320,
+          "height": 700
+        },
+        {
+          "base": "family-budget-2",
+          "alt": "لقطة شاشة 2 من تطبيق FamilyBudget",
+          "width": 320,
+          "height": 700
+        }
+      ],
+      "features": [
+        {
+          "icon": "📉",
+          "title": "ميزانية شاملة",
+          "text": "أضف دخلك الشهري وأدر مصاريفك الثابتة والسنوية"
+        },
+        {
+          "icon": "🗂️",
+          "title": "تصنيف ذكي",
+          "text": "فئات جاهزة، أولوية صرف، ميزانية مخصصة، قراءة SMS"
+        },
+        {
+          "icon": "⚠️",
+          "title": "نظام تنبيهات HD",
+          "text": "تنبيه حد استهلاك، توقع عجز، نصائح ذكية"
+        },
+        {
+          "icon": "📊",
+          "title": "تقارير ورسوم بيانية",
+          "text": "ملخص شهري مفصل ورسوم بيانية وإمكانية التصدير"
+        }
+      ]
+    }
+  ]
+}

@@ -8,8 +8,8 @@
 
 [![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://www.android.com/)
 [![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-222222?style=for-the-badge&logo=github)](https://abosalehg-ui.github.io/my-apps/)
-[![Apps](https://img.shields.io/badge/التطبيقات-7-blue?style=for-the-badge)]()
-[![Free](https://img.shields.io/badge/مجاني-100%25-green?style=for-the-badge)]()
+![Apps](https://img.shields.io/badge/التطبيقات-7-blue?style=for-the-badge)
+![Free](https://img.shields.io/badge/مجاني-100%25-green?style=for-the-badge)
 
 [🌐 زيارة الموقع](https://abosalehg-ui.github.io/my-apps/) · [📝 الإبلاغ عن مشكلة](https://github.com/abosalehg-ui/my-apps/issues)
 
@@ -167,19 +167,88 @@
 
 ```
 my-apps/
-├── index.html              # صفحة العرض الرئيسية
-├── README.md               # التوثيق
-└── assets/
-    ├── apps/               # ملفات APK
-    └── screenshots/        # صور التطبيقات
-        ├── hidden-notes-*.png
-        ├── pdf-compressor-*.png
-        ├── sh7na-*.png
-        ├── text-editor-*.png
-        ├── tiktok-downloader-*.png
-        ├── jureati-*.png
-        └── FamilyBudget-*.png
+├── index.html              # مُولَّد — لا تعدّله يدويًا
+├── data/
+│   └── apps.json           # مصدر الحقيقة: بيانات التطبيقات السبعة
+├── tools/
+│   ├── template.html       # هيكل الصفحة
+│   ├── build.mjs           # يبني index.html من البيانات + القالب
+│   └── optimize-images.mjs # يحوّل اللقطات إلى WebP ويجرّد بياناتها الوصفية
+├── assets/
+│   ├── styles.css
+│   ├── app.js              # تحسين تدريجي فقط — الصفحة تعمل بدونه
+│   ├── noscript.css
+│   └── screenshots/        # <slug>-<n>-{320,720,1080}.webp
+├── .github/workflows/ci.yml
+├── package.json
+└── README.md
 ```
+
+> ملفات APK لا تُحفظ في المستودع (`.gitignore` يستبعد `*.apk`) — تُستضاف على Google Drive.
+
+---
+
+## 🧑‍💻 للمطوّرين
+
+### التشغيل محليًا
+
+```bash
+git clone https://github.com/abosalehg-ui/my-apps.git
+cd my-apps
+python3 -m http.server 8000     # ثم افتح http://localhost:8000
+```
+
+الصفحة ثابتة بالكامل ولا تحتاج خطوة بناء لتُعرض. خطوة البناء لازمة فقط عند تعديل المحتوى.
+
+### إضافة تطبيق جديد أو تعديل تطبيق قائم
+
+`index.html` **مُولَّد** — أي تعديل يدوي عليه يضيع في أول بناء. المصدر هو `data/apps.json`.
+
+1. أضف عنصرًا جديدًا إلى مصفوفة `apps` في `data/apps.json`:
+
+```json
+{
+  "id": "my-app",
+  "name": "اسم التطبيق",
+  "version": "1.0",
+  "category": "tools",
+  "icon": "🛠️",
+  "iconClass": "editor",
+  "tagline": "سطر تعريفي قصير",
+  "description": "وصف من جملة أو جملتين.",
+  "tags": ["🔒 ميزة", "⚡ ميزة"],
+  "download": { "url": "https://drive.google.com/uc?export=download&id=...", "size": "12 ميجابايت" },
+  "shots": [
+    { "base": "my-app-1", "alt": "لقطة شاشة 1 من تطبيق كذا", "width": 320, "height": 700 }
+  ],
+  "features": [
+    { "icon": "⚡", "title": "عنوان الميزة", "text": "شرح الميزة." }
+  ]
+}
+```
+
+2. ضع لقطات الشاشة في `assets/screenshots` باسم `my-app-1.png`، ثم:
+
+```bash
+npm install        # مرة واحدة
+npm run images     # يولّد 320/720/1080 بصيغة WebP ويجرّد EXIF
+```
+
+احذف ملفات المصدر بعد التحويل، وحدّث `width`/`height` في `data/apps.json` لو تغيّرت نسبة الأبعاد.
+
+3. أعد بناء الصفحة والتزم بالنتيجة:
+
+```bash
+npm run build      # يكتب index.html
+npm run check      # يفشل لو index.html غير مطابق للبيانات (نفس فحص CI)
+```
+
+`iconClass` يجب أن تكون إحدى القيم المعرّفة في `assets/styles.css`: `calculator`, `pdf`, `shipment`, `editor`, `tiktok`, `medicine`, `budget`.
+`category` يجب أن تطابق أحد التصنيفات في أعلى `data/apps.json`.
+
+### التكامل المستمر
+
+`.github/workflows/ci.yml` يشغّل على كل دفعة: تطابق `index.html` مع البيانات، تدقيق HTML، فحص الروابط المكسورة، وLighthouse. عتبات Lighthouse في `.lighthouserc.json`.
 
 ---
 
@@ -207,15 +276,15 @@ my-apps/
 
 ## 📊 جدول التطبيقات
 
-| التطبيق | الوصف | الإصدار | الحالة |
-|---------|-------|---------|--------|
-| 🧮 Hidden Notes | ملاحظات مشفرة | 2.1 | ✅ متاح |
-| 📄 PDF Compressor | ضغط PDF | 1.1 | ✅ متاح |
-| 📦 شحنة | تتبع الشحنات | 1.0 | ✅ متاح |
-| 📝 Text Editor | محرر نصوص | 1.0 | ✅ متاح |
-| 🎵 Download Media | تحميل الفيديوهات | 1.0 | ✅ متاح |
-| 💊 جرعتي | مدير الأدوية | 1.0 | ✅ متاح |
-| 💰 FamilyBudget | ميزانية العائلة | 1.0 | ✅ متاح |
+| التطبيق | الوصف | الإصدار | الحجم | الحالة |
+|---------|-------|---------|-------|--------|
+| 🧮 Hidden Notes | ملاحظات مشفرة | 2.1 | 6.8 م.ب | ✅ متاح |
+| 📄 PDF Compressor | ضغط PDF | 1.1 | 15 م.ب | ✅ متاح |
+| 📦 شحنة | تتبع الشحنات | 1.0 | 68 م.ب | ✅ متاح |
+| 📝 Text Editor | محرر نصوص | 1.0 | 19 م.ب | ✅ متاح |
+| 🎵 Download Media | تحميل الفيديوهات | 1.0 | 9.4 م.ب | ✅ متاح |
+| 💊 جرعتي | مدير الأدوية | 1.0 | 16 م.ب | ✅ متاح |
+| 💰 FamilyBudget | ميزانية العائلة | 1.0 | 20 م.ب | ✅ متاح |
 
 ---
 
@@ -231,7 +300,7 @@ my-apps/
 
 ## 📄 الترخيص
 
-جميع التطبيقات مجانية للاستخدام الشخصي.
+جميع التطبيقات مجانية للاستخدام الشخصي. مصدر هذه الصفحة محفوظ الحقوق — راجع ملف [LICENSE](LICENSE).
 
 ---
 
