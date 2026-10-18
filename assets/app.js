@@ -1,6 +1,7 @@
 /* Progressive enhancement only: every card, screenshot and feature list is
-   already in the HTML. This file adds expand/collapse, filtering, the
-   lightbox and the scroll reveal on top of a page that works without it. */
+   already in the HTML and visible. This file adds expand/collapse, filtering,
+   the lightbox and the scroll reveal on top of a page that works without it,
+   including when this file fails to load. */
 (() => {
     'use strict';
 
@@ -81,8 +82,20 @@
 
     function openLightbox(img) {
         if (!lightbox || !ensureLightboxImg()) return;
-        lightboxImg.src = largeSrc(img);
-        lightboxImg.alt = img.alt;
+        /* Show the thumbnail we already have at once, then swap in the large
+           variant when it arrives instead of opening on an empty dialog. */
+        const target = lightboxImg;
+        target.src = img.currentSrc || img.src;
+        target.alt = img.alt;
+        target.classList.add('loading');
+        const large = new Image();
+        large.onload = () => {
+            if (lightboxImg !== target) return;
+            target.src = large.src;
+            target.classList.remove('loading');
+        };
+        large.onerror = () => target.classList.remove('loading');
+        large.src = largeSrc(img);
         /* showModal() traps focus and wires Esc for us. */
         if (typeof lightbox.showModal === 'function') lightbox.showModal();
         else lightbox.setAttribute('open', '');
@@ -128,23 +141,9 @@
         if (card) toggleFeatures(card.dataset.app);
     });
 
-    /* ---------- Smooth scroll for in-page links ---------- */
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const href = this.getAttribute('href');
-            if (href === '#') {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                return;
-            }
-            const target = document.querySelector(href);
-            if (target) {
-                e.preventDefault();
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        });
-    });
+    /* In-page links need no script: CSS scroll-behavior animates them (and
+       turns off under reduced motion), and the native jump moves keyboard
+       focus too, which the skip link depends on. */
 
     /* ---------- Reveal cards on scroll ---------- */
 
@@ -156,7 +155,13 @@
         });
     }, { root: null, rootMargin: '0px', threshold: 0.1 });
 
-    document.querySelectorAll('.app-card').forEach(card => observer.observe(card));
+    /* Only hide cards that are still below the fold; the ones already on
+       screen were painted before this ran and must not blink out. */
+    document.querySelectorAll('.app-card').forEach(card => {
+        if (card.getBoundingClientRect().top < window.innerHeight) return;
+        card.classList.add('reveal');
+        observer.observe(card);
+    });
 
     /* ---------- Footer year ---------- */
 

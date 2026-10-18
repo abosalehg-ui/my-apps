@@ -6,25 +6,32 @@ on:
   pull_request:
   workflow_dispatch:
 
+# Every job only reads the repo; nothing here needs a token that can write.
+permissions:
+  contents: read
+
+# Actions are pinned to a commit SHA because a tag can be moved to point at
+# different code. Bump them deliberately, keeping the version comment in step.
+
 jobs:
   build:
-    name: تحقق من تطابق index.html مع data/apps.json
+    name: تحقق من البيانات وتطابق index.html و README
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '20'
-      # index.html is generated. If someone edits it by hand, or edits
-      # data/apps.json without rebuilding, this step fails.
+      # Validates data/apps.json and the CSS custom properties, then checks
+      # index.html and README.md match what the build would generate.
       - run: node tools/build.mjs --check
 
   html:
     name: تدقيق HTML
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: Cyb3r-Jak3/html5validator-action@v7.2.0
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: Cyb3r-Jak3/html5validator-action@41633d488eb36e18fd1a95ffc83daf1bf22a75bd # v7.2.0
         with:
           root: .
           blacklist: node_modules
@@ -33,8 +40,8 @@ jobs:
     name: فحص الروابط المكسورة
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: lycheeverse/lychee-action@v2
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2
         with:
           args: --no-progress --max-concurrency 4 index.html README.md
           fail: true
@@ -43,8 +50,8 @@ jobs:
     name: Lighthouse
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: treosh/lighthouse-ci-action@v12
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: treosh/lighthouse-ci-action@3e7e23fb74242897f95c0ba9cabad3d0227b9b18 # v12
         with:
           configPath: ./.lighthouserc.json
           uploadArtifacts: true
