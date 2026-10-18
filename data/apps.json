@@ -1,4 +1,5 @@
 {
+  "signer": "1f0b98e8d00eeec9b8d023661730483db6b45db94be130eedaa63edbb60da394",
   "categories": [
     {
       "id": "all",
@@ -42,7 +43,8 @@
       ],
       "download": {
         "url": "https://drive.google.com/uc?export=download&id=1-iZFWAyCwemHzOhKPxeKxKdCvvc9GlQ_",
-        "size": "6.8 ميجابايت"
+        "size": "6.8 ميجابايت",
+        "sha256": "523db19e20a6c51558e46f4add774ec06fff188ee56790866fe93b12891f7049"
       },
       "shots": [
         {
@@ -97,7 +99,8 @@
       ],
       "download": {
         "url": "https://drive.google.com/uc?export=download&id=1VavdahvjdIj2lkDYRMr30x8MuYh0GNRZ",
-        "size": "15 ميجابايت"
+        "size": "15 ميجابايت",
+        "sha256": "73a18ad56473c7add6a6c03c50abf6c081dc6223f5350a9869e7a6e8ceba7951"
       },
       "shots": [
         {
@@ -152,7 +155,8 @@
       ],
       "download": {
         "url": "https://drive.google.com/uc?export=download&id=1KnBT-Gn0canvC-jfo_S-p_5hGnpHoGF7",
-        "size": "68 ميجابايت"
+        "size": "68 ميجابايت",
+        "sha256": "e8272f6b125421decdaa372aceccedb94301c26862d9fa7a9db3e12242ddce42"
       },
       "shots": [
         {
@@ -207,7 +211,8 @@
       ],
       "download": {
         "url": "https://drive.google.com/uc?export=download&id=14l4Q6jaR3_xa4YDsOSyHyeWAAL1huuh1",
-        "size": "19 ميجابايت"
+        "size": "19 ميجابايت",
+        "sha256": "375095b8ab71b93d07fd3be31038a639dae4b9e8ff2d5c4f34f5bdfe878dbf30"
       },
       "shots": [
         {
@@ -262,7 +267,8 @@
       ],
       "download": {
         "url": "https://drive.google.com/uc?export=download&id=1FgGbPlMPD6_ydX52VNrIvq3NJSanSKO0",
-        "size": "9.4 ميجابايت"
+        "size": "9.4 ميجابايت",
+        "sha256": "907e05ddd0b3df70a7e640d4076a9ff8cd1ccfc24dd104c8405c958be481c2ea"
       },
       "shots": [
         {
@@ -317,7 +323,8 @@
       ],
       "download": {
         "url": "https://drive.google.com/uc?export=download&id=1OL3aod4WdwJ2fMH7k6OvmWCbfvfhMFfn",
-        "size": "16 ميجابايت"
+        "size": "16 ميجابايت",
+        "sha256": "f7715563781ea6e0d6410668e38a3ea7afd8d0a52616ac6876382d6bda4cb376"
       },
       "shots": [
         {
@@ -372,7 +379,8 @@
       ],
       "download": {
         "url": "https://drive.google.com/uc?export=download&id=1TgMsvk_c6-FiXrh6ppwke2E97cG2CmJ_",
-        "size": "20 ميجابايت"
+        "size": "20 ميجابايت",
+        "sha256": "3960e928bcf0d6f7080fc51749374547edc5499d374fe41f8e92e742ccc682b6"
       },
       "shots": [
         {

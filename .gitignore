@@ -2,7 +2,7 @@
 # Committing them bloated git history by ~67 MB once already.
 *.apk
 
-# Source screenshots before WebP conversion (see tools/README-assets.md)
+# Source screenshots before WebP conversion (see "إضافة تطبيق جديد" in README.md)
 assets/screenshots/*.png
 assets/screenshots/*.jpg
 assets/screenshots/*.jpeg

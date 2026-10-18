@@ -8,6 +8,7 @@
     "build": "node tools/build.mjs",
     "check": "node tools/build.mjs --check",
     "images": "node tools/optimize-images.mjs",
+    "apk-info": "node tools/apk-info.mjs",
     "serve": "python3 -m http.server 8000"
   },
   "devDependencies": {
